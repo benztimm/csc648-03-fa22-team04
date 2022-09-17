@@ -8,6 +8,7 @@ import Jerry from './components/pages/Jerry';
 import Mahisha from './components/pages/Mahisha';
 import Sophia from './components/pages/Sophia';
 import Sudhanshu from './components/pages/Sudhanshu';
+import Ruben from './components/pages/Ruben';
 
 class App extends Component {
   render() {
@@ -21,7 +22,7 @@ class App extends Component {
           <Route path="/jerry" element={<Jerry />} />
           <Route path="/mahisha" element={<Mahisha />} />
           <Route path="/sudhanshu" element={<Sudhanshu />} />
-          <Route path="/ruben" element={<Sudhanshu />} />
+          <Route path="/ruben" element={<Ruben />} />
         </Routes>
       </div>
     );
