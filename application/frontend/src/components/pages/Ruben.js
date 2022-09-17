@@ -20,7 +20,10 @@ const Ruben = () => {
         </div>
         <div className="about">
           <h1>About Me</h1>
-          Insert your about here
+          My name is Ruben POnce and I am a Computer Science Major at San Francisco State
+          University. I have experience working with Java, c++, and C. I also have begginer
+          level of HTML/CSS but am willing to improve on this skill with this pproject.
+          My hobbies include workingout, watching anime, reading manga, and watching sports.
         </div>
       </div>
     </div>
