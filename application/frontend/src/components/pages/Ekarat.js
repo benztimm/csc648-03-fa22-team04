@@ -20,7 +20,11 @@ const Ekarat = () => {
         </div>
         <div className="about">
           <h1>About Me</h1>
-          Insert your about here
+          Ekarat Buddharuksa is MSCS student at San Francisco State University, 
+          he has experience programming in various languages such as Java, 
+          Javascript, Typescript, C, C++, MIPS Assembly, and so fourth.
+          <br></br><br></br>
+          He usually spend his free time cooking, playing video game, learning all stuff that interesting him.
         </div>
       </div>
     </div>
