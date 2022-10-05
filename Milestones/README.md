@@ -1,3 +1,12 @@
 # Milestones Folder
 
-## This folder is used to store all the necessary documents for each milestone. Some folders may be empty because certain milestones may not contain or need any documents. But certain milestones will required documents to be submitted and then links sent via email to the instructors. These documents should go here in the corresponding folder.
+## This folder is used to store all the necessary documents for each milestone. 
+
+| Folder | Things it contains|
+|    :---:     |     :---:     | 
+| Milestone 0 | Approval of tech stack <br> Milestone 0 submission  |
+| Milestone 1 | |
+| Milestone 2 | |
+| Milestone 3 | |
+| Milestone 4 | |
+| Milestone 5 | |
