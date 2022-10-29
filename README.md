@@ -1,6 +1,14 @@
-# CSC - 648 - Team 4: Code Repository
+<h1>
+<p align="center">  
+    gatorExchange 
+</p>
+</h1>
 
-## Team:
+### CSC - 648 - Team 4: Code Repository
+
+> [Please refer the Wiki pages for detailed documentation.](https://github.com/CSC-648-SFSU/csc648-03-fa22-team04/wiki)
+
+### Team:
 
 | Student Name | Student Email | GitHub Username |
 |    :---:     |     :---:     |     :---:       |
