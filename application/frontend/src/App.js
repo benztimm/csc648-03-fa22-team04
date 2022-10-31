@@ -10,6 +10,8 @@ import Sophia from './components/pages/Sophia';
 import Sudhanshu from './components/pages/Sudhanshu';
 import Ruben from './components/pages/Ruben';
 
+import SearchResults from './components/pages/SearchResults';
+
 class App extends Component {
   render() {
     return (
@@ -23,6 +25,9 @@ class App extends Component {
           <Route path="/mahisha" element={<Mahisha />} />
           <Route path="/sudhanshu" element={<Sudhanshu />} />
           <Route path="/ruben" element={<Ruben />} />
+
+          <Route path="/searchresults" element={<SearchResults />} />
+          
         </Routes>
       </div>
     );
