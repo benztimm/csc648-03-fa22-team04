@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter, Routes, Route, Switch, Router } from 'react-router-dom';
 import styles from './App.css';
 
+import Navbar from './components/Navbar/Navbar'
+
 import Home from './components/pages/Home';
 import Ekarat from './components/pages/Ekarat';
 import Jerry from './components/pages/Jerry';
@@ -15,7 +17,12 @@ import SearchResults from './components/pages/SearchResults';
 class App extends Component {
   render() {
     return (
+      
       <div className="App">
+        <React.Fragment>
+          <Navbar/>
+        </React.Fragment>
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
