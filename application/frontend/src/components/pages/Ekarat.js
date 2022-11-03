@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
 
 import './styles/milestoneOne.css';
 
@@ -11,12 +11,9 @@ import myImage from '../images/testimage.jpg';
 const Ekarat = () => {
   return (
     <div>
-      <div>
-        <Link to="/">Home</Link>
-      </div>
       <div className="container">
         <div className="image">
-          <img src={myImage}></img>
+          <img src={myImage} className="myImage"></img>
         </div>
         <div className="about">
           <h1>About Me</h1>
