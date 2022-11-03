@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './styles/searchResults.css';
-import myImage from '../images/testimage.jpg';
+import myImage from '../images/thumbnail.png';
 
 function ResultCard(props) {
   return (
@@ -13,9 +13,10 @@ function ResultCard(props) {
             </div>
 
             <div className='maintext'>
-                <h1 className='card__title'>Title</h1>
-                <h3 className='card__author'>Author</h3>
-                <h3 className='card__filetype'>Filetype</h3>
+                <h2 className='card__title'>Title: HERE</h2>
+                <h4 className='card__author'>Author: HERE</h4>
+                <h4 className='card__filetype'>Filetype: HERE</h4>
+                <br/>
                 <p className='card__description'>Description here. Need to type more words for example. It's cold and I'm hungry.</p>
             </div>
             
