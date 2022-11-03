@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Routes, Route, Switch, Router } from 'react-router-dom';
+import axios from 'axios';
 import styles from './App.css';
 
 import Navbar from './components/Navbar/Navbar'
@@ -16,6 +17,7 @@ import SearchResults from './components/pages/SearchResults';
 
 class App extends Component {
   render() {
+
     return (
       
       <div className="App">

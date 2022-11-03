@@ -1,4 +1,4 @@
-import { useRef } from "react"; 
+import { useRef, useState } from "react"; 
 import { FaBars, FaTimes} from "react-icons/fa";
 import "../pages/styles/main.css"
 import { Link } from 'react-router-dom';
@@ -11,6 +11,21 @@ function Navbar() {
     const showNavbar = () => {
         navRef.current.classList.toggle("responsive_nav");
     }
+
+    //search bar query
+    const [value, setValue] = useState('');
+    const onChange = (event) => {
+        setValue(event.target.value);
+    }
+
+    //when search button is clicked
+    const onSearch = (searchTerm) => {
+        //our api to fetch search results
+        console.log('search', searchTerm);
+    }
+
+    
+
     return(
         <header>
             <h3> <img src={logo} className="img-fluid" width={125} height={120}></img> </h3>
@@ -23,11 +38,14 @@ function Navbar() {
                     <FaTimes/>
                 </button>
             </nav>
-            <input type="text" placeholder="Search..."/>
-            <button>Search</button>
+
+            <input value={value} onChange={onChange} type="text" placeholder="Search..."/>
+            <button onClick={() => onSearch(value)}>Search</button>
+
             <button className="nav-btn" onClick={showNavbar}>
                 <FaBars/>
             </button>
+
         </header>
     );
 }
