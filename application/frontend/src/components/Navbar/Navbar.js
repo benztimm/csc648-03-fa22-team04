@@ -18,12 +18,10 @@ function Navbar() {
 
 
     //search bar query
-    const [value, setValue] = useContext(SearchContext);
+    const {value, setValue} = useContext(SearchContext);
+
+    const changeHandler = event => setValue(event.target.value);
     
-    //put input into value ^
-    const onChange = (event) => {
-        setValue(event.target.value);
-    }
 
     //when search button is clicked
     const onSearch = (searchTerm) => {
@@ -46,7 +44,7 @@ function Navbar() {
                 </button>
             </nav>
 
-            <input value={value} onChange={onChange} type="text" placeholder="Search..."/>
+            <input value={value} onChange={changeHandler} type="text" placeholder="Search..."/>
             <button onClick={() => onSearch(value)}>Search</button>
 
             <button className="nav-btn" onClick={showNavbar}>
