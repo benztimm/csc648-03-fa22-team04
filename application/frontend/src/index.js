@@ -5,8 +5,8 @@ import './index.css';
 import { BrowserRouter, Routes, Route, Router } from 'react-router-dom';
 
 ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+  
+  <App />,
+  
   document.getElementById('root')
 );

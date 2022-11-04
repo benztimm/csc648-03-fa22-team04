@@ -1,10 +1,13 @@
-import { useRef, useState } from "react"; 
+import { useContext, useRef, useState } from "react"; 
 import { FaBars, FaTimes} from "react-icons/fa";
 import "../pages/styles/main.css"
 import { Link, useNavigate } from 'react-router-dom';
 import React from "react";
 
 import logo from '../images/gatorExchange.png'
+import { SearchContext } from '../../SearchContext.js';
+
+
 
 function Navbar() {
     const navigate = useNavigate();
@@ -13,8 +16,9 @@ function Navbar() {
         navRef.current.classList.toggle("responsive_nav");
     }
 
+
     //search bar query
-    const [value, setValue] = useState('');
+    const [value, setValue] = useContext(SearchContext);
     
     //put input into value ^
     const onChange = (event) => {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './styles/milestoneOne.css';
 import ResultCard from './ResultCard';
-import History from './History';
+
 
 function SearchResults(location) {
   const [error, setError] = useState(null);

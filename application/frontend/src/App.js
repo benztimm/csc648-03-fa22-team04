@@ -14,19 +14,19 @@ import Sudhanshu from './components/pages/Sudhanshu';
 import Ruben from './components/pages/Ruben';
 
 import SearchResults from './components/pages/SearchResults';
-import History from './components/pages/History';
 
-class App extends Component {
-  render() {
 
-    return (
-      
+function App(){
+
+
+  return (
+    <BrowserRouter>
       <div className="App">
         <React.Fragment>
           <Navbar/>
         </React.Fragment>
 
-        <Routes history = {History}>
+        <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/ekarat" element={<Ekarat />} />
@@ -40,8 +40,10 @@ class App extends Component {
           
         </Routes>
       </div>
-    );
-  }
+    </BrowserRouter>
+    
+  );
+
 }
 
 export default App;
