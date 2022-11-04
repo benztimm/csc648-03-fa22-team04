@@ -1,12 +1,13 @@
 import { useRef, useState } from "react"; 
 import { FaBars, FaTimes} from "react-icons/fa";
 import "../pages/styles/main.css"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import React from "react";
 
 import logo from '../images/gatorExchange.png'
 
 function Navbar() {
+    const navigate = useNavigate();
     const navRef = useRef();
     const showNavbar = () => {
         navRef.current.classList.toggle("responsive_nav");
@@ -15,15 +16,15 @@ function Navbar() {
     //search bar query
     const [value, setValue] = useState('');
     
+    //put input into value ^
     const onChange = (event) => {
         setValue(event.target.value);
     }
 
     //when search button is clicked
     const onSearch = (searchTerm) => {
-        //our api to fetch search results
-
         console.log(value);
+        navigate('/searchresults?q=' + value);
     }
 
     
