@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './styles/milestoneOne.css';
 import ResultCard from './ResultCard';
 
-function SearchResults() {
+function SearchResults(location) {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);

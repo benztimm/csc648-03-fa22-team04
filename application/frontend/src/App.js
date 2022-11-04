@@ -14,6 +14,7 @@ import Sudhanshu from './components/pages/Sudhanshu';
 import Ruben from './components/pages/Ruben';
 
 import SearchResults from './components/pages/SearchResults';
+import History from './components/pages/History';
 
 class App extends Component {
   render() {
@@ -25,7 +26,7 @@ class App extends Component {
           <Navbar/>
         </React.Fragment>
 
-        <Routes>
+        <Routes history = {History}>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/ekarat" element={<Ekarat />} />

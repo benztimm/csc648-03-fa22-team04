@@ -14,6 +14,7 @@ function Navbar() {
 
     //search bar query
     const [value, setValue] = useState('');
+    
     const onChange = (event) => {
         setValue(event.target.value);
     }
@@ -21,7 +22,8 @@ function Navbar() {
     //when search button is clicked
     const onSearch = (searchTerm) => {
         //our api to fetch search results
-        console.log('search', searchTerm);
+
+        console.log(value);
     }
 
     
