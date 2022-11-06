@@ -14,9 +14,13 @@ import Sudhanshu from './components/pages/Sudhanshu';
 import Ruben from './components/pages/Ruben';
 import About from './components/About';
 
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
 import SearchResults from './components/pages/SearchResults';
 import { SearchContext } from './SearchContext.js';
 
+const queryClient = new QueryClient();
 
 function App(){
 
@@ -29,6 +33,7 @@ function App(){
   return (
 
       <BrowserRouter>
+      <QueryClientProvider client={queryClient}>
         <SearchContext.Provider value={search}>
           <div className="App">
             <React.Fragment>
@@ -51,6 +56,7 @@ function App(){
             </Routes>
           </div>
         </SearchContext.Provider>
+        </QueryClientProvider>
       </BrowserRouter>
 
 

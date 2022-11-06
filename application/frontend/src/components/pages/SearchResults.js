@@ -1,17 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './styles/milestoneOne.css';
 import ResultCard from './ResultCard';
 
+import { SearchContext } from '../../SearchContext.js';
+
 
 function SearchResults(location) {
+  //global search variable
+  const {value, setValue} = useContext(SearchContext);
+
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
 
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'text/html; charset=utf-8',
+      },
+    body: {value},
+  };
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/todos/1")
+    fetch("https://jsonplaceholder.typicode.com/todos/1", options)
       .then(res => res.json())
       .then(
         (result) => {
