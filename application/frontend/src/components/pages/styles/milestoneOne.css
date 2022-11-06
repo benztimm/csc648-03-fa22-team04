@@ -4,25 +4,52 @@
 }
 
 img {
-    max-width: 350px;
+    max-width: 250px;
     height: auto;
 }
 
 .about {
-    width: 300px;
-    background-color: whitesmoke;
-    
+    width: 65%;
+    background-color: #c5c8c8;
+    padding-right: 100px;
+    padding-bottom: 15px;
+
+    border: 2px solid;
+    border-color: black;
+    border-radius: 1%;
+}
+
+.aboutHeader{
+    padding:10px;
+
+}
+
+.aboutMe {
+    color: black;
+    font-weight: 400;
+    font-family: Georgia, 'Times New Roman', Times;
+    text-align: left;
+    padding-top: 20px;
+    padding-left: 55px;
+    padding-right: 10px;
+    padding-bottom: 20px;
 }
 
 .container {
     margin-top: 50px;
     display: flex;
-    justify-content: center;
+    justify-content: left;
+    margin-bottom: 50px;
 }
 
-.aboutMe {
-    text-align: left;
-    padding: 25px;
-    
-    width: 250px;
+.slogan{
+    margin-top: 5px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    background-color: black;
+    color: white;
+    font-size: 17px;
+    font-family: Georgia, 'Times New Roman';
 }
+
+

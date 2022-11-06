@@ -12,6 +12,7 @@ import Mahisha from './components/pages/Mahisha';
 import Sophia from './components/pages/Sophia';
 import Sudhanshu from './components/pages/Sudhanshu';
 import Ruben from './components/pages/Ruben';
+import About from './components/About';
 
 import SearchResults from './components/pages/SearchResults';
 import { SearchContext } from './SearchContext.js';
@@ -33,7 +34,6 @@ function App(){
             <React.Fragment>
               <Navbar/>
             </React.Fragment>
-
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />
@@ -43,6 +43,8 @@ function App(){
               <Route path="/mahisha" element={<Mahisha />} />
               <Route path="/sudhanshu" element={<Sudhanshu />} />
               <Route path="/ruben" element={<Ruben />} />
+              <Route path="/About" element={<About />} />
+
 
               <Route path="/searchresults" element={<SearchResults />} />
               

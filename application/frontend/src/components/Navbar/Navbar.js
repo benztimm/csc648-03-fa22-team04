@@ -4,7 +4,7 @@ import { FaBars, FaTimes} from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import '../pages/styles/main.css';
+import '../Navbar/Navbar.css';
 
 import logo from '../images/gatorExchange.png'
 import { SearchContext } from '../../SearchContext.js';
@@ -56,20 +56,32 @@ function Navbar() {
             <div>
                 <nav ref= {navRef}>
                     <a href="/#"><Link to="/">Home</Link></a>
+                    <a href='/#'><Link to="/About">About</Link></a>
                     <a href='/#'>Register</a>
                     <a href='/#'>Log In</a>
-
                     <button className="nav-btn nav-close-btn" onClick={showNavbar}>
                         <FaTimes/>
                     </button>
+                    
+
                 </nav>
+
+                <div>
+                <p className='cc'> 
+                    SFSU Software Engineering Project CSC648-848,
+                    Fall 2022 for Demonstration Only
+                </p>
+                </div>
             </div>
+            
+            
 
 
             <button className="nav-btn" onClick={showNavbar}>
                 <FaBars/>
             </button>
 
+            
 
         </header>
     );
