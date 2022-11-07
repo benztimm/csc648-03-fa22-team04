@@ -87,7 +87,7 @@ def execute_query(query, params:dict = None, debug = False):
         conn = mysql.connect()
         cursor = conn.cursor(pymysql.cursors.DictCursor)
         
-        # Query execution:
+        # Query execution: (always run query with external params -> prevents sql injection)
         cursor.execute(query, params)
         conn.commit()
 

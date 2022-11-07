@@ -21,6 +21,7 @@ def search_media(keyword = None):
                 ON
                     p.uploader_id = u.user_id
                 """
+    # Update query with where clause in case search keyword provided:
     if keyword:
         query += """
                 WHERE
@@ -32,6 +33,7 @@ def search_media(keyword = None):
 
     for post in results:
         try:
+            # read the file and send b64 data:
             file = open(post.get("file"), 'rb')
             post['file'] = b64encode(file.read()).decode()
         except Exception as e:
