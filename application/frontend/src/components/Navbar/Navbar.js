@@ -1,5 +1,5 @@
 import React from 'react';
-import { useContext, useRef, useState } from 'react'; 
+import { useContext, useRef, useState, useHistory } from 'react'; 
 import { FaBars, FaTimes} from 'react-icons/fa';
 import { Link, useNavigate, generatePath} from 'react-router-dom';
 import Select from 'react-select';
@@ -27,9 +27,8 @@ function Navbar() {
     // set global variable as search query
     const changeHandler = event => setValue(event.target.value);
     // when search button is clicked
-    const routeChange = (value) => {
 
-    };
+    const navigate = useNavigate();
     const onSearch = (searchTerm) => {
         console.log(value);
         //navigate('/searchresults?q=' + value);
@@ -41,7 +40,7 @@ function Navbar() {
 
 
     //NAVIGATION
-    const navigate = useNavigate();
+
     const navRef = useRef();
     const showNavbar = () => {
         navRef.current.classList.toggle("responsive_nav");
