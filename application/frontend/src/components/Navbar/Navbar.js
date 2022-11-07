@@ -1,7 +1,7 @@
 import React from 'react';
 import { useContext, useRef, useState } from 'react'; 
 import { FaBars, FaTimes} from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, generatePath} from 'react-router-dom';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import '../Navbar/Navbar.css';
@@ -21,16 +21,22 @@ function Navbar() {
         { label: "Category 3", value: 3 },
       ];
 
-
     // SEARCH BAR
     // search bar query
     const {value, setValue} = useContext(SearchContext);
     // set global variable as search query
     const changeHandler = event => setValue(event.target.value);
     // when search button is clicked
+    const routeChange = (value) => {
+
+    };
     const onSearch = (searchTerm) => {
         console.log(value);
-        navigate('/searchresults?q=' + value);
+        //navigate('/searchresults?q=' + value);
+        const path = generatePath("/searchresults?q=:input", {
+            input: {value},
+        });
+        navigate(path);
     }
 
 
@@ -74,8 +80,6 @@ function Navbar() {
                 </div>
             </div>
             
-            
-
 
             <button className="nav-btn" onClick={showNavbar}>
                 <FaBars/>
