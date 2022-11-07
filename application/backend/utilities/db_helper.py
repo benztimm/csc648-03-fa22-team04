@@ -17,7 +17,13 @@ app.config['MYSQL_DATABASE_DB'] = db_config_parser["production-db-config"]['MYSQ
 app.config['MYSQL_DATABASE_HOST'] = db_config_parser["production-db-config"]['MYSQL_DATABASE_HOST']
 mysql.init_app(app)
 
-print("DB Connection Successful")
+try:
+    conn = mysql.connect()
+    print("DB Connection Successful")
+    conn.close()
+except Exception as e:
+    print(e)
+    raise Exception("Error connecting database.")
 
 def read(table, column = None, value = None, debug=False):
     """
