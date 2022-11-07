@@ -15,13 +15,26 @@ import { SearchContext } from '../../SearchContext.js';
 function Navbar() {
 
     // CATEGORY SELECTOR
-    const animatedComponents = makeAnimated();
-    const Categories = [
-        { label: "Category 1", value: 1 },
-        { label: "Category 2", value: 2 },
-        { label: "Category 3", value: 3 },
-      ];
+    // const animatedComponents = makeAnimated();
+    // const Categories = [
+    //     { label: "Photography", value: 1 },
+    //     { label: "Art", value: 2 },
+    //     { label: "Computer Science", value: 3 },
+    //     { label: "Travel", value: 4 },
+        
+    //   ];
 
+    const [selectedOption, setSelectedOption] = useState({});
+
+    const changeHandlerCategory = (e) => {
+        setSelectedOption(e.target.value);
+        window.sessionStorage.setItem('category', selectedOption);
+        console.log(window.sessionStorage.getItem('category'));
+        
+    };
+
+    
+    //END CATEGORY SELECTOR
 
     // SEARCH BAR
     // search bar query
@@ -37,21 +50,20 @@ function Navbar() {
 
     
     const fetchAPI = async () => {
-        const res = await fetch(`http://54.200.101.218:5000/data-parameters/${value}`)      
+        const res = await fetch(`http://54.200.101.218:5000/search-posts/${selectedOption} ${value}`)      
         .then(res => res.json())
         .then(
           
           (result) => {
             setIsLoaded(true);
             setItems(result);
-            window.sessionStorage.setItem('result', result);
+            window.sessionStorage.setItem('result', JSON.stringify(result));
             console.log(result);
   
           },
           (error) => {
             setIsLoaded(true);
             setError(error);
-            //navigate(0);
           })
       };
 
@@ -67,6 +79,7 @@ function Navbar() {
         });
         fetchAPI();
         navigate(path);
+
     };
     //END SEARCH BAR
 
@@ -81,9 +94,14 @@ function Navbar() {
         <header>
             <h3> <img src={logo} className="img-fluid" width={125} height={120}></img> </h3>
 
-            <div className="category-select">
-                <Select options={Categories} components={animatedComponents} isMulti />
-            </div>
+
+            <select defaultValue="1" onChange={changeHandlerCategory}>
+                <option value="Photography" >Photography</option>
+                <option value="Computer Science" >Computer Science</option>
+                <option value="Art" >Art</option>
+                <option value="Travel" >Travel</option>
+            </select>
+
 
             <input value={value} onChange={changeHandler} type="text" placeholder="Search..."/>
             <button onClick={() => onSearch(value)}>Search</button>
@@ -109,12 +127,9 @@ function Navbar() {
                 </div>
             </div>
             
-
             <button className="nav-btn" onClick={showNavbar}>
                 <FaBars/>
             </button>
-
-            
 
         </header>
     );

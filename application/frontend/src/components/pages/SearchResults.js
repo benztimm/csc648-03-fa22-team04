@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
 import { Link, useNavigate, useHistory, generatePath } from 'react-router-dom';
-import './styles/milestoneOne.css';
+import './styles/searchResults.css';
 import ResultCard from './ResultCard';
-import test from './test';
+import myImage from '../images/thumbnail.png';
+
 
 import { SearchContext } from '../../SearchContext.js';
+
 
 
 function SearchResults(location) {
@@ -16,23 +17,40 @@ function SearchResults(location) {
   const [items, setItems] = useState([]);
 
   const APIpull = window.sessionStorage.getItem('result');
-  
-    return (
-      
-      <div className='wrapper'>
-        <ResultCard/>
-      </div>
-    );
+
+  const media = JSON.parse(APIpull);
+
+
+  return (
+    
+
+    <div className='wrapper'>
+        <br/>
+        {media.output.map(output => (
+          <div className='card_body' key={output.post_id}>
+
+            <div id='image_container'>
+              <img src={`data:image/jpeg;base64,${output.file}`} className='thumbnail' />
+            </div>
+
+            <div className='maintext'>
+              <h2 className='card__title'>{output.title}</h2>
+              <h4 className='card__author'>{output.uploader_name}</h4>
+              <h4 className='card__filetype'>{output.post_type}</h4>
+              <br />
+              <p className='card__description'>{output.description}</p>
+            </div>
+
+            <div className='purchaseinfo'>
+              <h1 className='card__price'>${output.price}</h1>
+              <button className='card__bttn'>PURCHASE</button>
+            </div>
+          </div>
+        ))}
+    </div>
+  );
   }
 
 
 export default SearchResults;
 
-
-{/* <ul>
-{items.map(item => (
-  <li key={item.id}>
-    {item.name} {item.price}
-  </li>
-))}
-</ul> */}
