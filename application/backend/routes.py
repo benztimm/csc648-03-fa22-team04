@@ -36,7 +36,7 @@ def data_parameters(x=None):
     return json.dumps({'output': x, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
 
 
-@app.route('/search-posts', defaults={'keyword': None})
+@app.route('/search-posts/', defaults={'keyword': None})
 @app.route('/search-posts/<keyword>')
 def search_posts(keyword=None):
     '''
