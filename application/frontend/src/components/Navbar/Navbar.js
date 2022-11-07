@@ -24,7 +24,7 @@ function Navbar() {
         
     //   ];
 
-    const [selectedOption, setSelectedOption] = useState({});
+    const [selectedOption, setSelectedOption] = useState('');
 
     const changeHandlerCategory = (e) => {
         setSelectedOption(e.target.value);
@@ -50,7 +50,7 @@ function Navbar() {
 
     
     const fetchAPI = async () => {
-        const res = await fetch(`http://54.200.101.218:5000/search-posts/${selectedOption} ${value}`)      
+        const res = await fetch(`http://54.200.101.218:5000/search-posts/${selectedOption}${value}`)      
         .then(res => res.json())
         .then(
           
@@ -95,7 +95,8 @@ function Navbar() {
             <h3> <img src={logo} className="img-fluid" width={125} height={120}></img> </h3>
 
 
-            <select defaultValue="1" onChange={changeHandlerCategory}>
+            <select onChange={changeHandlerCategory}>
+                <option value="">Select A Category</option>
                 <option value="Photography" >Photography</option>
                 <option value="Computer Science" >Computer Science</option>
                 <option value="Art" >Art</option>
