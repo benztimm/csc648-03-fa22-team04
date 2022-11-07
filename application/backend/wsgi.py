@@ -1,6 +1,8 @@
 from gevent.pywsgi import WSGIServer
 from root import app
 
+from routes import *
+
 # As flask is not a production suitable server, we use will
 # a WSGIServer instance to serve our flask application. 
 if __name__ == '__main__':  
