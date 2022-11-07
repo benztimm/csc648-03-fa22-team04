@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useHistory } from 'react-router-dom';
 import './styles/milestoneOne.css';
 import ResultCard from './ResultCard';
+import test from './test';
 
 import { SearchContext } from '../../SearchContext.js';
 
 
 function SearchResults(location) {
+
+  const navigate = useNavigate();
   //global search variable
   const {value, setValue} = useContext(SearchContext);
 
@@ -15,18 +18,22 @@ function SearchResults(location) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
 
-  const options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'text/html; charset=utf-8',
-      },
-    body: {value},
-  };
+  // const options = {
+  //   method: 'POST',
+  //   headers: {
+  //     'Access-Control-Allow-Origin':'*',
+  //     'Content-Type': 'text/html; charset=utf-8',
+  //     'Access-Control-Request-Method': 'POST',
+  //     },
+  //   body: {value},
+  // };
+
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/todos/1", options)
+    fetch(`http://54.200.101.218:5000/data-parameters/${value}`)
       .then(res => res.json())
       .then(
+        
         (result) => {
           setIsLoaded(true);
           setItems(result);
@@ -34,6 +41,7 @@ function SearchResults(location) {
         (error) => {
           setIsLoaded(true);
           setError(error);
+          //navigate(0);
         }
       )
   }, [])
@@ -44,6 +52,7 @@ function SearchResults(location) {
     return <div>Loading...</div>;
   } else {
     console.log(items);
+
     return (
       
       <div className='wrapper'>
@@ -52,6 +61,10 @@ function SearchResults(location) {
     );
   }
 }
+
+
+
+
 
 
 
