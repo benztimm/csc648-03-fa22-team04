@@ -1,5 +1,4 @@
-from flask import jsonify, send_file
-from base64 import b64encode
+from flask import jsonify
 from root import app
 import json
 from apis.media_api import search_media
@@ -52,5 +51,5 @@ def search_posts(keyword=None):
         print(f"== EXCEPTION == {e}")           
         return jsonify({"message: Something went wrong. Please check logs on the server :/ "}), 500     # Exception handling
     
-    # Dumps because it can handle things better:
+    # JSON.dumps because it can handle things better:
     return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
