@@ -1,5 +1,5 @@
 import React from 'react';
-import { useContext, useRef, useState, useHistory } from 'react'; 
+import { useContext, useRef, useState, useHistory, useEffect } from 'react'; 
 import { FaBars, FaTimes} from 'react-icons/fa';
 import { Link, useNavigate, generatePath} from 'react-router-dom';
 import Select from 'react-select';
@@ -8,6 +8,7 @@ import '../Navbar/Navbar.css';
 
 import logo from '../images/gatorExchange.png'
 import { SearchContext } from '../../SearchContext.js';
+
 
 
 
@@ -21,26 +22,55 @@ function Navbar() {
         { label: "Category 3", value: 3 },
       ];
 
+
     // SEARCH BAR
     // search bar query
     const {value, setValue} = useContext(SearchContext);
+
     // set global variable as search query
     const changeHandler = event => setValue(event.target.value);
-    // when search button is clicked
-
     const navigate = useNavigate();
-    const onSearch = (searchTerm) => {
+
+    const [error, setError] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [items, setItems] = useState([]);
+
+    
+    const fetchAPI = async () => {
+        const res = await fetch(`http://54.200.101.218:5000/data-parameters/${value}`)      
+        .then(res => res.json())
+        .then(
+          
+          (result) => {
+            setIsLoaded(true);
+            setItems(result);
+            window.sessionStorage.setItem('result', result);
+            console.log(result);
+  
+          },
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+            //navigate(0);
+          })
+      };
+
+    // when search button is clicked
+    const onSearch = (value) => {
+        //changeHandler();
         console.log(value);
+        window.sessionStorage.setItem('value', value);
+
         //navigate('/searchresults?q=' + value);
         const path = generatePath("/searchresults?q=:input", {
-            input: {value},
+            input: window.sessionStorage.getItem('value'),
         });
+        fetchAPI();
         navigate(path);
-    }
-
+    };
+    //END SEARCH BAR
 
     //NAVIGATION
-
     const navRef = useRef();
     const showNavbar = () => {
         navRef.current.classList.toggle("responsive_nav");

@@ -2,9 +2,11 @@
     display: inline-block;
     grid-template-columns: repeat;
     
+    
 }
 
 .card_body{
+    margin: 5px;
     width: 70vw;
     height: 150px;
     background-color: #fbfbfb;

@@ -20,6 +20,9 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import SearchResults from './components/pages/SearchResults';
 import { SearchContext } from './SearchContext.js';
 
+//TEST
+import TESTIMAGE from './components/pages/imagetest.js';
+
 const queryClient = new QueryClient();
 
 function App(){
@@ -49,6 +52,9 @@ function App(){
               <Route path="/sudhanshu" element={<Sudhanshu />} />
               <Route path="/ruben" element={<Ruben />} />
               <Route path="/About" element={<About />} />
+
+              //test
+              <Route path="/imagetest" element={<TESTIMAGE />} />
 
 
               <Route path="/searchresults" element={<SearchResults />} />
