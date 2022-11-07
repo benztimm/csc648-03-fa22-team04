@@ -11,12 +11,8 @@
     "react-icons": "^4.6.0",
     "react-query": "^3.39.2",
     "react-router-dom": "^6.3.0",
-<<<<<<< HEAD
     "react-scripts": "^5.0.1",
     "react-select": "^5.6.0"
-=======
-    "react-scripts": "^5.0.1"
->>>>>>> 0bc6675e5c8f6f312eada6ae0dd12f6d4a289728
   },
   "scripts": {
     "start": "react-scripts start",
@@ -24,25 +20,10 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-<<<<<<< HEAD
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
   ]
-=======
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
->>>>>>> 0bc6675e5c8f6f312eada6ae0dd12f6d4a289728
 }
