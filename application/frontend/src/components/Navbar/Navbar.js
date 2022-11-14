@@ -1,86 +1,95 @@
 import React from 'react';
 import { useContext, useRef, useState, useHistory, useEffect } from 'react'; 
 import { FaBars, FaTimes} from 'react-icons/fa';
-import { Link, useNavigate, generatePath} from 'react-router-dom';
+import { Link, useNavigate, generatePath, Navigate} from 'react-router-dom';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import '../Navbar/Navbar.css';
 
 import logo from '../images/gatorExchange.png'
+
+import SearchResults from '../pages/SearchResults';
 import { SearchContext } from '../../SearchContext.js';
 
 
+//`http://54.200.101.218:5000/search-posts/${selectedOption}${value}`
 
-
-function Navbar() {
+const Navbar = () =>{
 
     // CATEGORY SELECTOR
-    // const animatedComponents = makeAnimated();
-    // const Categories = [
-    //     { label: "Photography", value: 1 },
-    //     { label: "Art", value: 2 },
-    //     { label: "Computer Science", value: 3 },
-    //     { label: "Travel", value: 4 },
-        
-    //   ];
-
     const [selectedOption, setSelectedOption] = useState('');
 
     const changeHandlerCategory = (e) => {
-        setSelectedOption(e.target.value);
-        window.sessionStorage.setItem('category', selectedOption);
-        console.log(window.sessionStorage.getItem('category'));
-        
+        let newCat = e.target.value;
+        setSelectedOption(newCat);
     };
-
-    
     //END CATEGORY SELECTOR
 
     // SEARCH BAR
-    // search bar query
-    const {value, setValue} = useContext(SearchContext);
 
-    // set global variable as search query
-    const changeHandler = event => setValue(event.target.value);
-    const navigate = useNavigate();
+    //Set input value as value
+    const [value, setValue] = useState('');
+    const changeHandler = (event) => {
+        //let newValue = event.target.value;
+        setValue(event.target.value);
+    };
 
+    // END SEARCH BAR
+
+
+    // const [extension, setExtension] = useState(null);
+    // const settingExtension = () => {
+    //     let newExtension = `${selectedOption} ${value}`;
+    //     setExtension(newExtension);
+    // };
+
+    //fetch api
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [items, setItems] = useState([]);
+    const [items, setItems] = useState(null);
+    const navigate = useNavigate();
 
+  // declare the async data fetching function
+    const fetchData = async () => {
+        // get the data from the api
+        const data = await fetch(`http://54.200.101.218:5000/search-posts/${selectedOption} ${value}`);
+        // convert the data to json
+        const json = await data.json();
+
+        // set state with the result
+        console.log(json);
+        setItems(json);
+        window.localStorage.setItem('result', JSON.stringify(json));
+        console.log(window.localStorage.getItem('result'));
+        navigate('/searchresults');
+    }
+
+
+    //when search button is clicked
+
+
+    const searchClick = () => {
+        //settingExtension();
+        fetchData();
+
+
+    }
     
-    const fetchAPI = async () => {
-        const res = await fetch(`http://54.200.101.218:5000/search-posts/${selectedOption}${value}`)      
-        .then(res => res.json())
-        .then(
-          
-          (result) => {
-            setIsLoaded(true);
-            setItems(result);
-            window.sessionStorage.setItem('result', JSON.stringify(result));
-            console.log(result);
-  
-          },
-          (error) => {
-            setIsLoaded(true);
-            setError(error);
-          })
-      };
 
     // when search button is clicked
-    const onSearch = (value) => {
-        //changeHandler();
-        console.log(value);
-        window.sessionStorage.setItem('value', value);
+    // const onSearch = (value) => {
+    //     //changeHandler();
+    //     console.log(value);
+    //     window.sessionStorage.setItem('value', value);
 
-        //navigate('/searchresults?q=' + value);
-        const path = generatePath("/searchresults?q=:input", {
-            input: window.sessionStorage.getItem('value'),
-        });
-        fetchAPI();
-        navigate(path);
+    //     //navigate('/searchresults?q=' + value);
+    //     fetchAPI();
+    //     const path = generatePath("/searchresults?q=:input", {
+    //         input: window.sessionStorage.getItem('value'),
+    //     });
+    //     navigate(path);
 
-    };
+    // };
     //END SEARCH BAR
 
     //NAVIGATION
@@ -89,6 +98,8 @@ function Navbar() {
         navRef.current.classList.toggle("responsive_nav");
     }
 
+    //NAVIGATION IF CLICKING SEARCH
+    //if (extension) return  (<Navigate to="/searchresults?=" />);
 
     return(
         <header>
@@ -104,8 +115,8 @@ function Navbar() {
             </select>
 
 
-            <input value={value} onChange={changeHandler} type="text" placeholder="Search..."/>
-            <button onClick={() => onSearch(value)}>Search</button>
+            <input onChange={changeHandler} type="text" placeholder="Search..."/>
+            <button onClick={searchClick}>Search</button>
 
             <div>
                 <nav ref= {navRef}>
