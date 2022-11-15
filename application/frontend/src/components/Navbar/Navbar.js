@@ -122,8 +122,9 @@ const Navbar = () =>{
                 <nav ref= {navRef}>
                     <a href="/#"><Link to="/">Home</Link></a>
                     <a href='/#'><Link to="/About">About</Link></a>
-                    <a href='/#'>Register</a>
-                    <a href='/#'>Log In</a>
+                    <a href='/#'><Link to="/Upload">Upload</Link></a>
+                    <a href='/#'><Link to="/Register">Register</Link></a>
+                    <a href='/#'><Link to="/Login">Log In</Link></a>
                     <button className="nav-btn nav-close-btn" onClick={showNavbar}>
                         <FaTimes/>
                     </button>

@@ -1,0 +1,14 @@
+pre{
+    text-align: left;
+}
+
+.inbox{
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.innerinbox{
+    flex: 1;
+    margin: 10px;
+}

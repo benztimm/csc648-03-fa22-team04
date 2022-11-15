@@ -14,6 +14,11 @@ import Sophia from './components/pages/Sophia';
 import Sudhanshu from './components/pages/Sudhanshu';
 import Ruben from './components/pages/Ruben';
 import About from './components/About';
+import Login from './components/pages/login';
+import Register from './components/pages/register';
+import UploadPost from './components/pages/newPostPage';
+import Dashboard from './components/pages/dashboard';
+import Inbox from './components/pages/UserInbox';
 
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";

@@ -1,0 +1,18 @@
+div.dashboard{
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+
+button.dashboard{
+    align-items: center;
+    width: 100px;
+    font-size: medium;
+    padding: 0.5%;
+}
+
+hr.dashboard{
+    padding-bottom: 10px;
+    background-color: black;
+    margin-bottom: 20px;
+}
