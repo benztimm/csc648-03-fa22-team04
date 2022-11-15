@@ -1,46 +1,27 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Button from 'react-bootstrap/Button';
+import Modal from './modal.js';
 
-const imageUrl = "http://54.200.101.218:5000/data";
+
+
 
 //IMAGE TEST FOR base64 IMAGE FROM JSON DATA
 export default function ImageTest() {
 
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [items, setItems] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
 
 
-  useEffect(() => {
-    fetch('http://54.200.101.218:5000/data')
-
-      .then(res => res.json())
-      .then(
-        
-        (result) => {
-          setIsLoaded(true);
-          setItems(result);
-
-        },
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-          //navigate(0);
-        }
-      )
-  }, [])
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  } else if (!isLoaded) {
-    return <div>Loading...</div>;
-  } else {
-    console.log(items);
 
   return (
-    <>
-      <img src={`data:image/jpeg;base64,${items.data}`}/> 
-    </>
+    <div>
+      <button onClick={() => setIsOpen(true)}>
+        Open Modal
+      </button>
+      {isOpen && <Modal setIsOpen={setIsOpen} />}
+    </div>
+
   );
+
 }
-}
+
