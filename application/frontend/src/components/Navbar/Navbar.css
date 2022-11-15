@@ -59,16 +59,35 @@
     border-radius: 0px 4px 4px 0px;
     font-size: 20px;
     padding-left: 50px;
-    background-color: lightgray;
-    color: black;
+    background-color: white;
+    color: grey;
+    border: solid 1px;
+    border-color: grey;
   }
 
   header button{
-    width:80;
+    width:80px;
     height: 32px;
     font-size: 16px;
     background-color: #3BB271;
     color: #fbfbfb;
+    border-color: black;
+    border: solid;
+    border-width: 2px;
+  }
+
+  header button:hover{
+    width:80px;
+    height: 32px;
+    font-size: 16px;
+    background-color: #2a8051;
+    color: #fbfbfb;
+    border-color: black;
+    border: solid 2px;
+  }
+
+  .nav-space-filler {
+    width: 10vw;
   }
 /* 
   .page-links {
@@ -86,7 +105,7 @@
 
   
   
-  @media only screen and (max-width: 1024px){
+  @media only screen and (max-width: 1500px){
     header .nav-btn{
       visibility: visible;
       opacity: 1;

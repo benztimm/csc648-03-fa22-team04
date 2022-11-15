@@ -104,7 +104,7 @@ const Navbar = () =>{
     return(
         <header>
             <h3> <img src={logo} className="img-fluid" width={125} height={120}></img> </h3>
-
+            <div className='nav-space-filler'></div>
 
             <select  className='cat-Select' onChange={changeHandlerCategory}>
                 <option value="">Select A Category</option>
@@ -117,6 +117,8 @@ const Navbar = () =>{
 
             <input onChange={changeHandler} type="text" placeholder="Search..."/>
             <button onClick={searchClick}>Search</button>
+
+            <div className='nav-space-filler'></div>
 
             <div className='page-links'>
                 <nav ref= {navRef}>
