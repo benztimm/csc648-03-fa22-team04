@@ -2,8 +2,15 @@ pre{
     text-align: left;
 }
 
+.inbox-container {
+    display: inline-block;
+    flex-direction: column;
+    width: 70vw;
+
+}
+
 .inbox{
-    width: 50%;
+    width: 70%;
     display: flex;
     align-items: center;
 }

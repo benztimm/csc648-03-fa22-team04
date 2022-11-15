@@ -16,7 +16,7 @@ import Ruben from './components/pages/Ruben';
 import About from './components/About';
 import Login from './components/pages/login';
 import Register from './components/pages/register';
-import UploadPost from './components/pages/newPostPage';
+import UploadPost from './components/pages/UploadPost';
 import Dashboard from './components/pages/dashboard';
 import Inbox from './components/pages/UserInbox';
 
@@ -49,6 +49,11 @@ const App= () =>{
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/About" element={<About />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/upload" element={<UploadPost />} />
+            <Route path="/inbox" element={<Inbox />} />
 
 
             <Route path="/searchresults" element={<SearchResults />}>

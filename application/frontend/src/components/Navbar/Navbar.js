@@ -106,7 +106,7 @@ const Navbar = () =>{
             <h3> <img src={logo} className="img-fluid" width={125} height={120}></img> </h3>
 
 
-            <select onChange={changeHandlerCategory}>
+            <select  className='cat-Select' onChange={changeHandlerCategory}>
                 <option value="">Select A Category</option>
                 <option value="Photography" >Photography</option>
                 <option value="Computer Science" >Computer Science</option>
@@ -118,7 +118,7 @@ const Navbar = () =>{
             <input onChange={changeHandler} type="text" placeholder="Search..."/>
             <button onClick={searchClick}>Search</button>
 
-            <div>
+            <div className='page-links'>
                 <nav ref= {navRef}>
                     <a href="/#"><Link to="/">Home</Link></a>
                     <a href='/#'><Link to="/About">About</Link></a>

@@ -1,18 +1,28 @@
 import React from "react";
+import { Link, useNavigate, useHistory, generatePath, useLocation } from 'react-router-dom';
 import './styles/inbox.css';
 
+
+
 function Inbox(){
+    const navigate = useNavigate();
+
+    const goToPosts = () => {
+        navigate('/dashboard');
+
+    }
+
+
     return (
+
         <div>
                 <div class="dashboard">
                     <hr class="dashboard"></hr>
-                    <button class="dashboard">POSTS</button>&nbsp;&nbsp;&nbsp;
+                    <button class="dashboard" onClick={goToPosts}>POSTS</button>&nbsp;&nbsp;&nbsp;
                     <button class="dashboard">MESSAGES</button>
                 </div>
 
-                <div>
-                    <text>Showing 1 - 2 out of 2 messages</text>
-                </div>
+            <div className="inbox-container">
                 <hr></hr>
                 <div class="inbox">
                     <div class="innerinbox">
@@ -45,6 +55,8 @@ function Inbox(){
                     <div class="innerinbox">
                         <button>DELETE</button>
                     </div>
+                </div>
+
                 </div>
 
             </div>

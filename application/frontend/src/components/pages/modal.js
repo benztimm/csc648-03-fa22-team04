@@ -1,8 +1,17 @@
 import React from "react";
 import './styles/modal.css';
 import { RiCloseLine } from "react-icons/ri";
+import { Link, useNavigate, useHistory, generatePath, useLocation } from 'react-router-dom';
 
 const Modal = ({setIsOpen}) => {
+
+  const navigate = useNavigate();
+  const toMyUploads = () => {
+    //settingExtension();
+    navigate('/dashboard');
+
+
+}
     return (
         <>
           <div className='darkBG' onClick={() => setIsOpen(false)} />
@@ -19,7 +28,7 @@ const Modal = ({setIsOpen}) => {
               </div>
               <div className='modalActions'>
                 <div className='actionsContainer'>
-                  <button className='deleteBtn' onClick={() => setIsOpen(false)}>
+                  <button className='deleteBtn' onClick={toMyUploads}>
                     VIEW MY UPLOADS
                   </button>
                   <button

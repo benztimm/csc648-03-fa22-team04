@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useHistory, generatePath, useLocation } from 'react-router-dom';
 import axios from "axios";
 import Button from 'react-bootstrap/Button';
 import Modal from './modal.js';
@@ -10,6 +11,14 @@ import Modal from './modal.js';
 export default function ImageTest() {
 
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const toMyUploads = () => {
+    //settingExtension();
+    navigate('/dashboard');
+
+
+}
 
 
 
