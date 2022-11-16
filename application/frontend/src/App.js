@@ -7,18 +7,13 @@ import styles from './App.css';
 import Navbar from './components/Navbar/Navbar'
 
 import Home from './components/pages/Home';
-import Ekarat from './components/pages/Ekarat';
-import Jerry from './components/pages/Jerry';
-import Mahisha from './components/pages/Mahisha';
-import Sophia from './components/pages/Sophia';
-import Sudhanshu from './components/pages/Sudhanshu';
-import Ruben from './components/pages/Ruben';
 import About from './components/About';
 import Login from './components/pages/login';
 import Register from './components/pages/register';
 import UploadPost from './components/pages/UploadPost';
 import Dashboard from './components/pages/dashboard';
 import Inbox from './components/pages/UserInbox';
+import productPage from './components/pages/productPage';
 
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -54,6 +49,7 @@ const App= () =>{
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/upload" element={<UploadPost />} />
             <Route path="/inbox" element={<Inbox />} />
+            <Route path="/productPage" element={<productPage />}/>
 
 
             <Route path="/searchresults" element={<SearchResults />}>
