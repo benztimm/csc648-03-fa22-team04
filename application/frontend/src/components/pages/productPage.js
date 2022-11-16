@@ -23,10 +23,13 @@ function productPage() {
             <h1 className='title'> TITLE </h1>
             <div className='seller-profile'>
                 <img src={profilePic} width={100} height={100}></img>
-                <h2 className='seller-name'> Username </h2>
+                <h2 className='seller-name'> Test Username </h2>
             </div>
             <div className='about-item'>
-                <p>Date posted: </p>
+                <p>
+                    Date posted: 11/13/2022 <br/>
+                    Price: $5.00
+                </p>
                 <p className='description'>Description here by the author</p>
             </div>
             <div className='footer-buttons'>

@@ -59,6 +59,14 @@
     color: #2c3e50;
     text-align: center;
   }
+
+  .modalContent-purchaseMsg{
+    padding: 20px;
+    font-size: 14px;
+    color: #000000;
+    text-align: left;
+  }
+
   
   .modalActions {
     position: absolute;
@@ -157,5 +165,6 @@
 
 
   .msgContainer{
-    border: 1px solid #000000;
+    border: 6px double #000000;
+    
   }

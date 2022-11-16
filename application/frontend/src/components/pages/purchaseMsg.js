@@ -14,15 +14,16 @@ const purchaseMsg = ({setIsOpen}) =>{
                     <RiCloseLine style={{ marginBottom: "-3px"}} />
                 </button>
                 <div className="msgContainer">
-                    <div className="modalContent">
-                    I am intersted in buying this digital media. <br/>
-                    <br/>
-                    Date: <br/>
-                    Title:<br/>
-                    <br/>
-                    Please contact me on:<br/>
-                    Contact Number: <br/>
-                    Email: <br/>
+                    <div className="modalContent-purchaseMsg">
+                        Hi Test Username,<br/><br/>
+                        I am intersted in buying this digital media. <br/>
+                        <br/>
+                        Date: 11/16/2022<br/>
+                        Title: Test Title<br/>
+                        <br/>
+                        Please contact me on:<br/>
+                        Contact Number: +1(012) 345-6789 <br/>
+                        Email: tusername@sfsu.edu<br/>
                     </div> 
                 </div>
 
