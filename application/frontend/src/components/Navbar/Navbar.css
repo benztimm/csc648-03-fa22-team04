@@ -87,7 +87,7 @@
   }
 
   .nav-space-filler {
-    width: 10vw;
+    width: 4vw;
   }
 /* 
   .page-links {
@@ -105,7 +105,7 @@
 
   
   
-  @media only screen and (max-width: 1500px){
+  @media only screen and (max-width: 1300px){
     header .nav-btn{
       visibility: visible;
       opacity: 1;
