@@ -13,7 +13,7 @@ import Register from './components/pages/register';
 import UploadPost from './components/pages/UploadPost';
 import Dashboard from './components/pages/dashboard';
 import Inbox from './components/pages/UserInbox';
-import productPage from './components/pages/productPage';
+import ProductPage from './components/pages/productPage';
 
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -49,7 +49,7 @@ const App= () =>{
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/upload" element={<UploadPost />} />
             <Route path="/inbox" element={<Inbox />} />
-            <Route path="/productPage" element={<productPage />}/>
+            <Route path="/productpage" element={<ProductPage />}/>
 
 
             <Route path="/searchresults" element={<SearchResults />}>

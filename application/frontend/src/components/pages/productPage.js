@@ -3,21 +3,26 @@ import { Link, useNavigate, useHistory, generatePath } from 'react-router-dom';
 
 import '../pages/styles/productPage.css';
 import myImage from '../images/thumbnail.png';
-import purchaseMsg from '../pages/purchaseMsg.js';
+import PurchaseMsg from '../pages/purchaseMsg.js';
+import profilePic from '../images/testimage.jpg';
+
 
 function productPage() {
 
     const [isOpen, setIsOpen] = useState(false);
+    
+    return(
 
     <div className='page-container'>
+
         <div className='img-container'>
-            <img className='img-test'>myImage</img>
+            <img src = {myImage}></img>
         </div>
 
         <div className='seller-card'>
             <h1 className='title'> TITLE </h1>
             <div className='seller-profile'>
-                <img className='seller-img'> </img>
+                <img src={profilePic}></img>
                 <h2 className='seller-name'> Username </h2>
             </div>
             <div className='about-item'>
@@ -29,12 +34,13 @@ function productPage() {
                 <button className='purchase-bttn' onClick={() => setIsOpen(true)}>
                     CONTACT SELLER
                 </button>
-               {isOpen && <purchaseMsg setIsOpen={setIsOpen} />}
+               {isOpen && <PurchaseMsg setIsOpen={setIsOpen} />}
                 <button className='cancel-bttn'>CANCEL</button>
             </div>
         </div>
 
     </div>
+    );
 }
 
 export default productPage;
