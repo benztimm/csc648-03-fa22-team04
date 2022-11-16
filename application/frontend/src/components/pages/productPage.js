@@ -22,11 +22,11 @@ function productPage() {
         <div className='seller-card'>
             <h1 className='title'> TITLE </h1>
             <div className='seller-profile'>
-                <img src={profilePic}></img>
+                <img src={profilePic} width={100} height={100}></img>
                 <h2 className='seller-name'> Username </h2>
             </div>
             <div className='about-item'>
-                <h1>Date posted: </h1>
+                <p>Date posted: </p>
                 <p className='description'>Description here by the author</p>
             </div>
             <div className='footer-buttons'>

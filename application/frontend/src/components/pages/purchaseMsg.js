@@ -6,7 +6,7 @@ const purchaseMsg = ({setIsOpen}) =>{
     return (
         <div className="darkBG" onClick={() => setIsOpen(false)}>
         <div className="centered">
-            <div className="modal">
+            <div className="modal-purchaseMsg">
                 <div className="modalHeader">
                     <h5 className="heading">MESSAGE</h5>
                 </div>
@@ -17,7 +17,7 @@ const purchaseMsg = ({setIsOpen}) =>{
                     <div className="modalContent">
                     I am intersted in buying this digital media. <br/>
                     <br/>
-                    Date: 
+                    Date: <br/>
                     Title:<br/>
                     <br/>
                     Please contact me on:<br/>
