@@ -37,12 +37,6 @@ const Navbar = () =>{
     // END SEARCH BAR
 
 
-    // const [extension, setExtension] = useState(null);
-    // const settingExtension = () => {
-    //     let newExtension = `${selectedOption} ${value}`;
-    //     setExtension(newExtension);
-    // };
-
     //fetch api
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -75,21 +69,6 @@ const Navbar = () =>{
 
     }
     
-
-    // when search button is clicked
-    // const onSearch = (value) => {
-    //     //changeHandler();
-    //     console.log(value);
-    //     window.sessionStorage.setItem('value', value);
-
-    //     //navigate('/searchresults?q=' + value);
-    //     fetchAPI();
-    //     const path = generatePath("/searchresults?q=:input", {
-    //         input: window.sessionStorage.getItem('value'),
-    //     });
-    //     navigate(path);
-
-    // };
     //END SEARCH BAR
 
     //NAVIGATION
