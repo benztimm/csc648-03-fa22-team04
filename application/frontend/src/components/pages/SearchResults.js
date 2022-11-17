@@ -20,15 +20,15 @@ function SearchResults() {
 
   var media = JSON.parse(apiPull);
 
+  // onClick={}
 
   return (
 
     <div className='wrapper'>
 
-      
     <br/>
     {media && media.output.map(output => (
-      <div className='card_body' key={output.post_id}>
+      <div className='card_body' key={output.post_id} >
 
         <div id='image_container'>
           <img src={`data:image/jpeg;base64,${output.file}`} className='thumbnail' />
