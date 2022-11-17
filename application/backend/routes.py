@@ -68,9 +68,9 @@ def static_post(post_name=None):
     '''
 
     try:
-        file_name = path.join("../../posts", post_name)
+        file_name = path.abspath(f"../../posts/{post_name}")
         return send_file(file_name)
         # print(f":: DEBUG LOGS :: SEARCH OUTPUT : {output}")                                             # Adding debug logs
     except Exception as e:
-        print(f"== EXCEPTION == image_posts: \n{e}\n\nDETAILS:\n")           
-        return jsonify({"message: Something went wrong. Please check logs on the server :/ "}), 500  
+        print(f"== EXCEPTION == static_post: \n{e}")           
+        return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500  
