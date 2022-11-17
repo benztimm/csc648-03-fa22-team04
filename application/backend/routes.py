@@ -1,6 +1,7 @@
-from flask import jsonify
+from flask import jsonify, send_file
 from root import app
 import json
+from os import path
 from apis.media_api import search_media
 
 
@@ -53,3 +54,23 @@ def search_posts(keyword=None):
     
     # JSON.dumps because it can handle things better:
     return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
+
+
+@app.route('/post/', defaults={'post_name': None})
+@app.route('/post/<post_name>')
+def static_post(post_name=None):
+    '''
+    Serve the image from server's file system.
+
+    `inputs` image_path: path to image
+
+    `returns` static image
+    '''
+
+    try:
+        file_name = path.join("../../posts", post_name)
+        return send_file(file_name)
+        # print(f":: DEBUG LOGS :: SEARCH OUTPUT : {output}")                                             # Adding debug logs
+    except Exception as e:
+        print(f"== EXCEPTION == image_posts: \n{e}\n\nDETAILS:\n")           
+        return jsonify({"message: Something went wrong. Please check logs on the server :/ "}), 500  
