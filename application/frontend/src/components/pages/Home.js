@@ -53,7 +53,7 @@ const Home = () =>{
           {data && data.output.map(output => (
             <div className='card'>
               <div className='thumbnail-home'>
-                <img src={`data:image/jpeg;base64,${output.file}`} className='thumbnail' />
+                <img src={output.file} className='thumbnail' />
               </div>
               <div className='title-home'>
                 {output.title}

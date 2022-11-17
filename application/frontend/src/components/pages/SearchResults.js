@@ -31,7 +31,7 @@ function SearchResults() {
       <div className='card_body' key={output.post_id}>
 
         <div id='image_container'>
-          <img src={`data:image/jpeg;base64,${output.file}`} className='thumbnail' />
+          <img src={output.file} className='thumbnail' />
         </div>
 
         <div className='maintext'>
