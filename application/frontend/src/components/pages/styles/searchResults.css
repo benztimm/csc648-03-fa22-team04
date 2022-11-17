@@ -1,0 +1,52 @@
+.wrapper{
+    display: inline-block;
+    grid-template-columns: repeat;
+    
+    
+}
+
+.card_body{
+    margin: 5px;
+    width: 70vw;
+    height: 150px;
+    background-color: #fbfbfb;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    
+}
+
+.thumbnail{
+    width: 95%;
+    height: 95%;
+}
+
+#image_container{
+    vertical-align: middle;
+    order: 1;
+    width: 150px;
+    height: auto;
+}
+
+.maintext{
+    order:2;
+    height: 150px;
+    width: 30vw;
+    text-align: left;
+}
+
+.card__title, .card__author, .card__filetype, .card__description{
+    padding: 0px;
+    margin: 0px;
+}
+
+.purchaseinfo{
+    order:3;
+}
+
+
+
+
