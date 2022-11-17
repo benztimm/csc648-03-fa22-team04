@@ -31,15 +31,12 @@ def search_media(keyword = None):
                 """
     results = db.execute_query(query=query, params={"keyword": "%" + keyword + "%" if keyword else keyword})
 
-    
-    """
     for post in results:
         try:
-            # read the file and send b64 data:
-            file = open(post.get("file"), 'rb')
-            post['file'] = b64encode(file.read()).decode()
+            # read the file and send static URL:
+            post['file'] = f'http://54.200.101.218:5000/post/{post["file"]}'
         except Exception as e:
             print(f"Error loading file for post <{post.get('post_id')}> : \n{e}")
             raise Exception("Something went wrong while loading file.")
-    """
+
     return results
