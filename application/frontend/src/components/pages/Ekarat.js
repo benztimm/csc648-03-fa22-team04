@@ -13,7 +13,7 @@ const Ekarat = () => {
     <div>
       <div className="container">
         <div className="image">
-          <img src={myImage} className="myImage"></img>
+          <img src={myImage} className="aboutus-image"></img>
         </div>
         <div className="about">
           <h1 className='aboutHeader'>Ekarat Buddharuksa</h1>

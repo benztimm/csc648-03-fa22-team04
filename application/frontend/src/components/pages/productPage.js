@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate, useHistory, generatePath } from 'react-router-dom';
 
 import '../pages/styles/productPage.css';
-import myImage from '../images/thumbnail.png';
+import myImage from '../images/gatorExchange.png';
 import PurchaseMsg from '../pages/purchaseMsg.js';
 import profilePic from '../images/testimage.jpg';
 
@@ -10,17 +10,20 @@ import profilePic from '../images/testimage.jpg';
 function productPage() {
 
     const [isOpen, setIsOpen] = useState(false);
-    
+
     return(
 
     <div className='page-container'>
 
         <div className='img-container'>
-            <img src = {myImage}></img>
+            <img className='product-image' src = {myImage}></img>
         </div>
 
         <div className='seller-card'>
+            <div className='title-container'>
             <h1 className='title'> TITLE </h1>
+            </div>
+
             <div className='seller-profile'>
                 <img src={profilePic} width={100} height={100}></img>
                 <h2 className='seller-name'> Test Username </h2>
@@ -38,7 +41,6 @@ function productPage() {
                     CONTACT SELLER
                 </button>
                {isOpen && <PurchaseMsg setIsOpen={setIsOpen} />}
-                <button className='cancel-bttn'>CANCEL</button>
             </div>
         </div>
 
