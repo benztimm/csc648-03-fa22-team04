@@ -20,6 +20,15 @@ function SearchResults() {
 
   var media = JSON.parse(apiPull);
 
+  const navigateToProduct = (title, post_id) => {
+    // window.sessionStorage.setItem()
+    console.log(title);
+    console.log(post_id);
+    window.sessionStorage.setItem(post_id, title);
+    navigate(`/productpage/${post_id}`, {state:{id:post_id, title:title}});
+    //navigate(`/productpage/${title}`);
+  }
+
   // onClick={}
 
   return (
@@ -28,10 +37,10 @@ function SearchResults() {
 
     <br/>
     {media && media.output.map(output => (
-      <div className='card_body' key={output.post_id} >
+      <div className='card_body' key={output.post_id} onClick={() => navigateToProduct(`${output.title}`, `${output.post_id}`)}>
 
         <div id='image_container'>
-          <img src={`data:image/jpeg;base64,${output.file}`} className='thumbnail' />
+          <img src={output.file} className='thumbnail' />
         </div>
 
         <div className='maintext'>
