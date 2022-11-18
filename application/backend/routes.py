@@ -2,7 +2,8 @@ from flask import jsonify, send_file
 from root import app
 import json
 from os import path
-from apis.media_api import search_media
+
+import apis.post_api as post_api
 
 
 @app.route("/")
@@ -46,11 +47,48 @@ def search_posts(keyword=None):
     `returns` query output
     '''
     try:
-        output = search_media(keyword = keyword)
-        # print(f":: DEBUG LOGS :: SEARCH OUTPUT : {output}")                                             # Adding debug logs
+        output = post_api.search_posts(keyword = keyword)
     except Exception as e:
-        print(f"== EXCEPTION == {e}")           
+        print(f"== EXCEPTION == search_posts: \n{e}")           
         return jsonify({"message: Something went wrong. Please check logs on the server :/ "}), 500     # Exception handling
+    
+    # JSON.dumps because it can handle things better:
+    return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
+
+
+@app.route('/get-post-details/', defaults={'post_id': 1})
+@app.route('/get-post-details/<post_id>')
+def get_post_details(post_id=1):
+    '''
+    Search posts based on keywords. The keyword will be searched on title, description and category.
+
+    `inputs` keyword - input string
+    `returns` query output
+    '''
+    try:
+        output = post_api.get_post_details(post_id=post_id)
+    except Exception as e:
+        print(f"== EXCEPTION == get_post_details: \n{e}")           
+        return jsonify({"message: Something went wrong. Please check logs on the server :/ "}), 500     # Exception handling
+    
+    # JSON.dumps because it can handle things better:
+    return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
+
+
+@app.route('/home-page/', defaults={'limit': 10})
+@app.route('/home-page/<limit>')
+def get_latest_post(limit=None):
+    '''
+    Get latest post in post table default = 10
+    `inputs` limit - input string then change to int *prevent sql injection*
+    `returns` query output
+    '''
+    try:
+        limit = (int(limit))
+        output = post_api.get_latest_posts(limit = limit)
+    except Exception as e:
+        print(f"== EXCEPTION == get_latest_post: \n{e}")           
+        return jsonify({"message": "Something went wrong. Please check logs on the server :/ "}), 500     # Exception handling
     
     # JSON.dumps because it can handle things better:
     return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
@@ -66,11 +104,9 @@ def static_post(post_name=None):
 
     `returns` static image
     '''
-
     try:
         file_name = path.abspath(f"../../posts/{post_name}")
         return send_file(file_name)
-        # print(f":: DEBUG LOGS :: SEARCH OUTPUT : {output}")                                             # Adding debug logs
     except Exception as e:
         print(f"== EXCEPTION == static_post: \n{e}")           
         return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500  
