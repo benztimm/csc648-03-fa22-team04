@@ -43,3 +43,24 @@ def search_media(keyword = None):
             raise Exception("Something went wrong while loading file.")
     """
     return results
+
+def get_latest_media(limit = None):
+    query = """
+                SELECT
+                    p.*,
+                    u.first_name as 'uploader_name',
+                    u.user_id as 'uploader_id'
+                FROM
+                    post p
+                JOIN
+                    user u
+                ON
+                    p.uploader_id = u.user_id
+                order by post_id desc
+                limit 
+            """
+    if limit:
+        limit = (str(limit))
+        query += limit
+    results = db.execute_query(query=query)
+    return results
