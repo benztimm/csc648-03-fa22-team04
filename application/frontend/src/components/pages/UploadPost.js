@@ -10,51 +10,58 @@ function UploadPost() {
 
 
     return (
-        <form>
-            <div class="forms"><h2>UPLOAD AN ITEM</h2><hr></hr>
-                <br/>
-                <label for="file">
-                    FILE*<br></br>
-                    <input type="file" name="file" required class="forms" placeholder='Choose File'/>
-                </label><br/><br/>
-                <label for="thumbnail">
-                    THUMBNAIL*<br></br>
-                    <input type="file" name="thumbnail" required class="forms" placeholder='Choose File'/>
-                </label><br/><br/>
-                <label>
-                    TITLE*<br></br>
-                    <input type="text" name="title" required class="forms" placeholder='Enter the title'/>
-                </label><br/><br/>
-                <label>
-                    MEDIA TYPE*<br></br>
-                    <select name="mtype" required class="forms">
-                        <option value="image">Image</option>
-                        <option value="video">Video</option>
-                        <option value="document">Document</option>I
-                    </select>
-                </label><br/><br/>
+        <form className='upload-form-container'>
+            <div className='upload-forms'>
+                <div className='upload-header'>
+                    <h1>UPLOAD YOUR ITEM</h1>
+                    <hr className='line-upload'></hr>
+                    <br />
+                    <text><i>(All required fields are specified with an </i></text> <text style={{ color: 'red' }}><i>*</i></text> <text><i> )</i></text>
+                    <br />
+                    <br />
+                </div>
 
-                <label>
-                    DESCRIPTION<br/>
-                    <textarea name="description" class="forms" placeholder='Enter the description' rows="4"/>
-                </label><br/><br/>
-                <label>
-                    CATEGORY*<br></br>
-                    <select name="category" required class="forms">
-                        <option value="computerscience">Computer Science</option>
-                        <option value="photography">Photography</option>
-                        <option value="music">Music</option>I
-                    </select>
-                </label><br/><br/>
-                <label>
-                    PRICE<br/>
-                    <input type="number" name="price" class="forms" placeholder='Enter the price'/>
-                </label><br/><br/>
 
-                
-            <br/><br/>
-            <input type="cancel" value="Cancel" />&nbsp;
-            <input type="submit" value="Submit" />
+                <div className='form-container'>
+                    <label className='input-text-field'>
+                        TITLE<text style={{ color: 'red' }}><i>*</i></text><br></br>
+                        <input type="text" name="title" required className="forms" />
+                    </label><br /><br />
+                    <label className='input-text-field'>
+                        MEDIA TYPE<text style={{ color: 'red' }}><i>*</i></text><br></br>
+                        <select name="mtype" required class="forms">
+                            <option value="image">Image</option>
+                            <option value="video">Video</option>
+                            <option value="document">Document</option>I
+                        </select>
+                    </label><br /><br />
+                    <label className='input-text-field'>
+                        CATEGORY<text style={{ color: 'red' }}><i>*</i></text><br></br>
+                        <select name="category" required className="forms">
+                            <option value="computerscience">Computer Science</option>
+                            <option value="photography">Photography</option>
+                            <option value="music">Music</option>I
+                        </select>
+                    </label><br /><br />
+
+                    <label className='input-text-field'>
+                        DESCRIPTION<br />
+                        <textarea name="description" className="forms" rows="4" />
+                    </label><br /><br />
+
+                    <label className='input-text-field'>
+                        PRICE<br />
+                        <input type="number" name="price" className="forms" />
+                    </label><br /><br />
+
+                    <label for="file">
+                        FILE<text style={{ color: 'red' }}><i>*</i></text><br></br>
+                        <input type="file" name="file" required className="forms" />
+                    </label><br /><br />
+
+                    <br /><br />
+                    <button className='upload-submit-button' type="submit" value="Submit">SUBMIT</button>
+                </div>
             </div>
         </form>
     );
