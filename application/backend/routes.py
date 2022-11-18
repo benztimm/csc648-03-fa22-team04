@@ -1,7 +1,8 @@
 from flask import jsonify
 from root import app
 import json
-from apis.media_api import search_media
+from apis.media_api import *
+from apis.post_api import get_post
 
 
 @app.route("/")
@@ -46,6 +47,45 @@ def search_posts(keyword=None):
     '''
     try:
         output = search_media(keyword = keyword)
+        # print(f":: DEBUG LOGS :: SEARCH OUTPUT : {output}")                                             # Adding debug logs
+    except Exception as e:
+        print(f"== EXCEPTION == {e}")           
+        return jsonify({"message: Something went wrong. Please check logs on the server :/ "}), 500     # Exception handling
+    
+    # JSON.dumps because it can handle things better:
+    return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
+
+
+@app.route('/get-posts/', defaults={'keyword': None})
+@app.route('/get-posts/<keyword>')
+def get_posts(keyword=None):
+    '''
+    Search posts based on keywords. The keyword will be searched on title, description and category.
+
+    `inputs` keyword - input string
+    `returns` query output
+    '''
+    try:
+        output = get_post(keyword = keyword)
+        # print(f":: DEBUG LOGS :: SEARCH OUTPUT : {output}")                                             # Adding debug logs
+    except Exception as e:
+        print(f"== EXCEPTION == {e}")           
+        return jsonify({"message: Something went wrong. Please check logs on the server :/ "}), 500     # Exception handling
+    
+    # JSON.dumps because it can handle things better:
+    return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
+
+@app.route('/home-page/', defaults={'limit': 10})
+@app.route('/home-page/<limit>')
+def get_latest_post(limit=None):
+    '''
+    Get latest post in post table default = 10
+    `inputs` limit - input string then change to int *prevent sql injection*
+    `returns` query output
+    '''
+    try:
+        limit = (int(limit))
+        output = get_latest_media(limit = limit)
         # print(f":: DEBUG LOGS :: SEARCH OUTPUT : {output}")                                             # Adding debug logs
     except Exception as e:
         print(f"== EXCEPTION == {e}")           
