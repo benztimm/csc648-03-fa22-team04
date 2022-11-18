@@ -6,7 +6,7 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import '../Navbar/Navbar.css';
 
-import logo from '../images/gatorExchange.png'
+import logo from '../images/logo.png'
 
 import SearchResults from '../pages/SearchResults';
 import { SearchContext } from '../../SearchContext.js';
@@ -92,61 +92,53 @@ const Navbar = () =>{
     // };
     //END SEARCH BAR
 
-    //NAVIGATION
-    const navRef = useRef();
-    const showNavbar = () => {
-        navRef.current.classList.toggle("responsive_nav");
-    }
+    
 
     //NAVIGATION IF CLICKING SEARCH
     //if (extension) return  (<Navigate to="/searchresults?=" />);
 
+
+    const [showLinks, setShowLinks] = useState(false);
+
     return(
-        <header>
-            <h3> <img src={logo} className="img-fluid" width={125} height={120}></img> </h3>
-            <div className='nav-space-filler'></div>
+        <div className='Navbar'>
+            
+            <div className='left_side'>
+                <Link to="/">
+                    <img src={logo} className="img-fluid" onClick={() => setShowLinks(false)}
+                    width={125} height={120}></img>
+                </Link>
+                <div className='nav_search_bar'>
+                    <select  className='cat-Select' onChange={changeHandlerCategory}>
+                        <option value="">Category</option>
+                        <option value="Photography" >Photography</option>
+                        <option value="Computer Science" >Computer Science</option>
+                        <option value="Art" >Art</option>
+                        <option value="Travel" >Travel</option>
+                    </select>
 
-            <select  className='cat-Select' onChange={changeHandlerCategory}>
-                <option value="">Select A Category</option>
-                <option value="Photography" >Photography</option>
-                <option value="Computer Science" >Computer Science</option>
-                <option value="Art" >Art</option>
-                <option value="Travel" >Travel</option>
-            </select>
+                    <input onChange={changeHandler} type="text" placeholder="Search..."/>
+                    <button onClick={searchClick}>Search</button>
+                </div>
+                
+            </div>
 
-
-            <input onChange={changeHandler} type="text" placeholder="Search..."/>
-            <button onClick={searchClick}>Search</button>
-
-            <div className='nav-space-filler'></div>
-
-            <div className='page-links'>
-                <nav ref= {navRef}>
-                    <a href="/#"><Link to="/">Home</Link></a>
+            <div className='right_side'>
+                
+                <div className='nav_links' id={showLinks ? "hidden" : ""} onClick={() => setShowLinks(false)}>
                     <a href='/#'><Link to="/About">About</Link></a>
                     <a href='/#'><Link to="/Upload">Upload</Link></a>
                     <a href='/#'><Link to="/Register">Register</Link></a>
                     <a href='/#'><Link to="/Login">Log In</Link></a>
-                    <button className="nav-btn nav-close-btn" onClick={showNavbar}>
-                        <FaTimes/>
-                    </button>
-                    
-
-                </nav>
-
-                <div>
-                <p className='cc'> 
+                </div>
+                <button onClick={() => setShowLinks(!showLinks)}><FaBars/></button>
+            </div>
+            <p className='cc'> 
                     SFSU Software Engineering Project CSC648-848,
                     Fall 2022 for Demonstration Only
-                </p>
-                </div>
-            </div>
-            
-            <button className="nav-btn" onClick={showNavbar}>
-                <FaBars/>
-            </button>
+            </p>
 
-        </header>
+        </div>
     );
 }
 
