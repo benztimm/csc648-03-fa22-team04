@@ -9,17 +9,13 @@ certbot-nginx==1.21.0
 certifi==2020.6.20
 chardet==4.0.0
 click==8.0.3
-cloud-init==22.2
 colorama==0.4.4
-command-not-found==0.3
 ConfigArgParse==1.5.3
 configobj==5.0.6
 constantly==15.1.0
 cryptography==3.4.8
 dbus-python==1.2.18
 distro==1.7.0
-distro-info===1.1build1
-ec2-hibinit-agent==1.0.0
 Flask==2.2.2
 Flask-MySQL==1.5.2
 gevent==21.8.0
