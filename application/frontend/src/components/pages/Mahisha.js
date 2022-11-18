@@ -11,7 +11,7 @@ const Mahisha = () => {
   return (
     <div>
       <div className="container">
-        <div className="image">
+        <div className="aboutus-image">
           <img src={myImage}></img>
         </div>
         <div className="about">

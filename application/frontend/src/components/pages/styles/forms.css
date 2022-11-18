@@ -1,19 +1,83 @@
-div.forms{
+.upload-form-container {
+    display: flex;
+    justify-content: center;
+    background-color: #d1d1d1;
+    margin-top: 5vh;
+    height: 80vh;
+    align-items: center;
+    text-align: initial;
+}
+
+.line-upload {
+    background-color: black;
+}
+.upload-forms{
+    
+    contain: content;
+    display: flex;
     font-weight: bolder;
     font-size: 20px;
-    width: 100%;
-    align-items: center;
+    width: 40%;
     padding: 20px;
+    background-color: #5fc78e;
+    height: 80;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 10px 10px;
+    align-items: stretch;
+    overflow-y:auto;
+    border: solid;
+    border-width: 3px;
+    border-color: black;
+}
+
+/* .upload-header h1 {
+    color: white;
+
+} */
+
+.upload-submit-button {
+    width: 30%;
+    height: 30px;
+    background-color: white;
+
+    border-radius: 10px;
+    border: solid;
+    border-width: 2px;
+    border-color: black;
+    float: right;
+}
+
+.upload-submit-button:hover {
+    width: 30%;
+    height: 30px;
+    background-color: green;
+    border-radius: 10px;
+    border: solid;
+    border-width: 2px;
+    border-color: black;
+}
+
+
+
+.input-text-field {
+    text-align: justify;
 }
 
 input.forms, textarea.forms{
-    width: 40%;
-    height: 40px;
-    font-size: 20px;}
+    width: 65%;
+    height: 30px;
+    font-size: 20px;
+    border: solid;
+    border-width: 2px;
+    border-color: black;
+    border-radius: 5px;
+}
 
 select.forms{
-    width: 40%;
-    height: 40px;
+    width: 65%;
+    height: 30px;
     padding: 1px;
     font-size: 20px;
 }

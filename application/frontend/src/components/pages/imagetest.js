@@ -16,10 +16,17 @@ export default function ImageTest() {
   const toMyUploads = () => {
     //settingExtension();
     navigate('/dashboard');
-
-
 }
 
+    //LOGIN
+    const [isLoginOpen, setLoginOpen] = useState(false);
+    
+
+    //REGISTER
+    const [isRegisterOpen, setRegisterOpen] = useState(false);
+
+
+    const handleClick = value => () => console.log(value);
 
 
   return (
@@ -28,7 +35,30 @@ export default function ImageTest() {
         Open Modal
       </button>
       {isOpen && <Modal setIsOpen={setIsOpen} />}
+
+
+    //COPY ALL OF THIS
+
+    <button onClick={() => setLoginOpen(true)}>
+        Open Modal
+      </button>
+      {isLoginOpen && <Modal setIsOpen={setLoginOpen} />}
+
+
+      <button onClick={() => setRegisterOpen(true)}>
+        Open Modal
+      </button>
+      {isRegisterOpen && <Modal setIsOpen={setRegisterOpen} />}
+
+
+
+    <button onClick={handleClick('Bar')}>Speak</button>
+
+      
+
     </div>
+
+    
 
   );
 
