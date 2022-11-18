@@ -18,6 +18,15 @@
 <a href="https://nodejs.org/en/download/" alt="Node" target="_blank">
         <img src="https://img.shields.io/badge/NodeJS-v8.15.0-green?style=flat&logo=Node.js" /></a>
 
+<a href="http://54.200.101.218/" alt="Node" target="_blank">
+        <img src="https://img.shields.io/badge/AWS-ec2-yellow?style=flat&logo=Amazon%20EC2" /></a>
+
+<a href="https://releases.ubuntu.com/22.04" alt="Node" target="_blank">
+        <img src="https://img.shields.io/badge/ubuntu-22.04-red?style=flat&logo=Ubuntu" /></a>
+
+<a href="https://www.nginx.com/" alt="Node" target="_blank">
+        <img src="https://img.shields.io/badge/Web%20Server-Nginx-brightgreen?style=flat&logo=NGINX" /></a>
+        
 <br> <br>
 
 > [Please refer the Wiki pages for detailed documentation.](https://github.com/CSC-648-SFSU/csc648-03-fa22-team04/wiki)
