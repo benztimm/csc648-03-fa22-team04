@@ -1,18 +1,19 @@
 import React, { Component, useContext, useMemo, useState } from 'react';
-import { BrowserRouter, Routes, Route, Switch, Router } from 'react-router-dom';
+import { Routes, Route, Switch, Router, createBrowserRouter, RouterProvider,
+  Outlet, useRouteLoaderData, createRoutesFromElements, BrowserRouter  } from 'react-router-dom';
 import axios from 'axios';
 import styles from './App.css';
 
 import Navbar from './components/Navbar/Navbar'
 
 import Home from './components/pages/Home';
-import Ekarat from './components/pages/Ekarat';
-import Jerry from './components/pages/Jerry';
-import Mahisha from './components/pages/Mahisha';
-import Sophia from './components/pages/Sophia';
-import Sudhanshu from './components/pages/Sudhanshu';
-import Ruben from './components/pages/Ruben';
 import About from './components/About';
+import Login from './components/pages/login';
+import Register from './components/pages/register';
+import UploadPost from './components/pages/UploadPost';
+import Dashboard from './components/pages/dashboard';
+import Inbox from './components/pages/UserInbox';
+import ProductPage from './components/pages/productPage';
 
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -25,50 +26,49 @@ import TESTIMAGE from './components/pages/imagetest.js';
 
 const queryClient = new QueryClient();
 
-function App(){
 
-  const [value, setValue] = useState('');
-  const search = useMemo(
-    () => ({ value, setValue }), 
-    [value]
-  );
+
+const App= () =>{
+
 
   return (
 
-      <BrowserRouter>
+
+    <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <SearchContext.Provider value={search}>
-          <div className="App">
-            <React.Fragment>
-              <Navbar/>
-            </React.Fragment>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/ekarat" element={<Ekarat />} />
-              <Route path="/sophia" element={<Sophia />} />
-              <Route path="/jerry" element={<Jerry />} />
-              <Route path="/mahisha" element={<Mahisha />} />
-              <Route path="/sudhanshu" element={<Sudhanshu />} />
-              <Route path="/ruben" element={<Ruben />} />
-              <Route path="/About" element={<About />} />
-
-              //test
-              <Route path="/imagetest" element={<TESTIMAGE />} />
+        <div className="App">
+          <React.Fragment>
+            <Navbar />
+          </React.Fragment>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/About" element={<About />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/upload" element={<UploadPost />} />
+            <Route path="/inbox" element={<Inbox />} />
+            <Route path="/productpage" element={<ProductPage />}/>
 
 
-              <Route path="/searchresults" element={<SearchResults />} />
-              
-            </Routes>
-          </div>
-        </SearchContext.Provider>
-        </QueryClientProvider>
-      </BrowserRouter>
+            <Route path="/searchresults" element={<SearchResults />}>
+              <Route index element={<SearchResults />} />
+              <Route path=":sr" element={<SearchResults />} />
+            </Route>
+
+        //test
+            <Route path="/imagetest" element={<TESTIMAGE />} />
 
 
-    
+          </Routes>
+        </div>
+      </QueryClientProvider>
+    </BrowserRouter>
+
   );
 
-}
+};
 
 export default App;
+

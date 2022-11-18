@@ -1,0 +1,75 @@
+.dash-container {
+    display: inline-block;
+    grid-template-columns: repeat;
+
+}
+
+div.dashboard{
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+
+button.dashboard{
+    align-items: center;
+    width: 100px;
+    font-size: medium;
+    padding: 0.5%;
+}
+
+hr.dashboard{
+    padding-bottom: 10px;
+    background-color: black;
+    margin-bottom: 20px;
+}
+
+.dashboard-card-container {
+    /* width: 70%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    flex-direction: column; */
+
+}
+
+.card_body{
+    margin: 5px;
+    width: 70vw;
+    height: 150px;
+    background-color: #fbfbfb;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    
+}
+
+.thumbnail{
+    width: 95%;
+    height: 95%;
+}
+
+#image_container{
+    vertical-align: middle;
+    order: 1;
+    width: 150px;
+    height: auto;
+}
+
+.maintext{
+    order:2;
+    height: 150px;
+    width: 30vw;
+    text-align: left;
+}
+
+.card__title, .card__author, .card__filetype, .card__description{
+    padding: 0px;
+    margin: 0px;
+}
+
+.purchaseinfo{
+    order:3;
+}

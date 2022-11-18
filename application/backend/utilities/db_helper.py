@@ -27,7 +27,7 @@ except Exception as e:
 
 def read(table, column = None, value = None, debug=False):
     """
-    Reads from database.
+    Reads from from a SINGLE Table in database.
 
     `input` table: Table to read from
     `input` column [optional]: for searching specific value (WHERE CLAUSE 

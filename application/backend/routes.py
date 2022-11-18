@@ -1,8 +1,9 @@
-from flask import jsonify
+from flask import jsonify, send_file
 from root import app
 import json
-from apis.media_api import *
-from apis.post_api import get_post
+from os import path
+
+import apis.post_api as post_api
 
 
 @app.route("/")
@@ -46,19 +47,18 @@ def search_posts(keyword=None):
     `returns` query output
     '''
     try:
-        output = search_media(keyword = keyword)
-        # print(f":: DEBUG LOGS :: SEARCH OUTPUT : {output}")                                             # Adding debug logs
+        output = post_api.search_posts(keyword = keyword)
     except Exception as e:
-        print(f"== EXCEPTION == {e}")           
+        print(f"== EXCEPTION == search_posts: \n{e}")           
         return jsonify({"message: Something went wrong. Please check logs on the server :/ "}), 500     # Exception handling
     
     # JSON.dumps because it can handle things better:
     return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
 
 
-@app.route('/get-posts/', defaults={'keyword': None})
-@app.route('/get-posts/<keyword>')
-def get_posts(keyword=None):
+@app.route('/get-post-details/', defaults={'post_id': 1})
+@app.route('/get-post-details/<post_id>')
+def get_post_details(post_id=1):
     '''
     Search posts based on keywords. The keyword will be searched on title, description and category.
 
@@ -66,14 +66,14 @@ def get_posts(keyword=None):
     `returns` query output
     '''
     try:
-        output = get_post(keyword = keyword)
-        # print(f":: DEBUG LOGS :: SEARCH OUTPUT : {output}")                                             # Adding debug logs
+        output = post_api.get_post_details(post_id=post_id)
     except Exception as e:
-        print(f"== EXCEPTION == {e}")           
+        print(f"== EXCEPTION == get_post_details: \n{e}")           
         return jsonify({"message: Something went wrong. Please check logs on the server :/ "}), 500     # Exception handling
     
     # JSON.dumps because it can handle things better:
     return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
+
 
 @app.route('/home-page/', defaults={'limit': 10})
 @app.route('/home-page/<limit>')
@@ -85,11 +85,28 @@ def get_latest_post(limit=None):
     '''
     try:
         limit = (int(limit))
-        output = get_latest_media(limit = limit)
-        # print(f":: DEBUG LOGS :: SEARCH OUTPUT : {output}")                                             # Adding debug logs
+        output = post_api.get_latest_posts(limit = limit)
     except Exception as e:
-        print(f"== EXCEPTION == {e}")           
-        return jsonify({"message: Something went wrong. Please check logs on the server :/ "}), 500     # Exception handling
+        print(f"== EXCEPTION == get_latest_post: \n{e}")           
+        return jsonify({"message": "Something went wrong. Please check logs on the server :/ "}), 500     # Exception handling
     
     # JSON.dumps because it can handle things better:
     return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
+
+
+@app.route('/post/', defaults={'post_name': None})
+@app.route('/post/<post_name>')
+def static_post(post_name=None):
+    '''
+    Serve the image from server's file system.
+
+    `inputs` image_path: path to image
+
+    `returns` static image
+    '''
+    try:
+        file_name = path.abspath(f"../../posts/{post_name}")
+        return send_file(file_name)
+    except Exception as e:
+        print(f"== EXCEPTION == static_post: \n{e}")           
+        return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500  
