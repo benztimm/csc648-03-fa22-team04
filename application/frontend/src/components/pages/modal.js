@@ -13,6 +13,7 @@ const Modal = ({setIsOpen}) => {
 
 }
     return (
+      
         <>
           <div className='darkBG' onClick={() => setIsOpen(false)} />
           <div className='centered'>
