@@ -53,7 +53,17 @@
   }
   
 
-  
+  #reg-or-log {
+    font-size: medium;
+    color: #1271c9;
+    text-decoration:underline;
+  }
+
+  #reg-or-log:hover {
+    font-size: medium;
+    color: red;
+    text-decoration: underline;
+  }
 
 
 

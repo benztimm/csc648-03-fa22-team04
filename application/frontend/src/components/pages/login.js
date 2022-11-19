@@ -2,7 +2,12 @@ import React from 'react';
 import './styles/forms.css';
 import { RiCloseLine } from "react-icons/ri";
 
-const Login = ({setLoginOpen}) =>{
+const Login = ({setLoginOpen, setRegisterOpen}) =>{
+
+    const register = () => {
+        setLoginOpen(false);
+        setRegisterOpen(true);
+    }
 
     return (
         <>
@@ -22,7 +27,7 @@ const Login = ({setLoginOpen}) =>{
                     <br /><br /><br />
                     <input type="submit" value="Login" />
                     <br />
-                    New User? <u>Register</u>
+                    New User? <a id='reg-or-log' onClick={register}>Register</a>
 
             </form>
             </div>

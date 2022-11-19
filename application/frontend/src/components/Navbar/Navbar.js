@@ -108,9 +108,9 @@ const Navbar = () =>{
                     <a href='/#'><Link to="/About">About</Link></a>
                     <a href='/#'><Link to="/Upload">Upload</Link></a>
                     <a onClick={() => setRegisterOpen(true)}>Register</a>
-                    {isRegisterOpen && <Register setRegisterOpen={setRegisterOpen} />}
+                    {isRegisterOpen && <Register setRegisterOpen={setRegisterOpen} setLoginOpen={setLoginOpen}/>}
                     <a onClick={() => setLoginOpen(true)}>Log In</a>
-                    {isLoginOpen && <Login setLoginOpen={setLoginOpen} />}
+                    {isLoginOpen && <Login setLoginOpen={setLoginOpen} setRegisterOpen={setRegisterOpen}/>}
                     {/* <a href='/#'><Link to="/Register">Register</Link></a>
                     <a href='/#'><Link to="/Login">Log In</Link></a> */}
                 </div>

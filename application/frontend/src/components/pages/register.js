@@ -4,7 +4,13 @@ import { RiCloseLine } from "react-icons/ri";
 
 
 
-const Register = ({setRegisterOpen}) =>{
+const Register = ({setRegisterOpen, setLoginOpen}) =>{
+
+    const login = () => {
+        setRegisterOpen(false);
+        setLoginOpen(true);
+
+    }
 
     return (
         <>
@@ -39,7 +45,7 @@ const Register = ({setRegisterOpen}) =>{
                         <br /><br />
                         <input type="submit" value="Confirm" />
                         <br />
-                        Already Registered? <u>Login</u>
+                        Already Registered? <a id='reg-or-log' onClick={login}>Login</a>
 
                 </form>
                 </div>
