@@ -23,8 +23,10 @@
   height: auto;
 }
 
+
 .left_side .nav_search_bar{
   justify-content: right;
+  display: flex
 }
 
 .left_side input{
@@ -41,7 +43,7 @@
 }
 
 .left_side .nav_search_bar .cat-Select {
-  height: 32px;
+  height: 34px;
   width: 90px;
   border-radius: 4px;
   color: black;
@@ -50,7 +52,7 @@
 }
 
 .left_side button{
-  height: 32px;
+  height: 34px;
   width: 70px;
   font-size: 16px;
   border-radius: 4px;

@@ -7,8 +7,8 @@ const Sophia = () => {
   return (
     <div>
       <div className="container">
-        <div className="aboutus-image">
-          <img src={myImage}></img>
+      <div className="image">
+          <img src={myImage} className="aboutus-image"></img>
         </div>
         <div className="about">
           <h1 className='aboutHeader'>Sophia Chu</h1>
