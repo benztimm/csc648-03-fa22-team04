@@ -24,12 +24,12 @@ function UploadPost() {
 
                 <div className='form-container'>
                     <label className='input-text-field'>
-                        TITLE<text style={{ color: 'red' }}><i>*</i></text><br></br>
+                        TITLE<a style={{ color: 'red' }}><i>*</i></a><br></br>
                         <input type="text" name="title" required className="forms" />
                     </label><br /><br />
                     <label className='input-text-field'>
                         MEDIA TYPE<text style={{ color: 'red' }}><i>*</i></text><br></br>
-                        <select name="mtype" required class="forms">
+                        <select name="mtype" required className="forms">
                             <option value="image">Image</option>
                             <option value="video">Video</option>
                             <option value="document">Document</option>I
@@ -54,13 +54,13 @@ function UploadPost() {
                         <input type="number" name="price" className="forms" />
                     </label><br /><br />
 
-                    <label for="file">
+                    <label>
                         FILE<text style={{ color: 'red' }}><i>*</i></text><br></br>
                         <input type="file" name="file" required className="forms" />
                     </label><br /><br />
 
                     <br /><br />
-                    <button className='upload-submit-button' type="submit" value="Submit">SUBMIT</button>
+                    <button className='upload-submit-button' type="submit" >SUBMIT</button>
                 </div>
             </div>
         </form>

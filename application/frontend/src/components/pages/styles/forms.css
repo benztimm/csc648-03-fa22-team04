@@ -6,29 +6,34 @@
     height: 80vh;
     align-items: center;
     text-align: initial;
+    box-sizing: border-box;
+    z-index: 0;
+
+
 }
 
 .line-upload {
     background-color: black;
 }
 .upload-forms{
-    
+
+    z-index: 0;
     contain: content;
     display: flex;
     font-weight: bolder;
     font-size: 20px;
-    width: 40%;
+    width: 40vw;
+    height: auto;
     padding: 20px;
-    background-color: #5fc78e;
-    height: 80;
+    background-color: #bae0cc;
+    /* height: 70%; */
     justify-content: center;
     flex-direction: column;
-    border-radius: 10px;
-    box-shadow: 10px 10px;
+
     align-items: stretch;
     overflow-y:auto;
     border: solid;
-    border-width: 3px;
+    border-width: 3px 0px 3px 0px;
     border-color: black;
 }
 

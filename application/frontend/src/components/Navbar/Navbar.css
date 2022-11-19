@@ -5,6 +5,7 @@
   height: 100px;
   font-family: Georgia, 'Times New Roman', Times, serif;
   display:flex;
+
 }
 
 .Navbar .left_side{
@@ -103,11 +104,11 @@
 
 .Navbar .right_side .nav_links a:hover{
   font-size: 30px;
-  color: green;
+  color: gold;
   text-decoration: none;
 }
 
-.Navbar .right_side button{
+.Navbar .navButton{
   display:none;
 }
 

@@ -8,8 +8,8 @@ import '../Navbar/Navbar.css';
 
 import logo from '../images/logo.png'
 
-import SearchResults from '../pages/SearchResults';
-import { SearchContext } from '../../SearchContext.js';
+import Login from '../pages/login.js';
+import Register from '../pages/register.js';
 
 
 //`http://54.200.101.218:5000/search-posts/${selectedOption}${value}`
@@ -60,21 +60,20 @@ const Navbar = () =>{
 
 
     //when search button is clicked
-
-
     const searchClick = () => {
-        //settingExtension();
         fetchData();
-
-
     }
     
     //END SEARCH BAR
 
-    
+    //test
+    const [isOpen, setIsOpen] = useState(false);
 
-    //NAVIGATION IF CLICKING SEARCH
-    //if (extension) return  (<Navigate to="/searchresults?=" />);
+    //LOGIN
+    const [isLoginOpen, setLoginOpen] = useState(false);
+    
+    //REGISTER
+    const [isRegisterOpen, setRegisterOpen] = useState(false);
 
 
     const [showLinks, setShowLinks] = useState(false);
@@ -83,6 +82,7 @@ const Navbar = () =>{
         <div className='Navbar'>
             
             <div className='left_side'>
+                {/* <button>sidebarhere</button> */}
                 <Link to="/">
                     <img src={logo} className="img-fluid" onClick={() => setShowLinks(false)}
                     width={125} height={120}></img>
@@ -107,10 +107,14 @@ const Navbar = () =>{
                 <div className='nav_links' id={showLinks ? "hidden" : ""} onClick={() => setShowLinks(false)}>
                     <a href='/#'><Link to="/About">About</Link></a>
                     <a href='/#'><Link to="/Upload">Upload</Link></a>
-                    <a href='/#'><Link to="/Register">Register</Link></a>
-                    <a href='/#'><Link to="/Login">Log In</Link></a>
+                    <a onClick={() => setRegisterOpen(true)}>Register</a>
+                    {isRegisterOpen && <Register setRegisterOpen={setRegisterOpen} />}
+                    <a onClick={() => setLoginOpen(true)}>Log In</a>
+                    {isLoginOpen && <Login setLoginOpen={setLoginOpen} />}
+                    {/* <a href='/#'><Link to="/Register">Register</Link></a>
+                    <a href='/#'><Link to="/Login">Log In</Link></a> */}
                 </div>
-                <button onClick={() => setShowLinks(!showLinks)}><FaBars/></button>
+                <button className='navButton' onClick={() => setShowLinks(!showLinks)}><FaBars/></button>
             </div>
             <p className='cc'> 
                     SFSU Software Engineering Project CSC648-848,
