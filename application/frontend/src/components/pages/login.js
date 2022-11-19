@@ -14,13 +14,13 @@ const Login = ({setLoginOpen, setRegisterOpen}) =>{
         <div className='darkBG' onClick={() => setLoginOpen(false)}/>
             <div className='form-container-lr'>
             <div className='modal-form'>
-                <form className="forms"><h1>LOGIN</h1><hr></hr>
+                <form className="forms"><h1>Login</h1><hr></hr>
                     <label>
-                        Email*<br></br>
+                        Email<br></br>
                         <input type="email" name="email" required className="forms" />
                     </label><br /><br />
                     <label>
-                        Password*<br />
+                        Password<br />
                         <input type="password" name="password" required className="forms" />
                     </label><br />
                     <u>Forgot Password?</u>
