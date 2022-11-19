@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap');
+
 .upload-form-container {
     display: flex;
     justify-content: center;
@@ -8,6 +10,7 @@
     text-align: initial;
     box-sizing: border-box;
     z-index: 0;
+    font-family: 'Inter', sans-serif;
 
 
 }
@@ -25,7 +28,7 @@
     width: 40vw;
     height: auto;
     padding: 20px;
-    background-color: #bae0cc;
+    background-color: whitesmoke;
     /* height: 70%; */
     justify-content: center;
     flex-direction: column;
@@ -71,6 +74,7 @@
 }
 
 input.forms, textarea.forms{
+    font-weight: 100;
     width: 65%;
     height: 30px;
     font-size: 20px;
@@ -78,6 +82,10 @@ input.forms, textarea.forms{
     border-width: 2px;
     border-color: black;
     border-radius: 5px;
+}
+
+label.forms {
+    font-family: 'Inter', sans-serif;
 }
 
 select.forms{
