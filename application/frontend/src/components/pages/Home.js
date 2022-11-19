@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { useContext, useRef, useState, useHistory, useEffect,  } from 'react'; 
-import { Link, renderMatches, useRouteLoaderData } from 'react-router-dom';
+import { Link, renderMatches, useNavigate, useRouteLoaderData } from 'react-router-dom';
 import './styles/home.css';
 import { SearchContext } from '../../SearchContext.js';
 
@@ -9,6 +9,8 @@ import { SearchContext } from '../../SearchContext.js';
 // `http://54.200.101.218:5000/search-posts/`
 
 const Home = () =>{
+
+  const navigate = useNavigate();
 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -38,6 +40,15 @@ const Home = () =>{
     getData()
   }, [])
 
+  const navigateToProduct = (title, post_id) => {
+    // window.sessionStorage.setItem()
+    console.log(title);
+    console.log(post_id);
+    window.sessionStorage.setItem(post_id, title);
+    navigate(`/productpage/${post_id}`, {state:{id:post_id, title:title}});
+    //navigate(`/productpage/${title}`);
+  }
+
     return (
       <div>
         <div>
@@ -50,7 +61,7 @@ const Home = () =>{
         <div className='card-container'>
 
           {data && data.output.map(output => (
-            <div className='card'>
+            <div className='card' onClick={() => navigateToProduct(`${output.title}`, `${output.post_id}`)}>
               <div className='thumbnail-home'>
                 <img src={output.file} className='thumbnail' />
               </div>
