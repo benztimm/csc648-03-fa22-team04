@@ -66,8 +66,8 @@ const Home = () =>{
                 <img src={output.file} className='thumbnail' />
               </div>
               <div className='title-home'>
-                {output.title}
 
+                <h3>{output.title}</h3>
               </div>
             </div>
           ))}
