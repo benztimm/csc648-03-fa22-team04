@@ -35,6 +35,7 @@ function Dashboard(){
                         </div>
                         <div className='purchaseInfo'>
                             <h1 className='card__price'>$20</h1>
+                            <span>STATUS: APPROVED</span>
                             <button className='card__bttn'>DELETE</button>
                         </div>
                     </div>
@@ -54,6 +55,7 @@ function Dashboard(){
                         </div>
                         <div className='purchaseInfo'>
                             <h1 className='card__price'>$20</h1>
+                            <span>STATUS: APPROVED</span>
                             <button className='card__bttn'>DELETE</button>
                         </div>
                     </div>
@@ -73,6 +75,7 @@ function Dashboard(){
                         </div>
                         <div className='purchaseInfo'>
                             <h1 className='card__price'>$20</h1>
+                            <span>STATUS: In-review</span>
                             <button className='card__bttn'>DELETE</button>
                         </div>
                     </div>
