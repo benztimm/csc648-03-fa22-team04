@@ -4,6 +4,8 @@ import json
 from os import path
 
 import apis.post_api as post_api
+import apis.user_api as user_api
+import apis.message_api as message_api
 
 
 @app.route("/")
@@ -110,3 +112,58 @@ def static_post(post_name=None):
     except Exception as e:
         print(f"== EXCEPTION == static_post: \n{e}")           
         return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500  
+
+@app.route('/post-delete/', defaults={'post_id': 0})
+@app.route('/post-delete/<post_id>')
+def post_delete(post_id=None):
+    '''
+    delete post based on post_id
+
+    `inputs` post_id - input string then change to int *prevent sql injection*
+
+    `returns` query status
+    '''
+    try:
+        post_id = (int(post_id))
+        output = post_api.delete_post(post_id)
+    except Exception as e:
+        print(f"== EXCEPTION == post_delete: \n{e}")           
+        return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500  
+    return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
+
+@app.route('/user-delete/', defaults={'user_id': 0})
+@app.route('/user-delete/<user_id>')
+def user_delete(user_id=None):
+    '''
+    delete post based on user_id
+
+    `inputs` user_id - input string then change to int *prevent sql injection*
+
+    `returns` query status
+    '''
+    try:
+        user_id = (int(user_id))
+        output = user_api.delete_user(user_id)
+    except Exception as e:
+        print(f"== EXCEPTION == user_delete: \n{e}")           
+        return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500  
+    return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
+
+
+@app.route('/message-delete/', defaults={'message_id': 0})
+@app.route('/message-delete/<message_id>')
+def message_delete(message_id=None):
+    '''
+    delete post based on message_id
+
+    `inputs` message_id - input string then change to int *prevent sql injection*
+
+    `returns` query status
+    '''
+    try:
+        message_id = (int(message_id))
+        output = message_api.delete_message(message_id)
+    except Exception as e:
+        print(f"== EXCEPTION == message_delete: \n{e}")           
+        return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500  
+    return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
