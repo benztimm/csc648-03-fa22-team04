@@ -36,7 +36,7 @@ function SearchResults() {
 
         <div className='maintext'>
           <h1 className='card__title'>{output.title}</h1>
-          <span>Date created: </span><br />
+          <span>Date created: {output.created_timestamp}</span><br />
           <span>File type: {output.post_type}</span>
           <br /><br />
           <h4 className='card__author'>{output.uploader_name}</h4>
