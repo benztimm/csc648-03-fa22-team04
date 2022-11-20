@@ -2,7 +2,7 @@
 Filename: Login.js
 
 Date: 11/20/22
-Authors: Sophia Chu
+Authors: Sophia Chu, Mahisha Patel
 Description: File for Login modal linked in Navbar.js.
 
 */
