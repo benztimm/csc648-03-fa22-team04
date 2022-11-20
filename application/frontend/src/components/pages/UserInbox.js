@@ -1,6 +1,12 @@
-import React from "react";
-import { Link, useNavigate, useHistory, generatePath, useLocation } from 'react-router-dom';
+import React, { useMemo } from 'react';
+import { Link, useNavigate, generatePath, useLocation } from 'react-router-dom';
+import { useTable, useSortBy } from 'react-table';
+import MOCK_DATA from './MOCK_DATA.json'
+import { COLUMNS } from './columns'
+
+
 import './styles/inbox.css';
+
 
 
 
@@ -9,56 +15,67 @@ function Inbox(){
 
     const goToPosts = () => {
         navigate('/dashboard');
-
     }
 
+    const columns = useMemo(() => COLUMNS, []);
+    const data = useMemo(() => MOCK_DATA, []);
+
+
+
+    const { getTableProps, 
+            getTableBodyProps,
+            headerGroups, 
+            rows, 
+            prepareRow, 
+          } = useTable({
+              columns,
+              data,
+            },
+            useSortBy)
 
     return (
 
         <div>
-                <div class="dashboard">
-                    <hr class="dashboard"></hr>
-                    <button class="dashboard" onClick={goToPosts}>POSTS</button>&nbsp;&nbsp;&nbsp;
-                    <button class="dashboard">MESSAGES</button>
+                <div className="dashboard">
+                    <button className="dashboard" onClick={goToPosts}>MY POSTS</button>&nbsp;&nbsp;&nbsp;
+                    <button className="dashboard">INBOX</button>
                 </div>
 
-            <div className="inbox-container">
-                <hr></hr>
-                <div class="inbox">
-                    <div class="innerinbox">
-                        <pre>I am interested in buying is product. <br/>
-                            Date: October 20, 2022 <br/>
-                            Title: Music Album <br/>
-                            <br/>
-                            Please contact on: <br/>
-                            +1 650 839 0339 <br/>
-                            adria@sfsu.edu
-                        </pre>
-                    </div>
-                    <div class="innerinbox">
-                        <button>DELETE</button>
-                    </div>
-                </div>
+                <table {...getTableProps()}>
+                  <thead>
+                    {headerGroups.map((headerGroup) => (
+                    <tr {...headerGroup.getHeaderGroupProps()}>
+                        {headerGroup.headers.map((column) => (
+                              <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                {column.render('Header')}
+                                <span>
+                                  {column.isSorted ? (column.isSortedDesc ? '🔽' : '🔼' ): ''}
+                                </span>
+                              </th>
+                            ))}
+                    </tr>
+                    ))}
+                  </thead>
+                  <tbody {...getTableBodyProps()}>
+                    {
+                        rows.map(row => {
+                          prepareRow(row)
+                          return (
+                            <tr {...row.getRowProps()}>
+                              {
+                                row.cells.map((cell) => {
+                                  return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                })
+                              }
+                            </tr>
+                          )
+                        })
+                    }
 
-                <hr></hr>
-                <div class="inbox">
-                    <div class="innerinbox">
-                        <pre>I am interested in buying is product. <br/>
-                            Date: October 20, 2022 <br/>
-                            Title: Music Album <br/>
-                            <br/>
-                            Please contact on: <br/>
-                            +1 650 839 0339 <br/>
-                            adria@sfsu.edu
-                        </pre>
-                    </div>
-                    <div class="innerinbox">
-                        <button>DELETE</button>
-                    </div>
-                </div>
+                  </tbody>
 
-                </div>
-
+                </table>
+                
             </div>
     );
 }

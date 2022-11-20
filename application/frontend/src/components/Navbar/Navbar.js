@@ -8,8 +8,8 @@ import '../Navbar/Navbar.css';
 
 import logo from '../images/logo.png'
 
-import Login from '../pages/login.js';
-import Register from '../pages/register.js';
+import Login from '../pages/Login.js';
+import Register from '../pages/Register.js';
 
 
 //`http://54.200.101.218:5000/search-posts/${selectedOption}${value}`

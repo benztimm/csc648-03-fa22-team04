@@ -8,12 +8,12 @@ import Navbar from './components/Navbar/Navbar'
 
 import Home from './components/pages/Home';
 import About from './components/About';
-import Login from './components/pages/login';
-import Register from './components/pages/register';
+import Login from './components/pages/Login';
+import Register from './components/pages/Register';
 import UploadPost from './components/pages/UploadPost';
-import Dashboard from './components/pages/dashboard';
+import Dashboard from './components/pages/Dashboard';
 import Inbox from './components/pages/UserInbox';
-import ProductPage from './components/pages/productPage';
+import ProductPage from './components/pages/ProductPage';
 
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";

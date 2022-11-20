@@ -11,8 +11,6 @@
     box-sizing: border-box;
     z-index: 0;
     font-family: 'Inter', sans-serif;
-
-
 }
 
 .line-upload {
@@ -23,7 +21,6 @@
     z-index: 0;
     contain: content;
     display: flex;
-    font-weight: bolder;
     font-size: 20px;
     width: 40vw;
     height: auto;

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useNavigate, useHistory, generatePath, useLocation } from 'react-router-dom';
 import './styles/dashboard.css';
+import myImage from '../images/gatorExchange.png';
 
 function Dashboard(){
 
@@ -13,46 +14,70 @@ function Dashboard(){
         return (
             <div className="dash-container">
                 <div class="dashboard">
-                    <hr class="dashboard"></hr>
-                    <button class="dashboard" >POSTS</button>&nbsp;&nbsp;&nbsp;
-                    <button class="dashboard" onClick={goToInbox}>MESSAGES</button>
+                    <button class="dashboard" >MY POSTS</button>&nbsp;&nbsp;&nbsp;
+                    <button class="dashboard" onClick={goToInbox}>INBOX</button>
                 </div>
 
-                <div className='dashboard-card-container'>
-                    <div className="card_body">
-                        <div id="image_container">
-                            <img src="" className='thumbnail' />
+                <div className='wrapper'>
+                <div className='card_body' >
+                        <div className='image_container'>
+                            <img src={myImage} className='thumbnail' />
                         </div>
+
                         <div className='maintext'>
-                            <h2 className='card__title'>Title</h2>
-                            <h4 className='card__filetype'>File Type</h4>
-                            <br />
-                            <p className='card__description'>Description</p>
+                            <h1 className='card__title'>My Gator</h1>
+                            <span>Date created: </span><br />
+                            <span>File type: </span>
+                            <br /><br />
+                            <h4 className='card__author'>Sophia Chu</h4>
+                            <span><i>This is a stock photo of a cartoon alligator.</i></span>
+
                         </div>
-                        <div className='purchaseinfo'>
-                            <h2 className='card__price'>Free</h2><br />
-                            <h4 className='card_status'>Status: IN-REVIEW</h4>
+                        <div className='purchaseInfo'>
+                            <h1 className='card__price'>$20</h1>
                             <button className='card__bttn'>DELETE</button>
                         </div>
                     </div>
+                    <div className='card_body' >
+                        <div className='image_container'>
+                            <img src={myImage} className='thumbnail' />
+                        </div>
 
-                    <div className="card_body">
-                        <div id="image_container">
-                            <img src="" className='thumbnail' />
-                        </div>
                         <div className='maintext'>
-                            <h2 className='card__title'>Title 2</h2>
-                            <h4 className='card__filetype'>File Type</h4>
-                            <br />
-                            <p className='card__description'>Description</p>
+                            <h1 className='card__title'>My Gator</h1>
+                            <span>Date created: </span><br />
+                            <span>File type: </span>
+                            <br /><br />
+                            <h4 className='card__author'>Sophia Chu</h4>
+                            <span><i>This is a stock photo of a cartoon alligator.</i></span>
+
                         </div>
-                        <div className='purchaseinfo'>
-                            <h2 className='card__price'>$20</h2><br />
-                            <h4 className='card_status'>Status: APPROVED</h4>
+                        <div className='purchaseInfo'>
+                            <h1 className='card__price'>$20</h1>
+                            <button className='card__bttn'>DELETE</button>
+                        </div>
+                    </div>
+                    <div className='card_body' >
+                        <div className='image_container'>
+                            <img src={myImage} className='thumbnail' />
+                        </div>
+
+                        <div className='maintext'>
+                            <h1 className='card__title'>My Gator</h1>
+                            <span>Date created: </span><br />
+                            <span>File type: </span>
+                            <br /><br />
+                            <h4 className='card__author'>Sophia Chu</h4>
+                            <span><i>This is a stock photo of a cartoon alligator.</i></span>
+
+                        </div>
+                        <div className='purchaseInfo'>
+                            <h1 className='card__price'>$20</h1>
                             <button className='card__bttn'>DELETE</button>
                         </div>
                     </div>
                 </div>
+
             </div>
         );
 }

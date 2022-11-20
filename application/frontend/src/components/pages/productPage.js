@@ -3,7 +3,7 @@ import { Link, useNavigate, useHistory, generatePath, useLocation } from 'react-
 
 import '../pages/styles/productPage.css';
 import myImage from '../images/gatorExchange.png';
-import PurchaseMsg from '../pages/purchaseMsg.js';
+import PurchaseMsg from './PurchaseMsg.js';
 import profilePic from '../images/testimage.jpg';
 
 
