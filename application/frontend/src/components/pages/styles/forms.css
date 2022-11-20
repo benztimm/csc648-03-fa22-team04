@@ -1,15 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap');
 
 .upload-form-container {
-    display: flex;
+    display: inline-block;
     justify-content: center;
-    background-color: #d1d1d1;
     margin-top: 5vh;
     height: 80vh;
     align-items: center;
     text-align: initial;
     box-sizing: border-box;
-    z-index: 0;
+    /* z-index: 0; */
     font-family: 'Inter', sans-serif;
 }
 
@@ -18,7 +17,7 @@
 }
 .upload-forms{
 
-    z-index: 0;
+    /* z-index: 0; */
     contain: content;
     display: flex;
     font-size: 20px;

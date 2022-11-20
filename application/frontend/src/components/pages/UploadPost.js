@@ -10,7 +10,7 @@ function UploadPost() {
 
 
     return (
-        <form className='upload-form-container'>
+        <div className='upload-form-container'>
             <div className='upload-forms'>
                 <div className='upload-header'>
                     <h1>UPLOAD YOUR ITEM</h1>
@@ -21,7 +21,7 @@ function UploadPost() {
                     <br />
                 </div>
 
-
+                <form>
                 <div className='form-container'>
                     <label className='input-text-field'>
                         TITLE<a style={{ color: 'red' }}><i>*</i></a><br></br>
@@ -62,8 +62,9 @@ function UploadPost() {
                     <br /><br />
                     <button className='upload-submit-button' type="submit" >SUBMIT</button>
                 </div>
+                </form>
             </div>
-        </form>
+        </div>
     );
 }
 
