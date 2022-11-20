@@ -1,7 +1,14 @@
+/* 
+Filename: Register.js
+
+Date: 11/20/22
+Authors: Sophia Chu
+Description: File for Register modal linked in Navbar.js
+
+*/
+
 import React from 'react';
 import './styles/loginRegister.css';
-import { RiCloseLine } from "react-icons/ri";
-
 
 
 const Register = ({setRegisterOpen, setLoginOpen}) =>{

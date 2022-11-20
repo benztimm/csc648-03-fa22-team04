@@ -1,3 +1,12 @@
+/* 
+Filename: Dashboard.js
+
+Date: 11/20/22
+Authors: Sophia Chu, Mahisha Patel
+Description: File for user dashboard. Displays user's uploaded media items.
+
+*/
+
 import React from "react";
 import { Link, useNavigate, useHistory, generatePath, useLocation } from 'react-router-dom';
 import './styles/dashboard.css';

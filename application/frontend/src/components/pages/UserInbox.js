@@ -1,16 +1,22 @@
+/* 
+Filename: UserInbox.js
+
+Date: 11/20/22
+Authors: Sophia Chu
+Description: Displays user's messages from potential buyer's of user's listed items.
+
+*/
+
 import React, { useMemo } from 'react';
 import { Link, useNavigate, generatePath, useLocation } from 'react-router-dom';
 import { useTable, useSortBy } from 'react-table';
 import MOCK_DATA from './MOCK_DATA.json'
 import { COLUMNS } from './columns'
-
-
 import './styles/inbox.css';
 
 
-
-
 function Inbox(){
+  
     const navigate = useNavigate();
 
     const goToPosts = () => {
@@ -19,7 +25,6 @@ function Inbox(){
 
     const columns = useMemo(() => COLUMNS, []);
     const data = useMemo(() => MOCK_DATA, []);
-
 
 
     const { getTableProps, 

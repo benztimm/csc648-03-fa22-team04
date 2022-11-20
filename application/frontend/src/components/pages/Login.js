@@ -1,6 +1,13 @@
+/* 
+Filename: Login.js
+
+Date: 11/20/22
+Authors: Sophia Chu
+Description: File for Login modal linked in Navbar.js.
+
+*/
 import React from 'react';
 import './styles/forms.css';
-import { RiCloseLine } from "react-icons/ri";
 
 const Login = ({setLoginOpen, setRegisterOpen}) =>{
 

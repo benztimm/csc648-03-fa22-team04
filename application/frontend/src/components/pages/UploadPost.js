@@ -1,12 +1,18 @@
+/* 
+Filename: UploadPost.js
+
+Date: 11/20/22
+Authors: Sophia Chu
+Description: Page for users to upload files and enter file's information/price
+
+*/
+
 import React from 'react';
 import './styles/forms.css';
 import { Link, useNavigate, useHistory, generatePath, useLocation } from 'react-router-dom';
 
 
-
 function UploadPost() {
-
-
 
 
     return (

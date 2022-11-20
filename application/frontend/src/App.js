@@ -1,11 +1,16 @@
+/* 
+Filename: App.js
+
+Date: 11/20/22
+Authors: Sophia Chu, Ruben Ponce
+Description: Contains router for all components of app.
+
+*/
 import React, { Component, useContext, useMemo, useState } from 'react';
 import { Routes, Route, Switch, Router, createBrowserRouter, RouterProvider,
   Outlet, useRouteLoaderData, createRoutesFromElements, BrowserRouter  } from 'react-router-dom';
-import axios from 'axios';
 import styles from './App.css';
-
 import Navbar from './components/Navbar/Navbar'
-
 import Home from './components/pages/Home';
 import About from './components/About';
 import Login from './components/pages/Login';
@@ -14,18 +19,14 @@ import UploadPost from './components/pages/UploadPost';
 import Dashboard from './components/pages/Dashboard';
 import Inbox from './components/pages/UserInbox';
 import ProductPage from './components/pages/ProductPage';
-
-import { QueryClient, QueryClientProvider } from 'react-query'
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-
 import SearchResults from './components/pages/SearchResults';
-import { SearchContext } from './SearchContext.js';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
 
 //TEST
 import TESTIMAGE from './components/pages/imagetest.js';
 
 const queryClient = new QueryClient();
-
 
 
 const App= () =>{

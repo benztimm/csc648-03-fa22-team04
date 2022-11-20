@@ -1,8 +1,14 @@
+/* 
+Filename: ProductPage.js
+
+Date: 11/20/22
+Authors: Sophia Chu
+Description: Displays single item with item information.
+
+*/
 import React, { useState, useEffect, useContext } from 'react'; 
 import { Link, useNavigate, useHistory, generatePath, useLocation } from 'react-router-dom';
-
 import '../pages/styles/productPage.css';
-import myImage from '../images/gatorExchange.png';
 import PurchaseMsg from './PurchaseMsg.js';
 import profilePic from '../images/testimage.jpg';
 
@@ -13,20 +19,17 @@ function productPage() {
 
     const [isOpen, setIsOpen] = useState(false);
 
-    //fetch api
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState(null);
     const navigate = useNavigate();
 
-    // declare the async data fetching function
     const fetchData = async () => {
-        // get the data from the api
+
         const data = await fetch(`http://54.200.101.218:5000/get-post-details/${location.state.id}`);
-        // convert the data to json
+
         const json = await data.json();
 
-        // set state with the result
         console.log(json);
         setItems(json);
 

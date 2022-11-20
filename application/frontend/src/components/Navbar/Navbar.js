@@ -1,18 +1,24 @@
+/* 
+Filename: Navbar.js
+
+Date: 11/20/22
+Authors: Ruben Ponce, Sophia Chu
+Description: File for navigation bar. Includes search bar functionality that makes GET request,
+returns API response.
+
+*/
+
+
 import React from 'react';
 import { useContext, useRef, useState, useHistory, useEffect } from 'react'; 
 import { FaBars, FaTimes} from 'react-icons/fa';
 import { Link, useNavigate, generatePath, Navigate} from 'react-router-dom';
-import Select from 'react-select';
-import makeAnimated from 'react-select/animated';
 import '../Navbar/Navbar.css';
-
 import logo from '../images/logo.png'
-
 import Login from '../pages/Login.js';
 import Register from '../pages/Register.js';
 
 
-//`http://54.200.101.218:5000/search-posts/${selectedOption}${value}`
 
 const Navbar = () =>{
 
@@ -33,7 +39,6 @@ const Navbar = () =>{
         //let newValue = event.target.value;
         setValue(event.target.value);
     };
-
     // END SEARCH BAR
 
 
@@ -43,14 +48,13 @@ const Navbar = () =>{
     const [items, setItems] = useState(null);
     const navigate = useNavigate();
 
-  // declare the async data fetching function
+    //GET request from search bar input
     const fetchData = async () => {
-        // get the data from the api
+
         const data = await fetch(`http://54.200.101.218:5000/search-posts/${selectedOption} ${value}`);
-        // convert the data to json
+
         const json = await data.json();
 
-        // set state with the result
         console.log(json);
         setItems(json);
         window.localStorage.setItem('result', JSON.stringify(json));
@@ -63,11 +67,8 @@ const Navbar = () =>{
     const searchClick = () => {
         fetchData();
     }
-    
     //END SEARCH BAR
 
-    //test
-    const [isOpen, setIsOpen] = useState(false);
 
     //LOGIN
     const [isLoginOpen, setLoginOpen] = useState(false);

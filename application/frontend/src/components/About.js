@@ -1,6 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+/* 
+Filename: About.jss
 
+Date: 11/20/22
+Authors: Ruben Ponce
+Description: Amalgamation of all team member's About Us page into single page.
+
+*/
+import React from 'react';
 
 import Ekarat from './pages/Ekarat';
 import Jerry from './pages/Jerry';

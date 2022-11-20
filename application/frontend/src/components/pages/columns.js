@@ -1,3 +1,11 @@
+/* 
+Filename: column.js
+
+Date: 11/20/22
+Authors: Sophia Chu
+Description: File for columns for table in UserInbox.js
+
+*/
 export const COLUMNS = [
     {
         Header: 'First',

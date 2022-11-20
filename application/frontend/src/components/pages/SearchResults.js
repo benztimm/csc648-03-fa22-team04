@@ -1,3 +1,12 @@
+/* 
+Filename: SearchResults.js
+
+Date: 11/20/22
+Authors: Sophia Chu
+Description: Displays results from search bar located in Navbar
+
+*/
+
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate, useHistory, generatePath, useLocation } from 'react-router-dom';
 import './styles/searchResults.css';

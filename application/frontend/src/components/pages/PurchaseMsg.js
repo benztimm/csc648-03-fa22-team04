@@ -1,3 +1,11 @@
+/* 
+Filename: PurchaseMsg.js
+
+Date: 11/20/22
+Authors: Ruben Ponce, Sophia Chu
+Description: File for CONTACT SELLER modal in ProductPage.js
+
+*/
 import React from "react";
 import './styles/modal.css'
 import { RiCloseLine } from "react-icons/ri"

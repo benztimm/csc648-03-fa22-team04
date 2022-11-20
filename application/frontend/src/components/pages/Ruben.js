@@ -1,10 +1,14 @@
+/* 
+Filename: Ruben.js
+
+Date: 11/20/22
+Authors: Ruben Ponce, Sophia Chu
+Description: File for Ruben's About Us page.
+
+*/
+
 import React from 'react';
-
 import './styles/milestoneOne.css';
-
-//place your image in the images folder in the components folder and replace
-// "testimage.jpg" with your image name in the path below this
-//DELETE THESE COMMENTS when you are done for clean code tyyy
 import myImage from '../images/testimage.jpg';
 
 const Ruben = () => {
