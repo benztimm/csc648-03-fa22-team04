@@ -63,6 +63,11 @@ const Home = () =>{
 
           </h2>
         </div>
+        <br/>
+    
+      <div><b>Some Recent Uploads</b></div>
+      <br/>
+    
         <div className='card-container'>
 
           {data && data.output.map(output => (
