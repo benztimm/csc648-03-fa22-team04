@@ -105,3 +105,26 @@ def get_post_details(post_id = None):
             raise Exception("Something went wrong while loading file.")
 
     return results
+
+def delete_post(post_id = None):
+    """    
+    Delete specific post
+
+    `input` post_id : unique post ID
+
+    `return` status in JSON format
+        if success return 'Success'
+        if fail return 'Fail'
+    """
+    query_select = """ SELECT * FROM post """
+    query_delete = """DELETE FROM post WHERE post_id = """
+    post_id= (str(post_id))
+
+    if post_id:
+        query_delete += post_id
+    row_count_before = db.execute_query_rowcount(query_select)
+    db.execute_query(query_delete)
+    row_count_after = db.execute_query_rowcount(query_select)
+    status = 'Success' if row_count_after == row_count_before-1 else 'Fail'
+    results = {'status':status}
+    return results
