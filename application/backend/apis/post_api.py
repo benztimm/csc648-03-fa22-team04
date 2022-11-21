@@ -12,13 +12,20 @@ def search_posts(keyword = None):
     query = """
                 SELECT
                     p.*,
-                    CONCAT(u.first_name, ' ', u.last_name) as 'uploader_name'
+                    u.first_name as 'uploader_name',
+                    c.category_name as 'category_name',
+                    u.user_id as 'uploader_id',
+                    c.category_id as 'category_id'
                 FROM
                     post p
                 JOIN
                     user u
                 ON
                     p.uploader_id = u.user_id
+                join
+                    category c
+                on
+                    p.category = c.category_id
             """
     # Update query with where clause in case search keyword provided:
     if keyword:
@@ -45,14 +52,20 @@ def get_latest_posts(limit = None):
     query = """
                 SELECT
                     p.*,
-                    CONCAT(u.first_name, ' ', u.last_name) as 'uploader_name'
+                    u.first_name as 'uploader_name',
+                    c.category_name as 'category_name',
+                    u.user_id as 'uploader_id',
+                    c.category_id as 'category_id'
                 FROM
                     post p
                 JOIN
                     user u
                 ON
                     p.uploader_id = u.user_id
-                ORDER BY post_id desc
+                join
+                    category c
+                on
+                    p.category = c.category_id
                 limit 
             """
     if limit:
@@ -82,13 +95,20 @@ def get_post_details(post_id = None):
     query = """
                 SELECT
                     p.*,
-                    CONCAT(u.first_name, ' ', u.last_name) as 'uploader_name'
+                    u.first_name as 'uploader_name',
+                    c.category_name as 'category_name',
+                    u.user_id as 'uploader_id',
+                    c.category_id as 'category_id'
                 FROM
                     post p
                 JOIN
                     user u
                 ON
                     p.uploader_id = u.user_id
+                join
+                    category c
+                on
+                    p.category = c.category_id
                 WHERE
                     post_id = %(post_id)s
             """
