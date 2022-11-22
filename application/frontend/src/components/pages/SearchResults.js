@@ -33,12 +33,10 @@ function SearchResults() {
     navigate(`/productpage/${post_id}`, {state:{id:post_id, title:title}});
   }
 
-
   return (
 
     <div className='wrapper'>
     <br/>
-    
     <div><b>Showing 1 - {Object.keys(media.output).length} out of {Object.keys(media.output).length} results</b></div>
     <br/>
     {media && media.output.map(output => (

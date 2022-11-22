@@ -25,7 +25,7 @@ const Home = () =>{
     const getData = async () => {
       try {
         const response = await fetch(
-          `http://54.200.101.218:5000/search-posts/`
+          `http://54.200.101.218:5000/home-page/`
         );
         if (!response.ok) {
           throw new Error(
