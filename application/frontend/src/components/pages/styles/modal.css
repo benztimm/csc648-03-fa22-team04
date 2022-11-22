@@ -1,0 +1,178 @@
+.darkBG {
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+  }
+  
+  .centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .modal {
+    width: 40vw;
+    height: 30vh;
+    background: white;
+    color: white;
+    z-index: 10;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+  }
+
+  .modal-purchaseMsg{
+    width: 45vw;
+    height: 35vh;
+    background: white;
+    color: white;
+    z-index: 10;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+  }
+  
+  .modalHeader {
+    height: 50px;
+    background: white;
+    overflow: hidden;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
+  
+  .heading {
+    margin: 0;
+    padding: 10px;
+    color: #2c3e50;
+    font-weight: 500;
+    font-size: 18px;
+    text-align: center;
+  }
+  
+  .modalContent {
+    padding: 10px;
+    font-size: 14px;
+    color: #2c3e50;
+    text-align: center;
+  }
+
+  .modalContent-purchaseMsg{
+    padding: 20px;
+    font-size: 14px;
+    color: #000000;
+    text-align: left;
+    height: 15vh;
+    display: block;
+  }
+
+  .modalContent-purchaseMsg-input {
+
+    width: 30vw;
+  }
+
+  
+  .modalActions {
+    position: absolute;
+    bottom: 2px;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  
+  .actionsContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .closeBtn {
+    cursor: pointer;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 8px;
+    border: none;
+    font-size: 18px;
+    color: #2c3e50;
+    background: white;
+    transition: all 0.25s ease;
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.06);
+    position: absolute;
+    right: 0;
+    top: 0;
+    align-self: flex-end;
+    margin-top: -7px;
+    margin-right: -7px;
+  }
+  
+  .closeBtn:hover {
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+    transform: translate(-4px, 4px);
+  }
+  
+  .deleteBtn {
+    margin-top: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 11px 28px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    border: none;
+    color: #fff;
+    background: #3BB271;
+    transition: all 0.25s ease;
+  }
+  
+  .deleteBtn:hover {
+    box-shadow: 0 10px 20px -10px rgba(255, 62, 78, 0.6);
+    transform: translateY(-5px);
+    background: #ff3e4e;
+  }
+  
+  .cancelBtn {
+    width: 20%;
+    height: 30px;
+    border-radius: 10px;
+    border: solid;
+    border-width: 2px;
+    border-color: black;
+    cursor: pointer;
+
+    margin-right: 25px;
+  }
+  
+  .cancelBtn:hover {
+    box-shadow: 0 10px 20px -10px rgba(255, 62, 78, 0.6);
+    transform: translateY(-1px);
+    background: #ff3e4e;
+    color: white;
+  }
+
+  .sendBtn {
+    width: 20%;
+    height: 30px;
+    border-radius: 10px;
+    border: solid;
+    border-width: 2px;
+    border-color: black;
+    cursor: pointer;
+
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .sendBtn:hover {
+    box-shadow: #006400;
+    transform: translateY(-1px);
+    background: #006400;
+    color: white;
+  }
+
+
+
+  .msgContainer{
+    border: 6px double #000000;
+    
+  }

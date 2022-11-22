@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap');
+
+.upload-form-container {
+    display: inline-block;
+    justify-content: center;
+    margin-top: 5vh;
+    height: 80vh;
+    align-items: center;
+    text-align: initial;
+    box-sizing: border-box;
+    /* z-index: 0; */
+    font-family: 'Gill Sans', 'Gill Sans MT';
+}
+
+.line-upload {
+    background-color: black;
+}
+.upload-forms{
+
+    /* z-index: 0; */
+    contain: content;
+    display: flex;
+    font-size: 20px;
+    width: 40vw;
+    height: auto;
+    padding: 20px;
+    background-color: whitesmoke;
+    /* height: 70%; */
+    justify-content: center;
+    flex-direction: column;
+
+    align-items: stretch;
+    overflow-y:auto;
+    border: solid;
+    border-width: 3px 0px 3px 0px;
+    border-color: black;
+}
+
+/* .upload-header h1 {
+    color: white;
+
+} */
+.form-container button{
+    width: 30%;
+    height: 30px;
+
+    border-radius: 10px;
+    border: solid;
+    border-width: 2px;
+    border-color: black;
+    cursor: pointer;
+}
+
+.upload-submit-button {
+    background-color: white;
+    float: right;
+    cursor: pointer;
+}
+
+.upload-submit-button:hover {
+    background-color: green;
+    color:white;
+    transform: translateY(-1px);
+}
+
+.upload-cancel-button{
+    background-color: white;
+    float: left;
+    cursor: pointer;
+}
+
+.upload-cancel-button:hover{
+    background-color: red;
+    color: white;
+    transform: translateY(-1px);
+}
+
+
+.input-text-field {
+    text-align: justify;
+}
+
+input.forms, textarea.forms{
+    font-weight: 100;
+    width: 65%;
+    height: 30px;
+    font-size: 20px;
+    border: solid;
+    border-width: 2px;
+    border-color: black;
+    border-radius: 5px;
+}
+
+label.forms {
+    font-family: 'Inter', sans-serif;
+}
+
+select.forms{
+    width: 65%;
+    height: 30px;
+    padding: 1px;
+    font-size: 20px;
+}
+
+input[submit]:hover{
+    background-color: green;
+    color: white;
+    transform: translateY(-1px);
+}
