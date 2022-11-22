@@ -45,13 +45,14 @@ def search_posts(keyword = None):
     for post in results:
         try:
             # read the file and send static URL:
-            post['file'] = f'http://54.200.101.218:5000/post/{post["file"]}'
             if post['post_type'] == "Document":
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/document.png'
             elif post['post_type'] == "Audio":
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/audio.png'
             else:    
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/{post["file"]}'
+            
+            post['file'] = f'http://54.200.101.218:5000/post/{post["file"]}'
         except Exception as e:
             print(f"Error loading file for post <{post.get('post_id')}> : \n{e}")
             raise Exception("Something went wrong while loading file.")
@@ -94,13 +95,14 @@ def get_latest_posts(limit = 1):
     for post in results:
         try:
             # read the file and send static URL:
-            post['file'] = f'http://54.200.101.218:5000/post/{post["file"]}'
             if post['post_type'] == "Document":
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/document.png'
             elif post['post_type'] == "Audio":
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/audio.png'
             else:    
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/{post["file"]}'
+            
+            post['file'] = f'http://54.200.101.218:5000/post/{post["file"]}'
         except Exception as e:
             print(f"Error loading file for post <{post.get('post_id')}> : \n{e}")
             raise Exception("Something went wrong while loading file.")
@@ -143,13 +145,14 @@ def get_post_details(post_id = None):
     for post in results:
         try:
             # read the file and send static URL:
-            post['file'] = f'http://54.200.101.218:5000/post/{post["file"]}'
             if post['post_type'] == "Document":
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/document.png'
             elif post['post_type'] == "Audio":
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/audio.png'
             else:    
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/{post["file"]}'
+            
+            post['file'] = f'http://54.200.101.218:5000/post/{post["file"]}'
         except Exception as e:
             print(f"Error loading file for post <{post.get('post_id')}> : \n{e}")
             raise Exception("Something went wrong while loading file.")
