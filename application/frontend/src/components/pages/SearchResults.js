@@ -47,7 +47,7 @@ function SearchResults() {
         </div>
 
         <div className='maintext'>
-          <h1 className='card__title'>{output.title}</h1>
+          <h2 className='card__title'>{output.title}</h2>
           <span>Date created: {output.created_timestamp}</span><br />
           <span>File type: {output.post_type}</span>
           <br /><br />
