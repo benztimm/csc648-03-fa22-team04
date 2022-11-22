@@ -1,5 +1,12 @@
-import React from 'react';
+/* 
+Filename: Ekarat.js
 
+Date: 11/20/22
+Authors: Jerry Liu, Sophia Chu
+Description: File for Jerry's About Us page.
+
+*/
+import React from 'react'
 import './styles/milestoneOne.css';
 import myImage from '../images/testimage.jpg';
 

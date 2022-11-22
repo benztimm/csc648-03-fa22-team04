@@ -1,14 +1,21 @@
+/* 
+Filename: Home.js
+
+Date: 11/20/22
+Authors: Ruben Ponce, Sophia Chu
+Description: File for Home page. 
+
+*/
+
 import React, {Component} from 'react';
 import { useContext, useRef, useState, useHistory, useEffect,  } from 'react'; 
-import { Link, renderMatches, useRouteLoaderData } from 'react-router-dom';
+import { Link, renderMatches, useNavigate, useRouteLoaderData } from 'react-router-dom';
 import './styles/home.css';
-import { SearchContext } from '../../SearchContext.js';
 
-
-
-// `http://54.200.101.218:5000/search-posts/`
 
 const Home = () =>{
+
+  const navigate = useNavigate();
 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -18,7 +25,7 @@ const Home = () =>{
     const getData = async () => {
       try {
         const response = await fetch(
-          `http://54.200.101.218:5000/search-posts/`
+          `http://54.200.101.218:5000/home-page/`
         );
         if (!response.ok) {
           throw new Error(
@@ -38,6 +45,15 @@ const Home = () =>{
     getData()
   }, [])
 
+  const navigateToProduct = (title, post_id) => {
+
+    console.log(title);
+    console.log(post_id);
+    window.sessionStorage.setItem(post_id, title);
+    navigate(`/productpage/${post_id}`, {state:{id:post_id, title:title}});
+
+  }
+
     return (
       <div>
         <div>
@@ -47,16 +63,21 @@ const Home = () =>{
 
           </h2>
         </div>
+        <br/>
+    
+      <div><b>Some Recent Uploads</b></div>
+      <br/>
+    
         <div className='card-container'>
 
           {data && data.output.map(output => (
-            <div className='card'>
+            <div className='card' onClick={() => navigateToProduct(`${output.title}`, `${output.post_id}`)}>
               <div className='thumbnail-home'>
-                <img src={output.file} className='thumbnail' />
+                <img src={output.thumbnail} className='thumbnail' />
               </div>
               <div className='title-home'>
-                {output.title}
 
+                <h3>{output.title}</h3>
               </div>
             </div>
           ))}

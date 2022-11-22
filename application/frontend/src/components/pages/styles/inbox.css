@@ -1,21 +1,38 @@
-pre{
-    text-align: left;
+table {
+  border-collapse: collapse;
+  width: 73%;
+  margin: auto;
+}
+  
+table td, table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+  
+table tr:nth-child(even){background-color: #f2f2f2;}
+  
+table tr:hover {background-color: #ddd;}
+  
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #04AA6D;
+  color: white;
 }
 
-.inbox-container {
-    display: inline-block;
-    flex-direction: column;
-    width: 70vw;
-
+.delete{
+  background: red;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  
 }
 
-.inbox{
-    width: 70%;
-    display: flex;
-    align-items: center;
+.delete:hover{
+  background: tomato;
+  transform: translateY(-1px);
+  
 }
 
-.innerinbox{
-    flex: 1;
-    margin: 10px;
-}
+  

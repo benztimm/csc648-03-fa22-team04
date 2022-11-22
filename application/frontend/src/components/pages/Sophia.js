@@ -1,5 +1,13 @@
-import React from 'react';
+/* 
+Filename: Sophia.js
 
+Date: 11/20/22
+Authors: Sophia Chu
+Description: File for Sophia's About Us page.
+
+*/
+
+import React from 'react';
 import './styles/milestoneOne.css';
 import myImage from '../images/testimage.jpg';
 

@@ -1,21 +1,51 @@
-.dash-container {
-    display: inline-block;
-    grid-template-columns: repeat;
+.dashboard button.dashboard{
+    border-radius: 10px;
+    border: solid;
+    border-width: 2px;
+    border-color: black;
+    cursor: pointer;
 
-}
-
-div.dashboard{
     align-items: center;
-    width: 100%;
-    padding: 20px;
-}
-
-button.dashboard{
-    align-items: center;
-    width: 100px;
+    width: 120px;
     font-size: medium;
     padding: 0.5%;
+    margin: 10px;
+    text-align: center;
+    cursor: pointer;
 }
+.dashbord button.dashboard:hover{
+    box-shadow: #006400;
+    transform: translateY(-5px);
+    background: #006400;
+}
+
+.purchaseInfo button{
+    border-color: black;
+    cursor: pointer;
+
+    align-items: center;
+    width:100px;
+    font-size: medium;
+    padding: 0.5%;
+    margin: 10px;
+    text-align: center;
+    background: red;
+    color:white;
+
+}
+
+.purchaseInfo button:hover{
+    transform: translateY(-1px);
+    background-color: #ff6347;
+}
+
+.header{
+    font-size: 20px; 
+    font-weight: bolder;
+    text-decoration:underline;
+    text-decoration-thickness: 5px;
+}
+
 
 hr.dashboard{
     padding-bottom: 10px;
@@ -23,53 +53,3 @@ hr.dashboard{
     margin-bottom: 20px;
 }
 
-.dashboard-card-container {
-    /* width: 70%;
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    flex-direction: column; */
-
-}
-
-.card_body{
-    margin: 5px;
-    width: 70vw;
-    height: 150px;
-    background-color: #fbfbfb;
-    border-top: 1px solid;
-    border-bottom: 1px solid;
-    border-color: black;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    
-}
-
-.thumbnail{
-    width: 95%;
-    height: 95%;
-}
-
-#image_container{
-    vertical-align: middle;
-    order: 1;
-    width: 150px;
-    height: auto;
-}
-
-.maintext{
-    order:2;
-    height: 150px;
-    width: 30vw;
-    text-align: left;
-}
-
-.card__title, .card__author, .card__filetype, .card__description{
-    padding: 0px;
-    margin: 0px;
-}
-
-.purchaseinfo{
-    order:3;
-}

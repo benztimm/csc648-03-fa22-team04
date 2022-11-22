@@ -1,18 +1,24 @@
+/* 
+Filename: Navbar.js
+
+Date: 11/20/22
+Authors: Ruben Ponce, Sophia Chu
+Description: File for navigation bar. Includes search bar functionality that makes GET request,
+returns API response.
+
+*/
+
+
 import React from 'react';
 import { useContext, useRef, useState, useHistory, useEffect } from 'react'; 
 import { FaBars, FaTimes} from 'react-icons/fa';
 import { Link, useNavigate, generatePath, Navigate} from 'react-router-dom';
-import Select from 'react-select';
-import makeAnimated from 'react-select/animated';
 import '../Navbar/Navbar.css';
-
 import logo from '../images/logo.png'
+import Login from '../pages/Login.js';
+import Register from '../pages/Register.js';
 
-import SearchResults from '../pages/SearchResults';
-import { SearchContext } from '../../SearchContext.js';
 
-
-//`http://54.200.101.218:5000/search-posts/${selectedOption}${value}`
 
 const Navbar = () =>{
 
@@ -33,7 +39,6 @@ const Navbar = () =>{
         //let newValue = event.target.value;
         setValue(event.target.value);
     };
-
     // END SEARCH BAR
 
 
@@ -43,14 +48,13 @@ const Navbar = () =>{
     const [items, setItems] = useState(null);
     const navigate = useNavigate();
 
-  // declare the async data fetching function
+    //GET request from search bar input
     const fetchData = async () => {
-        // get the data from the api
+
         const data = await fetch(`http://54.200.101.218:5000/search-posts/${selectedOption} ${value}`);
-        // convert the data to json
+
         const json = await data.json();
 
-        // set state with the result
         console.log(json);
         setItems(json);
         window.localStorage.setItem('result', JSON.stringify(json));
@@ -60,21 +64,17 @@ const Navbar = () =>{
 
 
     //when search button is clicked
-
-
     const searchClick = () => {
-        //settingExtension();
         fetchData();
-
-
     }
-    
     //END SEARCH BAR
 
-    
 
-    //NAVIGATION IF CLICKING SEARCH
-    //if (extension) return  (<Navigate to="/searchresults?=" />);
+    //LOGIN
+    const [isLoginOpen, setLoginOpen] = useState(false);
+    
+    //REGISTER
+    const [isRegisterOpen, setRegisterOpen] = useState(false);
 
 
     const [showLinks, setShowLinks] = useState(false);
@@ -83,6 +83,7 @@ const Navbar = () =>{
         <div className='Navbar'>
             
             <div className='left_side'>
+                {/* <button>sidebarhere</button> */}
                 <Link to="/">
                     <img src={logo} className="img-fluid" onClick={() => setShowLinks(false)}
                     width={125} height={120}></img>
@@ -107,10 +108,14 @@ const Navbar = () =>{
                 <div className='nav_links' id={showLinks ? "hidden" : ""} onClick={() => setShowLinks(false)}>
                     <a href='/#'><Link to="/About">About</Link></a>
                     <a href='/#'><Link to="/Upload">Upload</Link></a>
-                    <a href='/#'><Link to="/Register">Register</Link></a>
-                    <a href='/#'><Link to="/Login">Log In</Link></a>
+                    <a onClick={() => setRegisterOpen(true)}>Register</a>
+                    {isRegisterOpen && <Register setRegisterOpen={setRegisterOpen} setLoginOpen={setLoginOpen}/>}
+                    <a onClick={() => setLoginOpen(true)}>Log In</a>
+                    {isLoginOpen && <Login setLoginOpen={setLoginOpen} setRegisterOpen={setRegisterOpen}/>}
+                    {/* <a href='/#'><Link to="/Register">Register</Link></a>
+                    <a href='/#'><Link to="/Login">Log In</Link></a> */}
                 </div>
-                <button onClick={() => setShowLinks(!showLinks)}><FaBars/></button>
+                <button className='navButton' onClick={() => setShowLinks(!showLinks)}><FaBars/></button>
             </div>
             <p className='cc'> 
                     SFSU Software Engineering Project CSC648-848,
