@@ -37,7 +37,7 @@ def search_posts(keyword = None):
     # Update query with where clause in case search keyword provided:
     if keyword:
         query += """
-                    AND (OR p.title LIKE %(keyword)s
+                    AND (p.title LIKE %(keyword)s
                     OR p.description LIKE %(keyword)s
                     OR c.category_name LIKE %(keyword)s)
                 """
@@ -89,7 +89,7 @@ def get_latest_posts(limit = 1):
                 WHERE
                     p.approved = 'Approved'
                 ORDER BY
-                    post_id desc;
+                    post_id desc
                 LIMIT 
             """
     query += str(limit)
