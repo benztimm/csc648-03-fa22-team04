@@ -33,7 +33,7 @@ const Login = ({setLoginOpen, setRegisterOpen}) =>{
                     </label><br />
                     <u>Forgot Password?</u>
                     <br /><br /><br />
-                    <input type="submit" value="Login" />
+                    <input className='confirm-bttn' type="submit" value="Login" />
                     <br />
                     New User? <a id='reg-or-log' onClick={register}>Register</a>
 
