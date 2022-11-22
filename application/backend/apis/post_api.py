@@ -27,18 +27,19 @@ def search_posts(keyword = None):
                     user u
                 ON
                     p.uploader_id = u.user_id
-                join
+                JOIN
                     category c
-                on
+                ON
                     p.category = c.category_id
+                WHERE
+                    p.approved = 'Approved'
             """
     # Update query with where clause in case search keyword provided:
     if keyword:
         query += """
-                WHERE
-                    p.title LIKE %(keyword)s
+                    AND (OR p.title LIKE %(keyword)s
                     OR p.description LIKE %(keyword)s
-                    OR p.category LIKE %(keyword)s
+                    OR c.category_name LIKE %(keyword)s)
                 """
     results = db.execute_query(query=query, params={"keyword": "%" + keyword + "%" if keyword else keyword})
 
@@ -81,15 +82,17 @@ def get_latest_posts(limit = 1):
                     user u
                 ON
                     p.uploader_id = u.user_id
-                join
+                JOIN
                     category c
-                on
+                ON
                     p.category = c.category_id
-                limit 
+                WHERE
+                    p.approved = 'Approved'
+                ORDER BY
+                    post_id desc;
+                LIMIT 
             """
-    if limit:
-        limit = (str(limit))
-        query += limit
+    query += str(limit)
     results = db.execute_query(query=query)
 
     for post in results:
