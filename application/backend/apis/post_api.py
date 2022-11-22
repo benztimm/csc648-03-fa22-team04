@@ -37,9 +37,9 @@ def search_posts(keyword = None):
     # Update query with where clause in case search keyword provided:
     if keyword:
         query += """
-                    AND ((p.title LIKE %(keyword)s
+                    AND (p.title LIKE %(keyword)s
                     OR p.description LIKE %(keyword)s
-                    OR c.category_name LIKE %(keyword)s))
+                    OR c.category_name LIKE %(keyword)s)
                 """
     results = db.execute_query(query=query, params={"keyword": "%" + keyword + "%" if keyword else keyword})
 
