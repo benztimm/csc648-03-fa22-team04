@@ -41,6 +41,12 @@ def search_posts(keyword = None):
         try:
             # read the file and send static URL:
             post['file'] = f'http://54.200.101.218:5000/post/{post["file"]}'
+            if post['post_type'] == "Document":
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/document.png'
+            elif post['post_type'] == "Audio":
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/audio.png'
+            else:    
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/{post["file"]}'
         except Exception as e:
             print(f"Error loading file for post <{post.get('post_id')}> : \n{e}")
             raise Exception("Something went wrong while loading file.")
@@ -77,6 +83,12 @@ def get_latest_posts(limit = None):
         try:
             # read the file and send static URL:
             post['file'] = f'http://54.200.101.218:5000/post/{post["file"]}'
+            if post['post_type'] == "Document":
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/document.png'
+            elif post['post_type'] == "Audio":
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/audio.png'
+            else:    
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/{post["file"]}'
         except Exception as e:
             print(f"Error loading file for post <{post.get('post_id')}> : \n{e}")
             raise Exception("Something went wrong while loading file.")
@@ -120,6 +132,12 @@ def get_post_details(post_id = None):
         try:
             # read the file and send static URL:
             post['file'] = f'http://54.200.101.218:5000/post/{post["file"]}'
+            if post['post_type'] == "Document":
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/document.png'
+            elif post['post_type'] == "Audio":
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/audio.png'
+            else:    
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/{post["file"]}'
         except Exception as e:
             print(f"Error loading file for post <{post.get('post_id')}> : \n{e}")
             raise Exception("Something went wrong while loading file.")
