@@ -16,7 +16,7 @@ import About from './components/About';
 import Login from './components/pages/Login';
 import Register from './components/pages/Register';
 import UploadPost from './components/pages/UploadPost';
-import Dashboard from './components/pages/dashboard';
+import Dashboard from './components/pages/Dashboard';
 import Inbox from './components/pages/UserInbox';
 import ProductPage from './components/pages/ProductPage';
 import SearchResults from './components/pages/SearchResults';

@@ -20,9 +20,6 @@
 }
 
 .purchaseInfo button{
-    border-radius: 10px;
-    border: solid;
-    border-width: 2px;
     border-color: black;
     cursor: pointer;
 
@@ -32,14 +29,14 @@
     padding: 0.5%;
     margin: 10px;
     text-align: center;
-    background: #006400;
+    background: red;
     color:white;
 
 }
 
 .purchaseInfo button:hover{
     transform: translateY(-1px);
-    background-color: #269226;
+    background-color: #ff6347;
 }
 
 .header{
