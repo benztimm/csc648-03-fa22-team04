@@ -1,3 +1,9 @@
+'''
+Date: 11/15/22
+Developers: Sudhanshu Kulkarni
+Description: Core flask app of backend server
+'''
+
 from flask import Flask
 from flask_cors import CORS, cross_origin
 

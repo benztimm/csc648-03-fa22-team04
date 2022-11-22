@@ -1,5 +1,10 @@
+'''
+Date: 11/15/22
+Developers: Sudhanshu Kulkarni, Ekarat Buddharuksa
+Description: All APIs related to Posts.
+'''
+
 import utilities.db_helper as db
-from base64 import b64encode
 
 def search_posts(keyword = None):
     """
@@ -54,7 +59,14 @@ def search_posts(keyword = None):
     return results
 
 
-def get_latest_posts(limit = None):
+def get_latest_posts(limit = 1):
+    """
+    Home page API, get latest x posts sorted on time
+
+    `input` limit: how many posts to return (default 1)
+
+    `return` JSON of all matching entries
+    """
     query = """
                 SELECT
                     p.*,
@@ -143,6 +155,7 @@ def get_post_details(post_id = None):
             raise Exception("Something went wrong while loading file.")
 
     return results
+
 
 def delete_post(post_id = None):
     """    
