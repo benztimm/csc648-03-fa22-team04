@@ -120,6 +120,24 @@ def static_post(post_name=None):
         return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500  
 
 
+@app.route('/thumbnails/', defaults={'post_name': None})
+@app.route('/thumbnails/<post_name>')
+def static_thumbnail(post_name=None):
+    '''
+    Serve the thumbnail image from server's file system.
+
+    `inputs` image_path: path to image
+
+    `returns` static image
+    '''
+    try:
+        file_name = path.abspath(f"../../thumbnails/{post_name}")
+        return send_file(file_name)
+    except Exception as e:
+        print(f"== EXCEPTION == static_thumbnail: \n{e}")           
+        return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500  
+
+
 @app.route('/post-delete/', defaults={'post_id': 0})
 @app.route('/post-delete/<post_id>')
 def post_delete(post_id=None):
