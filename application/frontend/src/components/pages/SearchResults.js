@@ -25,7 +25,7 @@ function SearchResults() {
   })
 
   var media = JSON.parse(apiPull);
-
+  
   const navigateToProduct = (title, post_id) => {
     console.log(title);
     console.log(post_id);
@@ -33,10 +33,12 @@ function SearchResults() {
     navigate(`/productpage/${post_id}`, {state:{id:post_id, title:title}});
   }
 
-
   return (
 
     <div className='wrapper'>
+    <br/>
+    <div><b>Showing 1 - {Object.keys(media.output).length} out of {Object.keys(media.output).length} results</b></div>
+    <br/>
     {media && media.output.map(output => (
       <div className='card_body' key={output.post_id} onClick={() => navigateToProduct(`${output.title}`, `${output.post_id}`)}>
         <div className='image_container'>
@@ -53,11 +55,11 @@ function SearchResults() {
 
         </div>
         <div className='purchaseInfo'>
-        <h1 className='card__price'>${output.price}</h1>
-        <button className='card__bttn'>PURCHASE</button>
+          <h1 className='card__price'>${output.price}</h1>
+          <button className='card__bttn'>PURCHASE</button>
         </div>
       </div>
-      ))} 
+    ))}
 
 </div>
   );
