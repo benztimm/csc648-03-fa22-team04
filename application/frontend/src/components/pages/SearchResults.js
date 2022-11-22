@@ -17,6 +17,7 @@ function SearchResults() {
   const navigate = useNavigate();
 
   const [apiPull, setApiPull] = useState(null);
+  
 
   useEffect(() => {
     let newPull = window.localStorage.getItem('result');
@@ -37,12 +38,12 @@ function SearchResults() {
 
     <div className='wrapper'>
     <br/>
-    <div><b>Showing 1 - {Object.keys(media.output).length} out of {Object.keys(media.output).length} results</b></div>
+    {/* <div><b>Showing 1 - {media && Object.keys(media.output).length} out of {Object.keys(media.output).length} results</b></div> */}
     <br/>
     {media && media.output.map(output => (
       <div className='card_body' key={output.post_id} onClick={() => navigateToProduct(`${output.title}`, `${output.post_id}`)}>
         <div className='image_container'>
-          <img src={output.file} className='thumbnail' />
+          <img src={output.thumbnail} className='thumbnail' />
         </div>
 
         <div className='maintext'>

@@ -28,7 +28,7 @@
 
   .modal-purchaseMsg{
     width: 45vw;
-    height: auto;
+    height: 35vh;
     background: white;
     color: white;
     z-index: 10;
@@ -65,6 +65,13 @@
     font-size: 14px;
     color: #000000;
     text-align: left;
+    height: 15vh;
+    display: block;
+  }
+
+  .modalContent-purchaseMsg-input {
+
+    width: 30vw;
   }
 
   

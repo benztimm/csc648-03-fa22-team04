@@ -73,7 +73,7 @@ const Home = () =>{
           {data && data.output.map(output => (
             <div className='card' onClick={() => navigateToProduct(`${output.title}`, `${output.post_id}`)}>
               <div className='thumbnail-home'>
-                <img src={output.file} className='thumbnail' />
+                <img src={output.thumbnail} className='thumbnail' />
               </div>
               <div className='title-home'>
 

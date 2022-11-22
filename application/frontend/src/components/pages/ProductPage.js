@@ -48,7 +48,7 @@ function productPage() {
         <div>{items && items.output.map(output => (
             <div className='page-container'>
                     <div className='img-container'>
-                    <img className='product-image' src = {output.file}></img>
+                    <img className='product-image' src = {output.thumbnail}></img>
                 </div>
         
                 <div className='seller-card'>
@@ -72,7 +72,7 @@ function productPage() {
                         <button className='purchase-bttn' onClick={() => setIsOpen(true)}>
                             CONTACT SELLER
                         </button>
-                       {isOpen && <PurchaseMsg setIsOpen={setIsOpen} />}
+                       {isOpen && <PurchaseMsg setIsOpen={setIsOpen} output={output}/>}
                     </div>
                 </div>
                 </div>

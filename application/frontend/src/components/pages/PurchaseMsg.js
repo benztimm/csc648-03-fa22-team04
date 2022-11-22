@@ -10,7 +10,13 @@ import React from "react";
 import './styles/modal.css'
 import { RiCloseLine } from "react-icons/ri"
 
-const purchaseMsg = ({setIsOpen}) =>{
+const purchaseMsg = ({setIsOpen, output}) =>{
+
+    let newDate = new Date();
+    let date = newDate.getDate();
+    let month = newDate.getMonth();
+    let year = newDate.getFullYear();
+
     return (
         <>
         <div className="darkBG" onClick={() => setIsOpen(false)}/>
@@ -24,8 +30,11 @@ const purchaseMsg = ({setIsOpen}) =>{
                 </button>
                 <div className="msgContainer">
                     <div className="modalContent-purchaseMsg">
-                        <span>Please enter message</span>
-                        <input/>
+                        <span>Date: {month}/{date}/{year}</span><br/>
+                        <span>This item: {output.title}</span><br/>
+                        <span>Price: ${output.price}</span><br/><br/>
+                        <span>Please enter message: </span><br/>
+                        <input className='modalContent-purchaseMsg-input' defaultValue='Hello, I would like to purchase your item.'/>
                     </div> 
                 </div>
 
