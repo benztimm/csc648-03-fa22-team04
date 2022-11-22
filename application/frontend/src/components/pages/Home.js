@@ -1,44 +1,93 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './styles/milestoneOne.css';
+/* 
+Filename: Home.js
 
-function Home() {
-  return (
-    <div>
+Date: 11/20/22
+Authors: Ruben Ponce, Sophia Chu
+Description: File for Home page. 
+
+*/
+
+import React, {Component} from 'react';
+import { useContext, useRef, useState, useHistory, useEffect,  } from 'react'; 
+import { Link, renderMatches, useNavigate, useRouteLoaderData } from 'react-router-dom';
+import './styles/home.css';
+
+
+const Home = () =>{
+
+  const navigate = useNavigate();
+
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await fetch(
+          `http://54.200.101.218:5000/home-page/`
+        );
+        if (!response.ok) {
+          throw new Error(
+            `This is an HTTP error: The status is ${response.status}`
+          );
+        }
+        let actualData = await response.json();
+        setData(actualData);
+        setError(null);
+      } catch(err) {
+        setError(err.message);
+        setData(null);
+      } finally {
+        setLoading(false);
+      }  
+    }
+    getData()
+  }, [])
+
+  const navigateToProduct = (title, post_id) => {
+
+    console.log(title);
+    console.log(post_id);
+    window.sessionStorage.setItem(post_id, title);
+    navigate(`/productpage/${post_id}`, {state:{id:post_id, title:title}});
+
+  }
+
+    return (
       <div>
-        <h2>Software Engineering class SFSU</h2>
-        <h3>Fall, 2022</h3>
-        <h3>Section 03</h3>
-        <h3>Team 4</h3>
-      </div>
+        <div>
+          <h2 className='slogan'>
+            "To connect our SFSU community through media share" - GatorExchange <br />
+            Post, share, sell, and buy your content here.<br />
 
-      <div className="team">
-        <Link to="/ekarat">
-          <button>Ekarat Buddharuksa</button>
-        </Link>
-        <br />
-        <Link to="/sophia">
-          <button>Sophia Chu</button>
-        </Link>
-        <br />
-        <Link to="/jerry">
-          <button>Jerry Liu</button>
-        </Link>
-        <br />
-        <Link to="/sudhanshu">
-          <button>Sudhanshu Kulkarni</button>{' '}
-        </Link>
-        <br />
-        <Link to="/mahisha">
-          <button>Mahisha Patel</button>
-        </Link>
-        <br />
-        <Link to="/ruben">
-          <button>Ruben Ponce</button>
-        </Link>
+          </h2>
+        </div>
+        <br/>
+    
+      <div><b>Some Recent Uploads</b></div>
+      <br/>
+    
+        <div className='card-container'>
+
+          {data && data.output.map(output => (
+            <div className='card' onClick={() => navigateToProduct(`${output.title}`, `${output.post_id}`)}>
+              <div className='thumbnail-home'>
+                <img src={output.thumbnail} className='thumbnail' />
+              </div>
+              <div className='title-home'>
+
+                <h3>{output.title}</h3>
+              </div>
+            </div>
+          ))}
+
+        </div>
+
       </div>
-    </div>
-  );
-}
+    );
+
+
+};
 
 export default Home;

@@ -1,0 +1,53 @@
+{
+    "additional_info": "something random info",
+    "output": [
+      {
+        "post_approved": 1,
+        "post_createdTime": "2022-11-02 23:22:28",
+        "post_description": "This is a description for test post",
+        "post_file": "test blob file",
+        "post_id": 1,
+        "post_price": 55.55,
+        "post_thumbnail": "test blob thumbnail",
+        "post_title": "TestTitle",
+        "post_type": "Photo",
+        "post_userId": 1
+      },
+      {
+        "post_approved": 1,
+        "post_createdTime": "2022-11-05 17:38:09",
+        "post_description": "This is a description for Sea photo post",
+        "post_file": "Sea photo file",
+        "post_id": 5,
+        "post_price": 43.21,
+        "post_thumbnail": "Sea photo thumbnail",
+        "post_title": "Sea photo",
+        "post_type": "Photo",
+        "post_userId": 1
+      },
+      {
+        "post_approved": 1,
+        "post_createdTime": "2022-11-05 17:38:09",
+        "post_description": "This is a description for Mountain photo post",
+        "post_file": "Mountain photo file",
+        "post_id": 6,
+        "post_price": 78.91,
+        "post_thumbnail": "Mountain photo thumbnail",
+        "post_title": "Mountain photo",
+        "post_type": "Photo",
+        "post_userId": 1
+      },
+      {
+        "post_approved": 1,
+        "post_createdTime": "2022-11-05 17:38:09",
+        "post_description": "This is a description for Sky photo post",
+        "post_file": "Sky photo file",
+        "post_id": 7,
+        "post_price": 12.34,
+        "post_thumbnail": "Sky photo thumbnail",
+        "post_title": "Sky photo",
+        "post_type": "Photo",
+        "post_userId": 1
+      }
+    ]
+  }

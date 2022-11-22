@@ -6,9 +6,32 @@
 
 ### CSC - 648 - Team 4: Code Repository
 
+<a href="https://dev.mysql.com/downloads/installer" alt="MySQL" target="_blank">
+        <img src="https://img.shields.io/badge/MySQL-v8.0-lightgrey?style=flat&logo=MySQL" /></a>
+
+<a href="https://www.python.org/downloads/" alt="Python" target="_blank">
+        <img src="https://img.shields.io/badge/Python-v3.10-blue?style=flat&logo=Python" /></a>
+
+<a href="https://www.npmjs.com/package/react/v/18.2.0" alt="React" target="_blank">
+        <img src="https://img.shields.io/badge/React-v18.2.0-orange?style=flat&logo=React" /></a>
+        
+<a href="https://nodejs.org/en/download/" alt="Node" target="_blank">
+        <img src="https://img.shields.io/badge/NodeJS-v8.15.0-green?style=flat&logo=Node.js" /></a>
+
+<a href="http://54.200.101.218/" alt="Node" target="_blank">
+        <img src="https://img.shields.io/badge/AWS-ec2-yellow?style=flat&logo=Amazon%20EC2" /></a>
+
+<a href="https://releases.ubuntu.com/22.04" alt="Node" target="_blank">
+        <img src="https://img.shields.io/badge/ubuntu-22.04-red?style=flat&logo=Ubuntu" /></a>
+
+<a href="https://www.nginx.com/" alt="Node" target="_blank">
+        <img src="https://img.shields.io/badge/Web%20Server-Nginx-brightgreen?style=flat&logo=NGINX" /></a>
+        
+<br> <br>
+
 > [Please refer the Wiki pages for detailed documentation.](https://github.com/CSC-648-SFSU/csc648-03-fa22-team04/wiki)
 
-### Team:
+### Team
 
 | Student Name | Student Email | GitHub Username |
 |    :---:     |     :---:     |     :---:       |
@@ -18,3 +41,7 @@
 | Ekarat Buddharuksa|ebuddharuksa@sfsu.edu|[benztimm](https://github.com/benztimm)|
 | Sophia Chu|schu5@mail.sfsu.edu |[schu-code](https://github.com/schu-code)|
 | Ruben Ponce|rponce3@sfsu.edu|[rubenPonce1](https://github.com/rubenPonce1)|
+
+### Mentors
+- Prof. Petkovic
+- Anthony J. Souza
