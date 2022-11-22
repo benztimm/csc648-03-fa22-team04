@@ -1,11 +1,54 @@
-button.dashboard{
+.dashboard button.dashboard{
+    border-radius: 10px;
+    border: solid;
+    border-width: 2px;
+    border-color: black;
+    cursor: pointer;
+
     align-items: center;
-    width: 100px;
+    width: 120px;
     font-size: medium;
     padding: 0.5%;
     margin: 10px;
     text-align: center;
+    cursor: pointer;
 }
+.dashbord button.dashboard:hover{
+    box-shadow: #006400;
+    transform: translateY(-5px);
+    background: #006400;
+}
+
+.purchaseInfo button{
+    border-radius: 10px;
+    border: solid;
+    border-width: 2px;
+    border-color: black;
+    cursor: pointer;
+
+    align-items: center;
+    width:100px;
+    font-size: medium;
+    padding: 0.5%;
+    margin: 10px;
+    text-align: center;
+    background: #006400;
+    color:white;
+
+}
+
+.purchaseInfo button:hover{
+    transform: translateY(-1px);
+    background-color: #269226;
+}
+
+.header{
+    font-size: 20px; 
+    font-weight: bolder;
+    text-decoration:underline;
+    text-decoration-thickness: 5px;
+}
+
 
 hr.dashboard{
     padding-bottom: 10px;

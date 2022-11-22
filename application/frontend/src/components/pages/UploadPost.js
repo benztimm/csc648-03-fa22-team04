@@ -67,6 +67,7 @@ function UploadPost() {
 
                     <br /><br />
                     <button className='upload-submit-button' type="submit" >SUBMIT</button>
+                    <button className='upload-cancel-button' type='cancel'>CANCEL</button>
                 </div>
                 </form>
             </div>

@@ -8,6 +8,7 @@ Description: File for Login modal linked in Navbar.js.
 */
 import React from 'react';
 import './styles/forms.css';
+import './styles/loginRegister.css';
 
 const Login = ({setLoginOpen, setRegisterOpen}) =>{
 

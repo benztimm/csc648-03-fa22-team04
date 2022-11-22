@@ -22,6 +22,9 @@ function Dashboard(){
     }
         return (
             <div className="dash-container">
+                <div className="header">
+                    <h1>MY POSTS</h1>
+                </div>
                 <div class="dashboard">
                     <button class="dashboard" >MY POSTS</button>&nbsp;&nbsp;&nbsp;
                     <button class="dashboard" onClick={goToInbox}>INBOX</button>

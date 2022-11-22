@@ -9,7 +9,7 @@
     text-align: initial;
     box-sizing: border-box;
     /* z-index: 0; */
-    font-family: 'Inter', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT';
 }
 
 .line-upload {
@@ -40,29 +40,40 @@
     color: white;
 
 } */
-
-.upload-submit-button {
+.form-container button{
     width: 30%;
     height: 30px;
-    background-color: white;
 
     border-radius: 10px;
     border: solid;
     border-width: 2px;
     border-color: black;
+    cursor: pointer;
+}
+
+.upload-submit-button {
+    background-color: white;
     float: right;
+    cursor: pointer;
 }
 
 .upload-submit-button:hover {
-    width: 30%;
-    height: 30px;
     background-color: green;
-    border-radius: 10px;
-    border: solid;
-    border-width: 2px;
-    border-color: black;
+    color:white;
+    transform: translateY(-1px);
 }
 
+.upload-cancel-button{
+    background-color: white;
+    float: left;
+    cursor: pointer;
+}
+
+.upload-cancel-button:hover{
+    background-color: red;
+    color: white;
+    transform: translateY(-1px);
+}
 
 
 .input-text-field {
@@ -89,4 +100,10 @@ select.forms{
     height: 30px;
     padding: 1px;
     font-size: 20px;
+}
+
+input[submit]:hover{
+    background-color: green;
+    color: white;
+    transform: translateY(-1px);
 }

@@ -42,6 +42,9 @@ function Inbox(){
 
         <div>
                 <div className="dashboard">
+                  <div className="header">
+                    <h1>INBOX</h1>
+                  </div>
                     <button className="dashboard" onClick={goToPosts}>MY POSTS</button>&nbsp;&nbsp;&nbsp;
                     <button className="dashboard">INBOX</button>
                 </div>

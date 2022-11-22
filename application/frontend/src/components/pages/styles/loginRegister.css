@@ -23,14 +23,9 @@
     border-width: 10px;
     border-color: #141414;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, .5);
-
-    
   }
 
-  
   .modal-form {
-
-    
     display: flex;
     width: 40vw;
     height: 600px;
@@ -40,18 +35,7 @@
     overflow-y: auto;
     scrollbar-color: #2eb06b #ffffff;
     scrollbar-width: thin;
-
   }
-
-  .cancel-button-lr {
-    background-color: #d1cfcf;
-    width: 90px;
-    height: 30px;
-    margin: 20px;
-    border-radius: 5px;
-    border-color: #000000;
-  }
-  
 
   #reg-or-log {
     font-size: medium;
@@ -61,16 +45,34 @@
 
   #reg-or-log:hover {
     font-size: medium;
-    color: red;
+    color: purple;
     text-decoration: underline;
   }
-
-
 
   .msgContainer{
     border: 6px double #000000;
     
   }
 
-  
+  .cancel-button-lr {
+    background-color: #d1cfcf;
+    width: 90px;
+    height: 30px;
+    margin: 20px;
+    border-radius: 5px;
+    border-color: #000000;
+    cursor: pointer;
+  }
+
+  #submit:hover{
+    background: red;
+    color: white;
+    transform: translateY(-1px);
+  }
+
+  .cancel-button-lr:hover{
+    background-color: red;
+    color: white;
+    transform: translateY(-1px);
+  }
 

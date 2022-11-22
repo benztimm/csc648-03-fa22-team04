@@ -6,6 +6,8 @@ Authors: Sophia Chu
 Description: File for columns for table in UserInbox.js
 
 */
+import './styles/inbox.css';
+
 export const COLUMNS = [
     {
         Header: 'Item Title',
@@ -25,6 +27,6 @@ export const COLUMNS = [
     },
     {
         Header: 'Delete',
-        Cell: <button>delete</button>
+        Cell: <button className='delete'>delete</button>
     },
 ]

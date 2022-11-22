@@ -31,13 +31,14 @@ const purchaseMsg = ({setIsOpen}) =>{
 
                 <div className="modalAction">
                     <div className="actionContainer">
+                        <button className="cancelBtn" onClick={() => setIsOpen(false)}>
+                            CANCEL
+                        </button>
                         <button className="sendBtn" onClick={() => setIsOpen(false)}>
                             SEND
                         </button>
 
-                        <button className="cancelBtn" onClick={() => setIsOpen(false)}>
-                            CANCEL
-                        </button>
+                        
                     </div>
                 </div>
             </div>
