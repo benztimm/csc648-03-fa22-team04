@@ -46,11 +46,11 @@ def search_posts(keyword = None):
         try:
             # read the file and send static URL:
             if post['post_type'] == "Document":
-                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/document.png'
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/document.png'
             elif post['post_type'] == "Audio":
-                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/audio.png'
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/audio.png'
             else:    
-                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/{post["file"]}'
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/{post["file"]}'
             
             post['file'] = f'http://54.200.101.218:5000/post/{post["file"]}'
         except Exception as e:
@@ -96,11 +96,11 @@ def get_latest_posts(limit = 1):
         try:
             # read the file and send static URL:
             if post['post_type'] == "Document":
-                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/document.png'
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/document.png'
             elif post['post_type'] == "Audio":
-                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/audio.png'
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/audio.png'
             else:    
-                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/{post["file"]}'
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/{post["file"]}'
             
             post['file'] = f'http://54.200.101.218:5000/post/{post["file"]}'
         except Exception as e:
@@ -146,11 +146,11 @@ def get_post_details(post_id = None):
         try:
             # read the file and send static URL:
             if post['post_type'] == "Document":
-                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/document.png'
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/document.png'
             elif post['post_type'] == "Audio":
-                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/audio.png'
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/audio.png'
             else:    
-                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/{post["file"]}'
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/{post["file"]}'
             
             post['file'] = f'http://54.200.101.218:5000/post/{post["file"]}'
         except Exception as e:
