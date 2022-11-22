@@ -1,3 +1,9 @@
+'''
+Date: 11/15/22
+Developers: Sudhanshu Kulkarni, Ekarat Buddharuksa
+Description: Only file which plays with database (connection + queries)
+'''
+
 import configparser
 import pymysql
 from flask import jsonify

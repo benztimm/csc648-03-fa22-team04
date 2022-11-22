@@ -1,5 +1,10 @@
+'''
+Date: 11/15/22
+Developers: Sudhanshu Kulkarni, Ekarat Buddharuksa
+Description: All APIs related to Posts.
+'''
+
 import utilities.db_helper as db
-from base64 import b64encode
 
 def search_posts(keyword = None):
     """
@@ -41,6 +46,12 @@ def search_posts(keyword = None):
         try:
             # read the file and send static URL:
             post['file'] = f'http://54.200.101.218:5000/post/{post["file"]}'
+            if post['post_type'] == "Document":
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/document.png'
+            elif post['post_type'] == "Audio":
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/audio.png'
+            else:    
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/{post["file"]}'
         except Exception as e:
             print(f"Error loading file for post <{post.get('post_id')}> : \n{e}")
             raise Exception("Something went wrong while loading file.")
@@ -48,7 +59,14 @@ def search_posts(keyword = None):
     return results
 
 
-def get_latest_posts(limit = None):
+def get_latest_posts(limit = 1):
+    """
+    Home page API, get latest x posts sorted on time
+
+    `input` limit: how many posts to return (default 1)
+
+    `return` JSON of all matching entries
+    """
     query = """
                 SELECT
                     p.*,
@@ -77,6 +95,12 @@ def get_latest_posts(limit = None):
         try:
             # read the file and send static URL:
             post['file'] = f'http://54.200.101.218:5000/post/{post["file"]}'
+            if post['post_type'] == "Document":
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/document.png'
+            elif post['post_type'] == "Audio":
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/audio.png'
+            else:    
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/{post["file"]}'
         except Exception as e:
             print(f"Error loading file for post <{post.get('post_id')}> : \n{e}")
             raise Exception("Something went wrong while loading file.")
@@ -120,11 +144,18 @@ def get_post_details(post_id = None):
         try:
             # read the file and send static URL:
             post['file'] = f'http://54.200.101.218:5000/post/{post["file"]}'
+            if post['post_type'] == "Document":
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/document.png'
+            elif post['post_type'] == "Audio":
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/audio.png'
+            else:    
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnail/{post["file"]}'
         except Exception as e:
             print(f"Error loading file for post <{post.get('post_id')}> : \n{e}")
             raise Exception("Something went wrong while loading file.")
 
     return results
+
 
 def delete_post(post_id = None):
     """    

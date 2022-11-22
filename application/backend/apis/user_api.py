@@ -1,3 +1,9 @@
+'''
+Date: 11/20/22
+Developers: Ekarat Buddharuksa
+Description: All APIs related to Users.
+'''
+
 import utilities.db_helper as db
 
 def delete_user(user_id = None):

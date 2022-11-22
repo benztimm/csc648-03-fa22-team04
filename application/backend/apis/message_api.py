@@ -1,3 +1,9 @@
+'''
+Date: 11/15/22
+Developers: Ekarat Buddharuksa
+Description: All APIs related to Messages.
+'''
+
 import utilities.db_helper as db
 
 def delete_message(message_id = None):

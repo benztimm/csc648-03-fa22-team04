@@ -1,3 +1,9 @@
+'''
+Date: 11/12/22
+Developers: Sudhanshu Kulkarni, Ekarat Buddharuksa
+Description: Routing page to handle all requests inbound to backend API
+'''
+
 from flask import jsonify, send_file
 from root import app
 import json
@@ -113,6 +119,7 @@ def static_post(post_name=None):
         print(f"== EXCEPTION == static_post: \n{e}")           
         return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500  
 
+
 @app.route('/post-delete/', defaults={'post_id': 0})
 @app.route('/post-delete/<post_id>')
 def post_delete(post_id=None):
@@ -130,6 +137,7 @@ def post_delete(post_id=None):
         print(f"== EXCEPTION == post_delete: \n{e}")           
         return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500  
     return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
+
 
 @app.route('/user-delete/', defaults={'user_id': 0})
 @app.route('/user-delete/<user_id>')
