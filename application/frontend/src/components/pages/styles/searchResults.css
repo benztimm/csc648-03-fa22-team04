@@ -59,8 +59,29 @@
     order: 3;
     height: 45%;
     width: 15%;
-    margin-top: -50px;
-    margin-left: -100px;
+    margin-top: -40px;
+    margin-left: -5px;
+    text-align: center;
+}
+
+.purchaseInfo .card__bttn{
+    border-color: black;
+    cursor: pointer;
+
+    align-items:flex-end;
+    width:100px;
+    font-size: medium;
+    padding: 0.5%;
+    margin: 10px;
+    text-align: center;
+    background: white;;
+    color:black;
+    
+}
+
+.purchaseInfo .card__bttn:hover{
+    background-color: gold;
+    transform: translateY(-1px);
 }
 
 

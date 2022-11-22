@@ -35,16 +35,19 @@
     overflow-y: auto;
     scrollbar-color: #2eb06b #ffffff;
     scrollbar-width: thin;
+    padding-bottom: 20px;
+    padding-top: 10px;
   }
 
   #reg-or-log {
-    font-size: medium;
+    font-size: 22px;
     color: #1271c9;
     text-decoration:underline;
+    cursor: pointer;
   }
 
   #reg-or-log:hover {
-    font-size: medium;
+    transform: translateY(-1px);
     color: purple;
     text-decoration: underline;
   }
