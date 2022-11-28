@@ -36,6 +36,11 @@
     border-color: black;
 }
 
+.form-container .upload-note{
+    text-align: center;
+    font-size: 20px;
+}
+
 /* .upload-header h1 {
     color: white;
 

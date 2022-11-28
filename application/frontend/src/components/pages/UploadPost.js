@@ -66,6 +66,8 @@ function UploadPost() {
                     </label><br /><br />
 
                     <br /><br />
+                    <div className='upload-note'>may take up to 24hrs to approve the post</div>
+                    <br/>
                     <button className='upload-submit-button' type="submit" >SUBMIT</button>
                     <button className='upload-cancel-button' type='cancel'>CANCEL</button>
                 </div>

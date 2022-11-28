@@ -41,7 +41,7 @@
 
 .left_side .nav_search_bar .cat-Select {
   height: 34px;
-  width: 90px;
+  width: fit-content;
   border-radius: 4px;
   color: black;
   border: solid 1px;

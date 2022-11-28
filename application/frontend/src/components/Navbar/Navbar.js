@@ -90,7 +90,7 @@ const Navbar = () =>{
                 </Link>
                 <div className='nav_search_bar'>
                     <select  className='cat-Select' onChange={changeHandlerCategory}>
-                        <option value="">Category</option>
+                        <option value="">All Categories</option>
                         <option value="Photography" >Photography</option>
                         <option value="Computer Science" >Computer Science</option>
                         <option value="Art" >Art</option>
