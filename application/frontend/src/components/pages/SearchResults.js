@@ -30,8 +30,11 @@ function SearchResults() {
   const navigateToProduct = (title, post_id) => {
     console.log(title);
     console.log(post_id);
-    window.sessionStorage.setItem(post_id, title);
-    navigate(`/productpage/${post_id}`, {state:{id:post_id, title:title}});
+    window.sessionStorage.setItem('post_id', post_id);
+    // navigate(`/productpage/${post_id}`, {state:{id:post_id, title:title}});
+    var url = `http://localhost:3000/productpage/${post_id}`;
+    window.open(url);
+
   }
 
   return (

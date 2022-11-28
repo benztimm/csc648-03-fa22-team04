@@ -26,8 +26,8 @@ function productPage() {
 
     const fetchData = async () => {
 
-        const data = await fetch(`http://54.200.101.218:5000/get-post-details/${location.state.id}`);
-
+        // const data = await fetch(`http://54.200.101.218:5000/get-post-details/${location.state.id}`);
+        const data = await fetch(`http://54.200.101.218:5000/get-post-details/${window.sessionStorage.getItem('post_id')}`);
         const json = await data.json();
 
         console.log(json);
@@ -37,7 +37,7 @@ function productPage() {
 
     useEffect(() => {
         fetchData();
-        console.log(items);
+        console.log(window.sessionStorage.getItem('post_id'));
       }, [])
 
     const media = items;
