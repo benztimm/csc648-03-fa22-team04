@@ -50,7 +50,7 @@ const Register = ({setRegisterOpen, setLoginOpen}) =>{
                             <input type="checkbox" required /><u>I agree to terms and conditions.</u>
                         </div>
                         <br /><br />
-                        <input type="submit" value="Confirm" />
+                        <input className='confirm-bttn' type="submit" value="Confirm" />
                         <br />
                         Already Registered? <a id='reg-or-log' onClick={login}>Login</a>
 
