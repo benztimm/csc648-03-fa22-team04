@@ -75,22 +75,10 @@ def login():
 def decode(user_password):
     # decode encrypted password from database
     # used to decrypt stored password and then check if it matches password from user input when logging in
-    query = """
-    SELECT 
-        u.user_password as 'password' 
-    FROM 
-        user u
-    WHERE
-        user_email = %(user_email)s
-
-        """
-    results = db.execute_query(query)
-
-    for user_password in results:
-        try:
-            encoded_pw = Fernet(user_password)
-            decoded_pw = encoded_pw.decrypt()
-            return decoded_pw
-        except Exception as e:
-            print(f"Error decoding password : \n{e}")
-            raise Exception("Something went wrong getting password.")
+    try:
+        encoded_pw = Fernet(user_password)
+        decoded_pw = encoded_pw.decrypt()
+        return decoded_pw
+    except Exception as e:
+        print(f"Error decoding password : \n{e}")
+        raise Exception("Something went wrong getting password.")
