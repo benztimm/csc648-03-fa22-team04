@@ -14,7 +14,6 @@ import apis.user_api as user_api
 import apis.message_api as message_api
 import apis.auth as auth
 
-
 @app.route("/")
 def hello():
     return "<h1 style='color:black'>CSC 648 - Team 4!</h1>"
@@ -23,7 +22,7 @@ def hello():
 @app.route('/data', methods=['GET'])
 def data():
     '''
-    TEST FUNCTION 
+    TEST FUNCTION
     :return: Json format of random data
     '''
     # file_name = r"D:\Masters\SE\csc648-03-fa22-team04\application\base_resources\CSC-648-team4-git_flow.png"
@@ -43,7 +42,7 @@ def data_parameters(x=None):
     :input: x - anything
     :return: JSON format of input
     '''
-    return json.dumps({'output': x, 'additional_info': 'something random info'}, sort_keys=True, default=str), 200
+    return json.dumps({'output': x, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
 
 
 @app.route('/search-posts/', defaults={'keyword': None})
@@ -51,19 +50,17 @@ def data_parameters(x=None):
 def search_posts(keyword=None):
     '''
     Search posts based on keywords. The keyword will be searched on title, description and category.
-
     `inputs` keyword - input string
     `returns` query output
     '''
     try:
-        output = post_api.search_posts(keyword=keyword)
+        output = post_api.search_posts(keyword = keyword)
     except Exception as e:
         print(f"== EXCEPTION == search_posts: \n{e}")
-        return jsonify(
-            {"message: Something went wrong. Please check logs on the server :/ "}), 500  # Exception handling
+        return jsonify({"message: Something went wrong. Please check logs on the server :/ "}), 500     # Exception handling
 
     # JSON.dumps because it can handle things better:
-    return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys=True, default=str), 200
+    return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
 
 
 @app.route('/get-post-details/', defaults={'post_id': 1})
@@ -71,7 +68,6 @@ def search_posts(keyword=None):
 def get_post_details(post_id=1):
     '''
     Search posts based on keywords. The keyword will be searched on title, description and category.
-
     `inputs` keyword - input string
     `returns` query output
     '''
@@ -79,11 +75,10 @@ def get_post_details(post_id=1):
         output = post_api.get_post_details(post_id=post_id)
     except Exception as e:
         print(f"== EXCEPTION == get_post_details: \n{e}")
-        return jsonify(
-            {"message: Something went wrong. Please check logs on the server :/ "}), 500  # Exception handling
+        return jsonify({"message: Something went wrong. Please check logs on the server :/ "}), 500     # Exception handling
 
     # JSON.dumps because it can handle things better:
-    return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys=True, default=str), 200
+    return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
 
 
 @app.route('/home-page/', defaults={'limit': 10})
@@ -96,14 +91,13 @@ def get_latest_post(limit=None):
     '''
     try:
         limit = (int(limit))
-        output = post_api.get_latest_posts(limit=limit)
+        output = post_api.get_latest_posts(limit = limit)
     except Exception as e:
         print(f"== EXCEPTION == get_latest_post: \n{e}")
-        return jsonify(
-            {"message": "Something went wrong. Please check logs on the server :/ "}), 500  # Exception handling
+        return jsonify({"message": "Something went wrong. Please check logs on the server :/ "}), 500     # Exception handling
 
     # JSON.dumps because it can handle things better:
-    return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys=True, default=str), 200
+    return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
 
 
 @app.route('/post/', defaults={'post_name': None})
@@ -111,9 +105,7 @@ def get_latest_post(limit=None):
 def static_post(post_name=None):
     '''
     Serve the image from server's file system.
-
     `inputs` image_path: path to image
-
     `returns` static image
     '''
     try:
@@ -129,9 +121,7 @@ def static_post(post_name=None):
 def static_thumbnail(post_name=None):
     '''
     Serve the thumbnail image from server's file system.
-
     `inputs` image_path: path to image
-
     `returns` static image
     '''
     try:
@@ -147,9 +137,7 @@ def static_thumbnail(post_name=None):
 def post_delete(post_id=None):
     '''
     delete post based on post_id
-
     `inputs` post_id - input string then change to int *prevent sql injection*
-
     `returns` query status
     '''
     try:
@@ -158,7 +146,7 @@ def post_delete(post_id=None):
     except Exception as e:
         print(f"== EXCEPTION == post_delete: \n{e}")
         return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500
-    return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys=True, default=str), 200
+    return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
 
 
 @app.route('/user-delete/', defaults={'user_id': 0})
@@ -166,9 +154,7 @@ def post_delete(post_id=None):
 def user_delete(user_id=None):
     '''
     delete post based on user_id
-
     `inputs` user_id - input string then change to int *prevent sql injection*
-
     `returns` query status
     '''
     try:
@@ -177,7 +163,7 @@ def user_delete(user_id=None):
     except Exception as e:
         print(f"== EXCEPTION == user_delete: \n{e}")
         return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500
-    return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys=True, default=str), 200
+    return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
 
 
 @app.route('/message-delete/', defaults={'message_id': 0})
@@ -185,9 +171,7 @@ def user_delete(user_id=None):
 def message_delete(message_id=None):
     '''
     delete post based on message_id
-
     `inputs` message_id - input string then change to int *prevent sql injection*
-
     `returns` query status
     '''
     try:
@@ -196,7 +180,7 @@ def message_delete(message_id=None):
     except Exception as e:
         print(f"== EXCEPTION == message_delete: \n{e}")
         return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500
-    return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys=True, default=str), 200
+    return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
 
 
 @app.route('/user-email-get', defaults={'user_id': 0})
@@ -229,3 +213,4 @@ def user_login():
         print(f"== EXCEPTION == message_delete: \n{e}")
         return jsonify({"message": "Incorrect email or password :/"}), 500
     return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys=True, default=str), 200
+

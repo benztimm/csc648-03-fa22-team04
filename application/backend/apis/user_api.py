@@ -9,9 +9,7 @@ import utilities.db_helper as db
 def delete_user(user_id = None):
     """    
     Delete specific post
-
     `input` user_id : unique post ID
-
     `return` status in JSON format
         if success return 'Success'
         if fail return 'Fail'
