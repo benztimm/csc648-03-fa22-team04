@@ -12,7 +12,7 @@ from os import path
 import apis.post_api as post_api
 import apis.user_api as user_api
 import apis.message_api as message_api
-import apis.auth as auth
+
 
 @app.route("/")
 def hello():
@@ -198,7 +198,7 @@ def email_get(user_id=None):
 @app.route('/register-submit')
 def user_add():
     try:
-        output = auth.register()
+        output = user_api.register()
     except Exception as e:
         print(f"== EXCEPTION == message_delete: \n{e}")
         return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500
@@ -208,9 +208,10 @@ def user_add():
 @app.route('/login-submit')
 def user_login():
     try:
-        output = auth.login()
+        output = user_api.login()
     except Exception as e:
         print(f"== EXCEPTION == message_delete: \n{e}")
         return jsonify({"message": "Incorrect email or password :/"}), 500
     return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys=True, default=str), 200
+
 
