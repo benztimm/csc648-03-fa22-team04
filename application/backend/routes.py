@@ -4,7 +4,7 @@ Developers: Sudhanshu Kulkarni, Ekarat Buddharuksa
 Description: Routing page to handle all requests inbound to backend API
 '''
 
-from flask import jsonify, send_file
+from flask import jsonify, send_file, request
 from root import app
 import json
 from os import path
@@ -195,9 +195,28 @@ def email_get(user_id=None):
     return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys=True, default=str), 200
 
 
-@app.route('/register-submit')
-def user_add():
+@app.route('/register-request')
+def register_request():
+    # takes user input from registration form
+    # returns firstname, lastname, email, and password in this specific order
     try:
+        _json = request.json
+        firstname = _json['firstname']
+        lastname = _json['lastname']
+        email = _json['email']
+        password = _json['password']
+        # validate the received values
+        if firstname and lastname and email and password and request.method == 'POST':
+            return firstname, lastname, email, password
+    except Exception as e:
+        print(f"Error registering user : \n{e}")
+        raise Exception("Something went wrong while registering user.")
+
+
+@app.route('/register-submit')
+def register_submit():
+    try:
+        # return success message if user is registered successfully
         output = user_api.register()
     except Exception as e:
         print(f"== EXCEPTION == message_delete: \n{e}")
@@ -205,9 +224,25 @@ def user_add():
     return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys=True, default=str), 200
 
 
-@app.route('/login-submit')
-def user_login():
+@app.route('/login-request')
+# takes user input from login form
+# returns email and password in this specific order
+def login_request():
     try:
+        _json = request.json
+        email = _json['email']
+        password = _json['password']
+        if email and password and request.method == 'POST':
+            return email, password
+    except Exception as e:
+        print(f"Error when logging in :  \n{e}")
+        raise Exception("Something went wrong with the login.")
+
+
+@app.route('/login-submit')
+def login_submit():
+    try:
+        # return success message if user is logged in successfully
         output = user_api.login()
     except Exception as e:
         print(f"== EXCEPTION == message_delete: \n{e}")
