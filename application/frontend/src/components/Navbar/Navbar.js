@@ -97,7 +97,7 @@ const Navbar = () =>{
                         <option value="Travel" >Travel</option>
                     </select>
 
-                    <input onChange={changeHandler} type="text" placeholder="Search..."/>
+                    <input maxLength={40} onChange={changeHandler} type="text" placeholder="Search..."/>
                     <button onClick={searchClick}>Search</button>
                 </div>
                 

@@ -45,6 +45,16 @@ const Register = ({setRegisterOpen, setLoginOpen}) =>{
 
     const handleSubmit  = () => {
         console.log(firstName,lastName,email,password,confirmPassword);
+        var sfsuRegex = /[A-Za-z0-9]+@sfsu\.edu/;
+        var mailRegex = /[A-Za-z0-9]+@mail\.sfsu\.edu/;
+        var result = sfsuRegex.test(email);
+        var result2 = mailRegex.test(email);
+        if(result == true || result2 == true ){
+            console.log("Register success");
+        }
+        else{
+            console.log("Enter correct email address!")
+        }
     }
 
 
