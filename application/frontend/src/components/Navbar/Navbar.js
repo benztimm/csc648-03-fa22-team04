@@ -72,12 +72,71 @@ const Navbar = () =>{
 
     //LOGIN
     const [isLoginOpen, setLoginOpen] = useState(false);
+    const [isUserLoggedIn, setUserLogin] = useState(false);
     
     //REGISTER
     const [isRegisterOpen, setRegisterOpen] = useState(false);
 
 
     const [showLinks, setShowLinks] = useState(false);
+
+
+    const [logout, setLogout] = useState(false);
+    const logoutFunction = () => {
+        setLogout(true);
+        setUserLogin(false);
+        window.localStorage.removeItem('user');
+    };
+
+
+
+    if(window.localStorage.getItem('user') !== null) {
+        return(
+            <div className='Navbar'>
+                
+                <div className='left_side'>
+                    {/* <button>sidebarhere</button> */}
+                    <Link to="/">
+                        <img src={logo} className="img-fluid" onClick={() => setShowLinks(false)}
+                        width={125} height={120}></img>
+                    </Link>
+                    <div className='nav_search_bar'>
+                        <select  className='cat-Select' onChange={changeHandlerCategory}>
+                            <option value="">All Categories</option>
+                            <option value="Photography" >Photography</option>
+                            <option value="Computer Science" >Computer Science</option>
+                            <option value="Art" >Art</option>
+                            <option value="Travel" >Travel</option>
+                        </select>
+    
+                        <input maxLength={40} onChange={changeHandler} type="text" placeholder="Search..."/>
+                        <button onClick={searchClick}>Search</button>
+                    </div>
+                    
+                </div>
+    
+                <div className='right_side'>
+                    
+                    <div className='nav_links' id={showLinks ? "hidden" : ""} onClick={() => setShowLinks(false)}>
+                        <a href='/#'><Link to="/About">About</Link></a>
+                        <a href='/#'><Link to="/Upload">Upload</Link></a>
+                        {/* <a onClick={() => setRegisterOpen(true)}>Register</a> */}
+                        {isRegisterOpen && <Register setRegisterOpen={setRegisterOpen} setLoginOpen={setLoginOpen}/>}
+                        <a onClick={logoutFunction} type='submit'>Logout</a>
+                        {isLoginOpen && <Login setLoginOpen={setLoginOpen} setRegisterOpen={setRegisterOpen} setUserLogin={setUserLogin}/>}
+                        {/* <a href='/#'><Link to="/Register">Register</Link></a>
+                        <a href='/#'><Link to="/Login">Log In</Link></a> */}
+                    </div>
+                    <button className='navButton' onClick={() => setShowLinks(!showLinks)}><FaBars/></button>
+                </div>
+                <p className='cc'> 
+                        SFSU Software Engineering Project CSC648-848,
+                        Fall 2022 for Demonstration Only
+                </p>
+    
+            </div>
+        );
+    }
 
     return(
         <div className='Navbar'>
@@ -110,8 +169,8 @@ const Navbar = () =>{
                     <a href='/#'><Link to="/Upload">Upload</Link></a>
                     <a onClick={() => setRegisterOpen(true)}>Register</a>
                     {isRegisterOpen && <Register setRegisterOpen={setRegisterOpen} setLoginOpen={setLoginOpen}/>}
-                    <a onClick={() => setLoginOpen(true)}>Log In</a>
-                    {isLoginOpen && <Login setLoginOpen={setLoginOpen} setRegisterOpen={setRegisterOpen}/>}
+                    <a onClick={() => setLoginOpen(true)}>Login</a>
+                    {isLoginOpen && <Login setLoginOpen={setLoginOpen} setRegisterOpen={setRegisterOpen} setUserLogin={setUserLogin}/>}
                     {/* <a href='/#'><Link to="/Register">Register</Link></a>
                     <a href='/#'><Link to="/Login">Log In</Link></a> */}
                 </div>

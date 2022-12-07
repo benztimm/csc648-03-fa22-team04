@@ -19,9 +19,8 @@ const Register = ({setRegisterOpen, setLoginOpen}) =>{
     const [email, setEmail] = useState(null);
     const [password,setPassword] = useState(null);
     const [confirmPassword,setConfirmPassword] = useState(null);
+    const [items, setItems] = useState(null);
 
-    //restrict registration to SFSU domains
-    const allowedDomains = ['mail.sfsu.edu', 'sfsu.edu'];
 
     const handleInputChange = (e) => {
         const {id , value} = e.target;
@@ -43,6 +42,18 @@ const Register = ({setRegisterOpen, setLoginOpen}) =>{
 
     }
 
+    const fetchData = async () => {
+
+        //http://54.200.101.218:5000/register?email=testuser2@sfsu.edu&password=password2&first_name=test_user_2&last_name=last_name_2
+        
+        const data = await fetch(`http://54.200.101.218:5000/register?email=${email}&password=${password}&first_name=${firstName}&last_name=${lastName}`);
+        const json = await data.json();
+
+        console.log(json);
+        setItems(json);
+
+    }
+
     const handleSubmit  = () => {
         console.log(firstName,lastName,email,password,confirmPassword);
         var sfsuRegex = /[A-Za-z0-9]+@sfsu\.edu/;
@@ -51,9 +62,10 @@ const Register = ({setRegisterOpen, setLoginOpen}) =>{
         var result2 = mailRegex.test(email);
         if(result == true || result2 == true ){
             console.log("Register success");
+            fetchData();
         }
         else{
-            console.log("Enter correct email address!")
+            alert("Please enter a SFSU email.")
         }
     }
 
