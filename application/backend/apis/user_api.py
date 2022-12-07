@@ -7,6 +7,7 @@ Description: All APIs related to Users.
 import utilities.db_helper as db
 from utilities import cryptography_helper as fernet
 import routes as routes
+import traceback
 
 def delete_user(user_id = None):
     """    
@@ -51,51 +52,78 @@ def get_email(user_id=None):
             raise Exception("Something went wrong while loading user.")
 
 
-def register():
+def register(first_name, last_name, email, password):
+    """
+    Register a new user into the system.
+
+    `input` firstname, lastname, email & password
+
+    `return` success / fail message
+    """
+
+    if not first_name or not last_name or not email or not password:
+        return "Missing data."
+
     try:
-        _firstname, _lastname, _email, _password = routes.register_request
         # do not save password as a plain text
-        encrypted_password = fernet.encrypting_function(_password)
+        # encrypted_password = fernet.encrypting_function(password)
+        encrypted_password = password
+
         # save edits
-        query = "INSERT INTO user(user_firstname, user_lastname, user_email, user_password) VALUES(%s, %s, %s, %s)"
-        data = (_firstname, _lastname, _email, encrypted_password)
+        query = "INSERT INTO user(first_name, last_name, email, password) VALUES(%s, %s, %s, %s)"
+        data = (first_name, last_name, email, encrypted_password)
         db.execute_query(query, data)
         return 'Registration successful'
+
     except Exception as e:
         print(f"Error registering user : \n{e}")
         raise Exception("Something went wrong while registering user.")
 
 
-def login():
+def login(email, password):
+    """
+    Login user.
+
+    `input` credentials
+    
+    `return` success / fail message
+    """
+    if not email or not password:
+        return 'Missing Credentials.'
+
     try:
-        _email, _password = routes.login_request
         # find email from user input
         query1 = """
-            SELECT
-                u.user_email as 'user_email'
-            FROM 
-                user u
-            WHERE
-                user_email = %(user_email)s
-            """
+                    SELECT
+                        u.email as 'user_email'
+                    FROM 
+                        user u
+                    WHERE
+                        email = %(user_email)s
+                """
         # find encrypted password from user email
         query2 = """
-            SELECT 
-                u.user_password as 'user_password'
-            FROM
-                user u 
-            WHERE
-                user_email = %(user_email)s
-            """
-        data = _email
-        auth_email = db.execute_query(query1, data)
-        auth_password = db.execute_query(query2, data)
+                    SELECT 
+                        u.password as 'user_password'
+                    FROM
+                        user u 
+                    WHERE
+                        email = %(user_email)s
+                """
+
+        auth_email = db.execute_query(query1, {"user_email": email})[0]
+        auth_password = db.execute_query(query2, {"user_email": email})[0]
+
         # check if user input matches stored email and decoded password
-        decrypted_password = fernet.decrypting_function(auth_password)
-        if _email == auth_email and _password == decrypted_password:
-            return 'Logged in successfully!'
+        # decrypted_password = fernet.decrypting_function(auth_password.get("user_password"))
+
+        
+        if email == auth_email.get("user_email") and password == auth_password.get("user_password"):
+            return 'Login Successfully!'
         else:
-            print(f"Incorrect username or password")
-    except Exception as e:
-        print(f"Error logging in user :  \n{e}")
-        raise Exception("Something went wrong with the login.")
+            print(f"Incorrect Credentials: {email} == {auth_email} | {password} == {auth_password}")
+            return 'Login Unsuccessful!'
+
+    except BaseException as e:
+        traceback.print_exc()
+        raise Exception(f"{repr(e)}\nError: user_api.login")

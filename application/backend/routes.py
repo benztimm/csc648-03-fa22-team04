@@ -195,58 +195,68 @@ def email_get(user_id=None):
     return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys=True, default=str), 200
 
 
-@app.route('/register-request')
-def register_request():
-    # takes user input from registration form
-    # returns firstname, lastname, email, and password in this specific order
-    try:
-        _json = request.json
-        firstname = _json['firstname']
-        lastname = _json['lastname']
-        email = _json['email']
-        password = _json['password']
-        # validate the received values
-        if firstname and lastname and email and password and request.method == 'POST':
-            return firstname, lastname, email, password
-    except Exception as e:
-        print(f"Error registering user : \n{e}")
-        raise Exception("Something went wrong while registering user.")
+# @app.route('/register-request')
+# def register_request():
+#     # takes user input from registration form
+#     # returns firstname, lastname, email, and password in this specific order
+#     try:
+#         _json = request.json
+#         firstname = _json['firstname']
+#         lastname = _json['lastname']
+#         email = _json['email']
+#         password = _json['password']
+#         # validate the received values
+#         if firstname and lastname and email and password and request.method == 'POST':
+#             return firstname, lastname, email, password
+#     except Exception as e:
+#         print(f"Error registering user : \n{e}")
+#         raise Exception("Something went wrong while registering user.")
 
 
-@app.route('/register-submit')
-def register_submit():
+@app.route('/register', methods=['GET', 'POST'])
+def register():
     try:
+        param = request.args.to_dict()
+        first_name = param.get("first_name")
+        last_name = param.get("last_name")
+        email = param.get("email")
+        password = param.get("password")
+
         # return success message if user is registered successfully
-        output = user_api.register()
+        output = user_api.register(first_name=first_name, last_name=last_name, email=email, password=password)
     except Exception as e:
         print(f"== EXCEPTION == message_delete: \n{e}")
         return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500
-    return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys=True, default=str), 200
+    return json.dumps({'output': output}, sort_keys=True, default=str), 200
 
 
-@app.route('/login-request')
-# takes user input from login form
-# returns email and password in this specific order
-def login_request():
+# @app.route('/login-request')
+# # takes user input from login form
+# # returns email and password in this specific order
+# def login_request():
+#     try:
+#         _json = request.json
+#         email = _json['email']
+#         password = _json['password']
+#         if email and password and request.method == 'POST':
+#             return email, password
+#     except Exception as e:
+#         print(f"Error when logging in :  \n{e}")
+#         raise Exception("Something went wrong with the login.")
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
     try:
-        _json = request.json
-        email = _json['email']
-        password = _json['password']
-        if email and password and request.method == 'POST':
-            return email, password
-    except Exception as e:
-        print(f"Error when logging in :  \n{e}")
-        raise Exception("Something went wrong with the login.")
+        param = request.args.to_dict()
+        email = param.get("email")
+        password = param.get("password")
 
-
-@app.route('/login-submit')
-def login_submit():
-    try:
         # return success message if user is logged in successfully
-        output = user_api.login()
+        output = user_api.login(email, password)    
+
     except Exception as e:
-        print(f"== EXCEPTION == message_delete: \n{e}")
-        return jsonify({"message": "Incorrect email or password :/"}), 500
-    return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys=True, default=str), 200
+        print(f"{e}\n == EXCEPTION == login")
+        return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500
 
-
+    return json.dumps({'output': output}, sort_keys=True, default=str), 200
