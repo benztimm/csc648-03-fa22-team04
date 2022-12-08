@@ -57,7 +57,7 @@ const Navbar = () =>{
 
         console.log(json);
         setItems(json);
-        window.localStorage.setItem('result', JSON.stringify(json));
+        // window.localStorage.setItem('result', {email});
         console.log(window.localStorage.getItem('result'));
         navigate('/searchresults');
     }
@@ -91,6 +91,9 @@ const Navbar = () =>{
 
 
     if(window.localStorage.getItem('user') !== null) {
+        const user_email = JSON.parse(JSON.stringify(window.localStorage.getItem('user')));
+        console.log(user_email);
+
         return(
             <div className='Navbar'>
                 
@@ -118,7 +121,7 @@ const Navbar = () =>{
                 <div className='right_side'>
                     
                     <div className='nav_links' id={showLinks ? "hidden" : ""} onClick={() => setShowLinks(false)}>
-                        <a href='/#'><Link to="/About">About</Link></a>
+                        <a href='/#'><Link to="/dashboard">Welcome {user_email}</Link></a>
                         <a href='/#'><Link to="/Upload">Upload</Link></a>
                         {/* <a onClick={() => setRegisterOpen(true)}>Register</a> */}
                         {isRegisterOpen && <Register setRegisterOpen={setRegisterOpen} setLoginOpen={setLoginOpen}/>}

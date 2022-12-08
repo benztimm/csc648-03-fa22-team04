@@ -44,7 +44,7 @@ const Login = ({setLoginOpen, setRegisterOpen, setUserLogin}) =>{
 
         if(json.output === "Login Successfully!"){
             console.log("worked");
-            window.localStorage.setItem('user', {email});
+            window.localStorage.setItem('user', `${email}`);
             setUserLogin(true);
             setLoginOpen(false);
         }   
