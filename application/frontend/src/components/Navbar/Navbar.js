@@ -94,6 +94,16 @@ const Navbar = () =>{
         const user_email = JSON.parse(JSON.stringify(window.localStorage.getItem('user')));
         console.log(user_email);
 
+        function HoverLink({ initialText, hoverText }) {
+            const [text, setText] = React.useState(initialText);
+          
+            return (
+              <a onMouseEnter={() => setText(hoverText)} onMouseLeave={() => setText(initialText)}><Link to="/dashboard">
+                {text}
+              </Link></a>
+            );
+          }
+
         return(
             <div className='Navbar'>
                 
@@ -121,7 +131,8 @@ const Navbar = () =>{
                 <div className='right_side'>
                     
                     <div className='nav_links' id={showLinks ? "hidden" : ""} onClick={() => setShowLinks(false)}>
-                        <a href='/#'><Link to="/dashboard">Welcome {user_email}</Link></a>
+                        {/* <a href='/#'><Link to="/dashboard">Welcome {user_email}</Link></a> */}
+                        <HoverLink initialText={"Welcome "+ user_email} hoverText="To Dashboard" />
                         <a href='/#'><Link to="/Upload">Upload</Link></a>
                         {/* <a onClick={() => setRegisterOpen(true)}>Register</a> */}
                         {isRegisterOpen && <Register setRegisterOpen={setRegisterOpen} setLoginOpen={setLoginOpen}/>}
