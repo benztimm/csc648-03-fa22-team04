@@ -15,9 +15,29 @@
 }
 .dashbord button.dashboard:hover{
     box-shadow: #006400;
-    transform: translateY(-5px);
+    transform: translateY(-1px);
     background: #006400;
 }
+
+.dashboard button.dashboard-myPost, button.dashboard-inbox{
+    background: #006400;
+    transform: translateY(-1px);
+
+    border: solid;
+    border-width: 2px;
+    border-color: black;
+    cursor: pointer;
+    border-radius: 10px;
+
+    align-items: center;
+    width: 120px;
+    font-size: medium;
+    padding: 0.5%;
+    margin: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
 
 .purchaseInfo button{
     border-color: black;
