@@ -6,7 +6,7 @@ Description: All APIs related to Posts.
 
 import utilities.db_helper as db
 
-def search_posts(keyword = None):
+def search_posts(keyword = None,category = None,type = None):
     """
     Searches all matching media from database
 
@@ -39,9 +39,22 @@ def search_posts(keyword = None):
         query += """
                     AND (p.title LIKE %(keyword)s
                     OR p.description LIKE %(keyword)s
-                    OR c.category_name LIKE %(keyword)s)
+                    OR c.category_name LIKE %(category)s
+                    )
                 """
-    results = db.execute_query(query=query, params={"keyword": "%" + keyword + "%" if keyword else keyword})
+    if  category:
+        query+= """
+                    AND (c.category_name LIKE %(category)s)
+                """
+    if  type:
+        query+= """
+                    AND (p.post_type LIKE %(type)s)
+                """
+    results = db.execute_query(query=query, params={
+        "keyword": "%" + keyword + "%" if keyword else keyword,
+        "category": "%" + category + "%" if category else category,
+        "type": "%" + type + "%" if type else type
+        })
 
     for post in results:
         try:
