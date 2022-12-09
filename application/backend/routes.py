@@ -4,10 +4,12 @@ Developers: Sudhanshu Kulkarni, Ekarat Buddharuksa
 Description: Routing page to handle all requests inbound to backend API
 '''
 
-from flask import jsonify, send_file, request
+from flask import jsonify, send_file, request, render_template
 from root import app
 import json
 from os import path
+import os
+from PIL import Image
 
 import apis.post_api as post_api
 import apis.user_api as user_api
@@ -270,3 +272,37 @@ def login():
         return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500
 
     return json.dumps({'output': output}, sort_keys=True, default=str), 200
+
+
+@app.route('/upload_file/',methods = ['POST'],defaults={'uploader_id' : None, 'post_type' : None, 'title' : None, 'file' : None, 'description' : None, 'price' : None, 'category' : None})
+def upload_file(uploader_id = None, post_type = None, title = None, file = None, description = None, price = None, category = None):
+    try:
+        # Save file to ../../posts
+        f = request.files['file']
+        f.save(os.path.join(app.config['UPLOAD_FOLDER'], f.filename))
+
+        #get all parameter
+        uploader_id = request.form['uploader_id']
+        post_type = request.form['post_type'].lower()
+        title = request.form['title']
+        file = f.filename
+        description = request.form['description']
+        price = request.form['price']
+        category = request.form['category']
+        
+        #create thumbnail from file if file_type is image
+        if post_type=='image':
+            img = Image.open(os.path.join(app.config['UPLOAD_FOLDER'], f.filename))
+            SIZE = (img.width/(img.height/300), 300)
+            img.thumbnail(SIZE)
+            #save thumbnail to ../../thumbnails
+            img.save(os.path.join("../../thumbnails", f.filename))
+
+        output = post_api.upload_post(uploader_id,post_type,title,file,description,price,category)
+
+    except Exception as e:
+        print(f"{e}\n == EXCEPTION == upload-file")
+        return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500
+
+    return json.dumps({'output': output}, sort_keys=True, default=str), 200
+
