@@ -51,13 +51,13 @@ const Navbar = () =>{
     //GET request from search bar input
     const fetchData = async () => {
 
-        const data = await fetch(`http://54.200.101.218:5000/search-posts/${selectedOption} ${value}`);
+        const data = await fetch(`http://54.200.101.218:5000/search-posts/?keyword=${value}&type=document&category=${selectedOption}`);
 
         const json = await data.json();
 
         console.log(json);
         setItems(json);
-        // window.localStorage.setItem('result', {email});
+        window.localStorage.setItem('result', JSON.stringify(json));
         console.log(window.localStorage.getItem('result'));
         navigate('/searchresults');
     }
@@ -77,9 +77,7 @@ const Navbar = () =>{
     //REGISTER
     const [isRegisterOpen, setRegisterOpen] = useState(false);
 
-
     const [showLinks, setShowLinks] = useState(false);
-
 
     const [logout, setLogout] = useState(false);
     const logoutFunction = () => {
@@ -94,6 +92,7 @@ const Navbar = () =>{
         const user_email = JSON.parse(JSON.stringify(window.localStorage.getItem('user')));
         console.log(user_email);
 
+        //function to change text when hovering over NavBar buttons
         function HoverLink({ initialText, hoverText }) {
             const [text, setText] = React.useState(initialText);
           

@@ -40,12 +40,13 @@ function SearchResults() {
     window.open(url);
 
   }
-
+  
+  //if(Object.keys(media.output).length > 0){
   return (
 
     <div className='wrapper'>
     <br/>
-    <div><b>Showing 1 - {media && Object.keys(media.output).length} out of {media && Object.keys(media.output).length} results</b></div>
+    <div><b>Showing {media && Object.keys(media.output).length} results</b></div>
     <br/>
     {media && media.output.map(output => (
       <div className='card_body' key={output.post_id} onClick={() => navigateToProduct(`${output.title}`, `${output.post_id}`)}>
@@ -70,9 +71,10 @@ function SearchResults() {
       </div>
     ))}
 
-</div>
+  </div>
   );
-  }
+  
+}
 
 
 export default SearchResults;
