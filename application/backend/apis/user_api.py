@@ -127,3 +127,52 @@ def login(email, password):
     except BaseException as e:
         traceback.print_exc()
         raise Exception(f"{repr(e)}\nError: user_api.login")
+
+def get_user_post(uploader_id = None):
+    """
+    Get details of a user specific post
+
+    `input` user_id : unique user_id
+
+    `return` JSON of all details of that
+    """
+    query = """
+                SELECT
+                    p.*,
+                    u.first_name as 'uploader_name',
+                    c.category_name as 'category_name',
+                    u.user_id as 'uploader_id',
+                    c.category_id as 'category_id'
+                FROM
+                    post p
+                JOIN
+                    user u
+                ON
+                    p.uploader_id = u.user_id
+                join
+                    category c
+                on
+                    p.category = c.category_id
+                WHERE
+                    p.uploader_id = %(uploader_id)s
+            """
+
+    # Update query with where clause with post_id provided:
+    results = db.execute_query(query=query, params={"uploader_id": uploader_id})
+
+    for post in results:
+        try:
+            # read the file and send static URL:
+            if post['post_type'] == "Document":
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/document.png'
+            elif post['post_type'] == "Audio":
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/audio.png'
+            else:    
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/{post["file"]}'
+            
+            post['file'] = f'http://54.200.101.218:5000/post/{post["file"]}'
+        except Exception as e:
+            print(f"Error loading file for post <{post.get('post_id')}> : \n{e}")
+            raise Exception("Something went wrong while loading file.")
+
+    return results
