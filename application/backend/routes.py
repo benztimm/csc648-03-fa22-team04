@@ -45,24 +45,6 @@ def data_parameters(x=None):
     return json.dumps({'output': x, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
 
 
-@app.route('/search-posts/', defaults={'keyword': None})
-@app.route('/search-posts/<keyword>')
-def search_posts(keyword=None):
-    '''
-    Search posts based on keywords. The keyword will be searched on title, description and category.
-    `inputs` keyword - input string
-    `returns` query output
-    '''
-    try:
-        output = post_api.search_posts(keyword = keyword)
-    except Exception as e:
-        print(f"== EXCEPTION == search_posts: \n{e}")
-        return jsonify({"message: Something went wrong. Please check logs on the server :/ "}), 500     # Exception handling
-
-    # JSON.dumps because it can handle things better:
-    return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
-
-
 @app.route('/get-post-details/', defaults={'post_id': 1})
 @app.route('/get-post-details/<post_id>')
 def get_post_details(post_id=1):
@@ -182,6 +164,34 @@ def message_delete(message_id=None):
         return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500
     return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
 
+@app.route('/search-posts/',defaults={'keyword': None,'category': None,'type': None})
+def search_posts(keyword = None,category = None,type = None):
+    '''
+    Search posts based on keywords. The keyword will be searched on title, description and category.
+
+    `inputs` 
+        keyword - input string
+        optional
+            category - input string
+            type - input string
+    `returns` query output
+    '''
+    try:
+        param = request.args.to_dict()
+        if 'keyword' in param:
+            keyword = param['keyword']
+        if 'category' in param:  
+            category = param['category']
+        if 'type' in param:
+            type = param['type']
+        output = post_api.search_posts(keyword,category,type)
+    except Exception as e:
+        print(f"== EXCEPTION == search_posts: \n{e}")           
+        return jsonify({"message: Something went wrong. Please check logs on the server :/ "}), 500     # Exception handling
+    
+    # JSON.dumps because it can handle things better:
+    return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
+    
 
 @app.route('/user-email-get', defaults={'user_id': 0})
 @app.route('/user-email-get/<user_id>')
