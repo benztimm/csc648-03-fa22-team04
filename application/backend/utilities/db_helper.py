@@ -1,3 +1,9 @@
+'''
+Date: 11/15/22
+Developers: Sudhanshu Kulkarni, Ekarat Buddharuksa
+Description: Only file which plays with database (connection + queries)
+'''
+
 import configparser
 import pymysql
 from flask import jsonify
@@ -96,6 +102,42 @@ def execute_query(query, params:dict = None, debug = False):
         
         # Debug:
         if debug: print(cursor._executed)
+        return rows
+
+    except Exception as e :
+        print(e)
+        raise Exception("Error with Database (execute_query)- Please check logs.")
+    finally:
+        conn.close()
+        cursor.close()
+
+def execute_query_rowcount(query, params:dict = None, debug = False):
+    """
+    Run custom queries on the database
+
+    `input` query: string with appropriate placeholders if applicable
+    `input` param [optional]: dict with placehoder values if applicable
+    `input` debug: Print the final query executed
+
+    `returns` int with query's rowcount
+    """
+    conn = None
+    cursor = None
+
+    try:
+        # Connection:
+        conn = mysql.connect()
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
+        
+        # Query execution: (always run query with external params -> prevents sql injection)
+        cursor.execute(query, params)
+        conn.commit()
+
+        # Results:
+        rows = cursor.rowcount
+        
+        # Debug:
+        if debug: print(cursor.rowcount)
         return rows
 
     except Exception as e :
