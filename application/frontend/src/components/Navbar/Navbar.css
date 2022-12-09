@@ -49,6 +49,13 @@
   cursor: pointer;
 }
 
+.searchBarAlert {
+  position: absolute;
+  left:240px;
+  top: 73px;
+  color: white;
+}
+
 .left_side button{
   height: 34px;
   width: 70px;

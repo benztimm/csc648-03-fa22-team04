@@ -39,6 +39,18 @@ const Navbar = () =>{
         //let newValue = event.target.value;
         setValue(event.target.value);
     };
+
+    const [isActive, setIsActive] = useState(false);
+    const [alert, setAlert] = useState('');
+
+    useEffect(() => {
+        if (value !== '') {
+          setIsActive(true);
+        } else {
+          setIsActive(false);
+        }
+      }, [value]);
+
     // END SEARCH BAR
 
 
@@ -51,7 +63,7 @@ const Navbar = () =>{
     //GET request from search bar input
     const fetchData = async () => {
 
-        const data = await fetch(`http://54.200.101.218:5000/search-posts/?keyword=${value}&type=document&category=${selectedOption}`);
+        const data = await fetch(`http://54.200.101.218:5000/search-posts/?keyword=${value}&type=&category=${selectedOption}`);
 
         const json = await data.json();
 
@@ -169,7 +181,8 @@ const Navbar = () =>{
                         <option value="Travel" >Travel</option>
                     </select>
 
-                    <input maxLength={40} onChange={changeHandler} type="text" placeholder="Search..."/>
+                    <input maxLength={40} value={value} onChange={changeHandler} type="text" placeholder="Search..."/>
+                    {isActive && <div className="searchBarAlert">Please enter up to 40 characters.</div>}
                     <button onClick={searchClick}>Search</button>
                 </div>
                 
