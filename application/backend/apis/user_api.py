@@ -132,7 +132,7 @@ def get_user_post(uploader_id = None):
     """
     Get details of a user specific post
 
-    `input` user_id : unique user_id
+    `input` uploader_id : unique uploader_id
 
     `return` JSON of all details of that
     """
