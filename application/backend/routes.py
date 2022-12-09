@@ -276,8 +276,8 @@ def login():
 @app.route('/get-user-post/<uploader_id>')
 def get_user_post(uploader_id=None):
     '''
-    Search posts based on uploader_id. The keyword will be searched on title, description and category.
-    `inputs` keyword - input string
+    Search posts based on uploader_id. 
+    `inputs` uploader_id - input string
     `returns` query output
     '''
     output = []
