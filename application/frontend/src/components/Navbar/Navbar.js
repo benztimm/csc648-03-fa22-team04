@@ -34,10 +34,29 @@ const Navbar = () =>{
     // SEARCH BAR
 
     //Set input value as value
+    const searchButtonRef = useRef();
     const [value, setValue] = useState('');
-    const changeHandler = (event) => {
-        //let newValue = event.target.value;
+
+    function handleChange(event) {
         setValue(event.target.value);
+      }
+
+    function changeHandler(event)  {
+        const alphanumericRegex = /^[a-zA-Z0-9]+$/;
+        const newValue = event.target.value;
+
+        if (event.keyCode === 13) {
+            searchButtonRef.current.click();
+          }
+
+        if (event.keyCode === 8 && event.target.selectionStart !== event.target.selectionEnd) {
+            setValue(newValue);
+            return;
+        }
+
+        if (alphanumericRegex.test(newValue)) {
+        setValue(newValue);
+        }
     };
 
     const [isActive, setIsActive] = useState(false);
@@ -64,7 +83,6 @@ const Navbar = () =>{
     const fetchData = async () => {
 
         const data = await fetch(`http://54.200.101.218:5000/search-posts/?keyword=${value}&type=&category=${selectedOption}`);
-
         const json = await data.json();
 
         console.log(json);
@@ -77,6 +95,7 @@ const Navbar = () =>{
 
     //when search button is clicked
     const searchClick = () => {
+        console.log(value)
         fetchData();
     }
     //END SEARCH BAR
@@ -133,8 +152,9 @@ const Navbar = () =>{
                             <option value="Travel" >Travel</option>
                         </select>
     
-                        <input maxLength={40} onChange={changeHandler} type="text" placeholder="Search..."/>
-                        <button onClick={searchClick}>Search</button>
+                        <input maxLength={40} value={value} onChange={handleChange} onKeyDown={changeHandler} type="text" placeholder="Search..."/>
+                        {isActive && <div className="searchBarAlert">Please enter up to 40 characters.</div>}
+                        <button onClick={searchClick} ref={searchButtonRef}>Search</button>
                     </div>
                     
                 </div>
@@ -181,9 +201,9 @@ const Navbar = () =>{
                         <option value="Travel" >Travel</option>
                     </select>
 
-                    <input maxLength={40} value={value} onChange={changeHandler} type="text" placeholder="Search..."/>
+                    <input maxLength={40} value={value} onChange={handleChange} onKeyDown={changeHandler} type="text" placeholder="Search..."/>
                     {isActive && <div className="searchBarAlert">Please enter up to 40 characters.</div>}
-                    <button onClick={searchClick}>Search</button>
+                    <button onClick={searchClick} ref={searchButtonRef}>Search</button>
                 </div>
                 
             </div>

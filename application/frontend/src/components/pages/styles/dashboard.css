@@ -20,7 +20,7 @@
 }
 
 .dashboard button.dashboard-myPost, button.dashboard-inbox{
-    background: #006400;
+    background: #95db9e;
     transform: translateY(-1px);
 
     border: solid;
