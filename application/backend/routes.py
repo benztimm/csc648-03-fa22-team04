@@ -277,9 +277,16 @@ def login():
 @app.route('/upload_file/',methods = ['POST'],defaults={'uploader_id' : None, 'post_type' : None, 'title' : None, 'file' : None, 'description' : None, 'price' : None, 'category' : None})
 def upload_file(uploader_id = None, post_type = None, title = None, file = None, description = None, price = None, category = None):
     try:
+        #check if directory exist or not. if not then create 
+        #NOT NECESSARY FOR THE PROJECT
+        if not os.path.exists("../../posts"):
+            os.mkdir("../../posts")
+        if not os.path.exists("../../thumbnails"):
+            os.mkdir("../../thumbnails")
+
         # Save file to ../../posts
         f = request.files['file']
-        f.save(os.path.join(app.config['UPLOAD_FOLDER'], f.filename))
+        f.save(os.path.join("../../posts", f.filename))
 
         #get all parameter
         uploader_id = request.form['uploader_id']
@@ -292,12 +299,13 @@ def upload_file(uploader_id = None, post_type = None, title = None, file = None,
         
         #create thumbnail from file if file_type is image
         if post_type=='image':
-            img = Image.open(os.path.join(app.config['UPLOAD_FOLDER'], f.filename))
+            img = Image.open(os.path.join("../../posts", f.filename))
             SIZE = (img.width/(img.height/300), 300)
             img.thumbnail(SIZE)
             #save thumbnail to ../../thumbnails
             img.save(os.path.join("../../thumbnails", f.filename))
 
+        #CALL API TO INSERT ITEM TO TABLE
         output = post_api.upload_post(uploader_id,post_type,title,file,description,price,category)
 
     except Exception as e:
