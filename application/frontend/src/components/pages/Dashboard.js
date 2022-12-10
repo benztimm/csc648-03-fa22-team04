@@ -26,7 +26,7 @@ function Dashboard(){
                     <h1>MY POSTS</h1>
                 </div>
                 <div class="dashboard">
-                    <button class="dashboard" >MY POSTS</button>&nbsp;&nbsp;&nbsp;
+                    <button class="dashboard-myPost" >MY POSTS</button>&nbsp;&nbsp;&nbsp;
                     <button class="dashboard" onClick={goToInbox}>INBOX</button>
                 </div>
 

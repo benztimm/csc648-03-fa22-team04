@@ -30,20 +30,29 @@ function SearchResults() {
   const navigateToProduct = (title, post_id) => {
     console.log(title);
     console.log(post_id);
-    window.sessionStorage.setItem(post_id, title);
-    navigate(`/productpage/${post_id}`, {state:{id:post_id, title:title}});
-  }
+    window.sessionStorage.setItem('post_id', post_id);
+    // navigate(`/productpage/${post_id}`, {state:{id:post_id, title:title}});
 
+    //USE THIS url WHEN TESTING ON LOCALHOST
+    var url = `http://localhost:3000/productpage/${post_id}`;
+
+    //var url = `http://54.200.101.218/productpage/${post_id}`;
+    window.open(url);
+
+  }
+  
+  //if(Object.keys(media.output).length > 0){
   return (
 
     <div className='wrapper'>
     <br/>
-    <div><b>Showing 1 - {media && Object.keys(media.output).length} out of {media && Object.keys(media.output).length} results</b></div>
+    <div><b>Showing {media && Object.keys(media.output).length} results</b></div>
     <br/>
     {media && media.output.map(output => (
       <div className='card_body' key={output.post_id} onClick={() => navigateToProduct(`${output.title}`, `${output.post_id}`)}>
         <div className='image_container'>
           <img src={output.thumbnail} className='thumbnail' />
+          <div className='hovercap'>Click for Details</div>
         </div>
 
         <div className='maintext'>
@@ -62,9 +71,10 @@ function SearchResults() {
       </div>
     ))}
 
-</div>
+  </div>
   );
-  }
+  
+}
 
 
 export default SearchResults;

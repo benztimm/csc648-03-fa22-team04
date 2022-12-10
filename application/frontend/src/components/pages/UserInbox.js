@@ -46,7 +46,7 @@ function Inbox(){
                     <h1>INBOX</h1>
                   </div>
                     <button className="dashboard" onClick={goToPosts}>MY POSTS</button>&nbsp;&nbsp;&nbsp;
-                    <button className="dashboard">INBOX</button>
+                    <button className="dashboard-inbox">INBOX</button>
                 </div>
 
                 <table {...getTableProps()}>
