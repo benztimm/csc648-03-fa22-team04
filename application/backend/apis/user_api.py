@@ -8,9 +8,11 @@ import utilities.db_helper as db
 from utilities import cryptography_helper as fernet
 import routes as routes
 import traceback
+import utilities.session as session
+
 
 def delete_user(user_id = None):
-    """    
+    """
     Delete specific post
     `input` user_id : unique post ID
     `return` status in JSON format
@@ -85,7 +87,7 @@ def login(email, password):
     Login user.
 
     `input` credentials
-    
+
     `return` success / fail message
     """
     if not email or not password:
@@ -110,15 +112,25 @@ def login(email, password):
                     WHERE
                         email = %(user_email)s
                 """
+        # find user_id for session
+        query3 = """
+                    SELECT
+                        u.user_id as 'user_id'
+                    FROM 
+                        user u
+                    WHERE
+                        email = %(user_email)s 
+            """
 
         auth_email = db.execute_query(query1, {"user_email": email})[0]
         auth_password = db.execute_query(query2, {"user_email": email})[0]
+        user_id = db.execute_query(query3, {"user_email": email})[0]
 
         # check if user input matches stored email and decoded password
         # decrypted_password = fernet.decrypting_function(auth_password.get("user_password"))
 
-        
         if email == auth_email.get("user_email") and password == auth_password.get("user_password"):
+            session.enter_session(user_id)
             return 'Login Successfully!'
         else:
             print(f"Incorrect Credentials: {email} == {auth_email} | {password} == {auth_password}")
@@ -176,3 +188,10 @@ def get_user_post(uploader_id = None):
             raise Exception("Something went wrong while loading file.")
 
     return results
+
+def logout(user_id):
+    try:
+        session.exit_session(user_id)
+    except BaseException as e:
+        traceback.print_exc()
+        raise Exception(f"{repr(e)}\nError: user_api.logout")
