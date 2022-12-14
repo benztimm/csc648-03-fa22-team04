@@ -273,6 +273,25 @@ def login():
     return json.dumps({'output': output}, sort_keys=True, default=str), 200
 
 
+@app.route('/get-user-post/', defaults={'uploader_id': None})
+@app.route('/get-user-post/<uploader_id>')
+def get_user_post(uploader_id=None):
+    '''
+    Search posts based on uploader_id. 
+    `inputs` uploader_id - input string
+    `returns` query output
+    '''
+    output = []
+    try:
+        if uploader_id:
+            output = user_api.get_user_post(uploader_id)
+    except Exception as e:
+        print(f"== EXCEPTION == get-user-post: \n{e}")
+        return jsonify({"message: Something went wrong. Please check logs on the server :/ "}), 500     # Exception handling
+
+    # JSON.dumps because it can handle things better:
+    return json.dumps({'output': output , 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
+
 @app.route('/logout/<user_id>')
 def logout(user_id):
     try:
@@ -283,5 +302,3 @@ def logout(user_id):
         print(f"{e}\n == EXCEPTION == logout")
         return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500
     return json.dumps({'output': output}, sort_keys=True, default=str), 200
-
-
