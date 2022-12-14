@@ -198,3 +198,46 @@ def delete_post(post_id = None):
     status = 'Success' if row_count_after == row_count_before-1 else 'Fail'
     results = {'status':status}
     return results
+
+def upload_post(uploader_id = None, post_type = None, title = None, file = None, description = None, price = None, category = None):
+    """
+    Insert new upload to post table
+
+    `input` 
+        uploader_id : unique uploader ID
+        post_type : file type eg. Image, Document
+        title : post title
+        file : file name — use in both file and thumbnail
+        description : post description
+        price : media price
+        category : media category. *integer*
+
+    `return` Success or Failed
+    """
+    try:
+        query_select = """ SELECT * FROM post """
+        query = """
+                insert into post
+                (uploader_id,post_type,title,file,thumbnail,description,price,approved,category)
+                values 
+                (%(uploader_id)s,%(post_type)s,%(title)s,%(file)s,%(file)s,%(description)s,%(price)s,'Approved',%(category)s);
+                """
+
+        row_count_before = db.execute_query_rowcount(query_select)
+        db.execute_query(query=query, params={
+            "uploader_id": uploader_id if uploader_id else uploader_id,
+            "post_type": post_type if post_type else post_type,
+            "title": title if title else title,
+            "file": file if file else file,
+            "description": description if description else description,
+            "price": price if price else price,
+            "category": category if category else category  
+            })
+        row_count_after = db.execute_query_rowcount(query_select)
+        status = 'Success' if row_count_after == row_count_before+1 else 'Fail'
+        results = {'status':status}
+        return results
+
+    except Exception as e:
+        print(f"Error in post_api : upload_post user : \n{e}")
+        raise Exception("Something went wrong while uploading a new post.")
