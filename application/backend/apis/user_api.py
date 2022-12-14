@@ -124,14 +124,14 @@ def login(email, password):
 
         auth_email = db.execute_query(query1, {"user_email": email})[0]
         auth_password = db.execute_query(query2, {"user_email": email})[0]
-        user_id = db.execute_query(query3, {"user_email": email})[0]
+        user_id = db.execute_query(query3, {"user_email": email})[0].get("user_id")
 
         # check if user input matches stored email and decoded password
         # decrypted_password = fernet.decrypting_function(auth_password.get("user_password"))
 
         if email == auth_email.get("user_email") and password == auth_password.get("user_password"):
             session.enter_session(user_id)
-            return 'Login Successfully!'
+            return email
         else:
             print(f"Incorrect Credentials: {email} == {auth_email} | {password} == {auth_password}")
             return 'Login Unsuccessful!'
