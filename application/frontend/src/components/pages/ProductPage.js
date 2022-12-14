@@ -7,6 +7,7 @@ Description: Displays single item with item information.
 
 */
 import React, { useState, useEffect, useContext } from 'react'; 
+import { Document, Page } from 'react-pdf';
 import { Link, useNavigate, useHistory, generatePath, useLocation } from 'react-router-dom';
 import '../pages/styles/productPage.css';
 import PurchaseMsg from './PurchaseMsg.js';
@@ -41,6 +42,51 @@ function productPage() {
       }, [])
 
     const media = items;
+
+    //if(items && items.output.post_type === "Document") {
+        return(
+
+
+            <div>{items && items.output.map(output => (
+                <div className='page-container'>
+                        <div className='img-container'>
+                        <Document file={output.file} workerSrc={null} disableWorker={true}>
+                            <Page pageNumber={1}/>
+                        </Document>
+                    </div>
+            
+                    <div className='seller-card'>
+                        <div className='title-container'>
+                        <h1 className='title'>{output.title}</h1>
+                        </div>
+            
+                        <div className='seller-profile'>
+                            <img src={profilePic} width={100} height={100}></img>
+                            <h2 className='seller-name'>{output.uploader_name}</h2>
+                        </div>
+                        <div className='about-item'>
+                            <p>
+                                Date posted: {output.created_timestamp} <br/>
+                                Price: ${output.price}
+                            </p>
+                            <p className='description'>{output.description}</p>
+                        </div>
+                        <div className='footer-buttons'>
+                            
+                            <button className='purchase-bttn' onClick={() => setIsOpen(true)}>
+                                CONTACT SELLER
+                            </button>
+                           {isOpen && <PurchaseMsg setIsOpen={setIsOpen} output={output}/>}
+                        </div>
+                    </div>
+                    </div>
+    
+            ))}</div>
+    
+    
+    
+        );
+    //}
 
     return(
 

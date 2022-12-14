@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 .wrapper{
     display: inline-block;
     text-align: initial;
@@ -6,6 +7,7 @@
 }
 
 .card_body{
+    font-family: 'Noto Sans', sans-serif;
     margin: 15px;
     width: 65vw;
     height: 180px;

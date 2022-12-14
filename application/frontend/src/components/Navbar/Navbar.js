@@ -111,17 +111,27 @@ const Navbar = () =>{
     const [showLinks, setShowLinks] = useState(false);
 
     const [logout, setLogout] = useState(false);
-    const logoutFunction = () => {
-        setLogout(true);
-        setUserLogin(false);
-        window.localStorage.removeItem('user');
-    };
+
+    
 
 
 
-    if(window.localStorage.getItem('user') !== null) {
-        const user_email = JSON.parse(JSON.stringify(window.localStorage.getItem('user')));
-        console.log(user_email);
+    if(sessionStorage.getItem('user') !== null) {
+        const user = JSON.parse(sessionStorage.getItem("user"));
+        const email = user.output.email;
+        console.log(email);
+
+        const logoutFunction = async () => {
+            const data = await fetch(`http://54.200.101.218:5000/logout/${user.output.user_id}`);
+            const json = await data.json();
+            console.log(json);
+            
+            setLogout(true);
+            setUserLogin(false);
+            window.sessionStorage.removeItem('user');
+        };
+
+        
 
         //function to change text when hovering over NavBar buttons
         function HoverLink({ initialText, hoverText }) {
@@ -163,7 +173,7 @@ const Navbar = () =>{
                     
                     <div className='nav_links' id={showLinks ? "hidden" : ""} onClick={() => setShowLinks(false)}>
                         {/* <a href='/#'><Link to="/dashboard">Welcome {user_email}</Link></a> */}
-                        <HoverLink initialText={"Welcome "+ user_email} hoverText="To Dashboard" />
+                        <HoverLink initialText={"Welcome "+ email} hoverText="To Dashboard" />
                         <a href='/#'><Link to="/Upload">Upload</Link></a>
                         {/* <a onClick={() => setRegisterOpen(true)}>Register</a> */}
                         {isRegisterOpen && <Register setRegisterOpen={setRegisterOpen} setLoginOpen={setLoginOpen}/>}

@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+.home-recent {
+    font-family: 'Noto Sans', sans-serif;
+}
+
 .card-container {
 
     display: flex;
@@ -13,6 +19,7 @@
     margin: 20px;
     display:flex;
     flex-direction: column;
+    font-family: 'Noto Sans', sans-serif;
 
 }
 
@@ -29,9 +36,6 @@
 
 .thumbnail-home{
     height: 180px;
-    border: solid;
-    border-width: 2px;
-    border-color: black;
     border-radius: 15px 15px 15px 15px;
     background-color: lightblue;
     position: relative;
@@ -41,7 +45,6 @@
     box-sizing: border-box;
     width: 100%;
     padding: 10px;
-   
     position: absolute;
     bottom: 0; left: 0;
    
