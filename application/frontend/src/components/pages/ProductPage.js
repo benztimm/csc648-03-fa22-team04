@@ -7,14 +7,13 @@ Description: Displays single item with item information.
 
 */
 import React, { useState, useEffect, useContext } from 'react'; 
-import { Document, Page } from 'react-pdf';
 import { Link, useNavigate, useHistory, generatePath, useLocation } from 'react-router-dom';
 import '../pages/styles/productPage.css';
 import PurchaseMsg from './PurchaseMsg.js';
 import profilePic from '../images/testimage.jpg';
 
 
-function productPage() {
+function ProductPage() {
 
     const location = useLocation();
 
@@ -27,32 +26,31 @@ function productPage() {
 
     const fetchData = async () => {
 
-        // const data = await fetch(`http://54.200.101.218:5000/get-post-details/${location.state.id}`);
         const data = await fetch(`http://54.200.101.218:5000/get-post-details/${window.sessionStorage.getItem('post_id')}`);
         const json = await data.json();
 
         console.log(json);
-        setItems(json);
+        let product = json;
+        setItems(product);
+        
 
     }
 
     useEffect(() => {
         fetchData();
-        console.log(window.sessionStorage.getItem('post_id'));
       }, [])
 
     const media = items;
 
-    //if(items && items.output.post_type === "Document") {
+    if(items && items.output[0].post_type === "Document") {
+
         return(
 
 
             <div>{items && items.output.map(output => (
                 <div className='page-container'>
                         <div className='img-container'>
-                        <Document file={output.file} workerSrc={null} disableWorker={true}>
-                            <Page pageNumber={1}/>
-                        </Document>
+                        <object data={output.file} type="application/pdf" width="100%" height="100%"></object>
                     </div>
             
                     <div className='seller-card'>
@@ -85,8 +83,8 @@ function productPage() {
     
     
     
-        );
-    //}
+        )
+    }   else {
 
     return(
 
@@ -127,7 +125,8 @@ function productPage() {
 
 
 
-    );
+    )
+}
 }
 
-export default productPage;
+export default ProductPage;
