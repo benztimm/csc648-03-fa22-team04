@@ -131,7 +131,7 @@ def login(email, password):
 
         if email == auth_email.get("user_email") and password == auth_password.get("user_password"):
             session.enter_session(user_id)
-            return email
+            return {'email': email, "user_id": user_id}
         else:
             print(f"Incorrect Credentials: {email} == {auth_email} | {password} == {auth_password}")
             return 'Login Unsuccessful!'
