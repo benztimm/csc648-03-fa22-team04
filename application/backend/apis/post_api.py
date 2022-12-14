@@ -39,6 +39,7 @@ def search_posts(keyword = None,category = None,type = None):
         query += """
                     AND (p.title LIKE %(keyword)s
                     OR p.description LIKE %(keyword)s
+                    OR c.category_name LIKE %(category)s
                     )
                 """
     if  category:

@@ -16,6 +16,7 @@ import apis.user_api as user_api
 import apis.message_api as message_api
 
 
+
 @app.route("/")
 def hello():
     return "<h1 style='color:black'>CSC 648 - Team 4!</h1>"
@@ -171,7 +172,7 @@ def search_posts(keyword = None,category = None,type = None):
     '''
     Search posts based on keywords. The keyword will be searched on title, description and category.
 
-    `inputs` 
+    `inputs`
         keyword - input string
         optional
             category - input string
@@ -182,18 +183,18 @@ def search_posts(keyword = None,category = None,type = None):
         param = request.args.to_dict()
         if 'keyword' in param:
             keyword = param['keyword']
-        if 'category' in param:  
+        if 'category' in param:
             category = param['category']
         if 'type' in param:
             type = param['type']
         output = post_api.search_posts(keyword,category,type)
     except Exception as e:
-        print(f"== EXCEPTION == search_posts: \n{e}")           
+        print(f"== EXCEPTION == search_posts: \n{e}")
         return jsonify({"message: Something went wrong. Please check logs on the server :/ "}), 500     # Exception handling
-    
+
     # JSON.dumps because it can handle things better:
     return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
-    
+
 
 @app.route('/user-email-get', defaults={'user_id': 0})
 @app.route('/user-email-get/<user_id>')
@@ -265,7 +266,7 @@ def login():
         password = param.get("password")
 
         # return success message if user is logged in successfully
-        output = user_api.login(email, password)    
+        output = user_api.login(email, password)
 
     except Exception as e:
         print(f"{e}\n == EXCEPTION == login")
@@ -312,5 +313,36 @@ def upload_file(uploader_id = None, post_type = None, title = None, file = None,
         print(f"{e}\n == EXCEPTION == upload-file")
         return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500
 
+    return json.dumps({'output': output}, sort_keys=True, default=str), 200
+
+
+@app.route('/get-user-post/', defaults={'uploader_id': None})
+@app.route('/get-user-post/<uploader_id>')
+def get_user_post(uploader_id=None):
+    '''
+    Search posts based on uploader_id. 
+    `inputs` uploader_id - input string
+    `returns` query output
+    '''
+    output = []
+    try:
+        if uploader_id:
+            output = user_api.get_user_post(uploader_id)
+    except Exception as e:
+        print(f"== EXCEPTION == get-user-post: \n{e}")
+        return jsonify({"message: Something went wrong. Please check logs on the server :/ "}), 500     # Exception handling
+
+    # JSON.dumps because it can handle things better:
+    return json.dumps({'output': output , 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
+
+@app.route('/logout/<user_id>')
+def logout(user_id):
+    try:
+        user_id = (int(user_id))
+        user_api.logout(user_id)
+        output = "Logout Successful"
+    except Exception as e:
+        print(f"{e}\n == EXCEPTION == logout")
+        return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500
     return json.dumps({'output': output}, sort_keys=True, default=str), 200
 
