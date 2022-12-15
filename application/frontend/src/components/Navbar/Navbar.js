@@ -88,7 +88,6 @@ const Navbar = () =>{
         console.log(json);
         setItems(json);
         window.localStorage.setItem('result', JSON.stringify(json));
-        console.log(window.localStorage.getItem('result'));
         navigate('/searchresults');
     }
 
@@ -129,6 +128,7 @@ const Navbar = () =>{
             setLogout(true);
             setUserLogin(false);
             window.sessionStorage.removeItem('user');
+            navigate('/');
         };
 
         
@@ -172,15 +172,11 @@ const Navbar = () =>{
                 <div className='right_side'>
                     
                     <div className='nav_links' id={showLinks ? "hidden" : ""} onClick={() => setShowLinks(false)}>
-                        {/* <a href='/#'><Link to="/dashboard">Welcome {user_email}</Link></a> */}
                         <HoverLink initialText={"Welcome "+ email} hoverText="To Dashboard" />
                         <a href='/#'><Link to="/Upload">Upload</Link></a>
-                        {/* <a onClick={() => setRegisterOpen(true)}>Register</a> */}
                         {isRegisterOpen && <Register setRegisterOpen={setRegisterOpen} setLoginOpen={setLoginOpen}/>}
                         <a onClick={logoutFunction} type='submit'>Logout</a>
                         {isLoginOpen && <Login setLoginOpen={setLoginOpen} setRegisterOpen={setRegisterOpen} setUserLogin={setUserLogin}/>}
-                        {/* <a href='/#'><Link to="/Register">Register</Link></a>
-                        <a href='/#'><Link to="/Login">Log In</Link></a> */}
                     </div>
                     <button className='navButton' onClick={() => setShowLinks(!showLinks)}><FaBars/></button>
                 </div>
@@ -227,8 +223,6 @@ const Navbar = () =>{
                     {isRegisterOpen && <Register setRegisterOpen={setRegisterOpen} setLoginOpen={setLoginOpen}/>}
                     <a onClick={() => setLoginOpen(true)}>Login</a>
                     {isLoginOpen && <Login setLoginOpen={setLoginOpen} setRegisterOpen={setRegisterOpen} setUserLogin={setUserLogin}/>}
-                    {/* <a href='/#'><Link to="/Register">Register</Link></a>
-                    <a href='/#'><Link to="/Login">Log In</Link></a> */}
                 </div>
                 <button className='navButton' onClick={() => setShowLinks(!showLinks)}><FaBars/></button>
             </div>

@@ -49,7 +49,7 @@
     width: 30%;
     height: 30px;
 
-    border-radius: 10px;
+    border-radius: 5px;
     border: solid;
     border-width: 2px;
     border-color: black;
@@ -57,7 +57,7 @@
 }
 
 .upload-submit-button {
-    background-color: white;
+    background-color: #2eb06b;
     float: right;
     cursor: pointer;
 }
@@ -111,4 +111,19 @@ input[submit]:hover{
     background-color: green;
     color: white;
     transform: translateY(-1px);
+}
+
+.uploadModal {
+    width: 45vw;
+
+}
+
+.go-to-uploads {
+    background-color: #2eb06b;
+width: 150px;
+height: 30px;
+margin: 20px;
+border-radius: 5px;
+border-color: #000000;
+cursor: pointer;
 }

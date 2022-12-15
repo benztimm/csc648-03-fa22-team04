@@ -21,7 +21,6 @@ function SearchResults() {
 
   useEffect(() => {
     let newPull = window.localStorage.getItem('result');
-    console.log(newPull);
     setApiPull(newPull); 
   })
 
@@ -40,15 +39,22 @@ function SearchResults() {
     window.open(url);
 
   }
-  
-  //if(Object.keys(media.output).length > 0){
-  return (
 
+  function handleDownload(event) {
+
+  }
+  
+  
+
+  return (
+    
     <div className='wrapper'>
     <br/>
     <div><b>Showing {media && Object.keys(media.output).length} results</b></div>
     <br/>
     {media && media.output.map(output => (
+
+      <div>
       <div className='card_body' key={output.post_id} onClick={() => navigateToProduct(`${output.title}`, `${output.post_id}`)}>
         <div className='image_container'>
           <img src={output.thumbnail} className='thumbnail' />
@@ -56,18 +62,29 @@ function SearchResults() {
         </div>
 
         <div className='maintext'>
-          <h2 className='card__title'>{output.title}</h2>
-          <span>Date created: {output.created_timestamp}</span><br />
-          <span>File type: {output.post_type}</span>
+          <h3 className='card__title'>{output.title}</h3>
+          <span className='date-filetype'>Date created: {output.created_timestamp}</span><br />
+          <span className='date-filetype'>File type: {output.post_type}</span>
           <br /><br />
-          <h4 className='card__author'>{output.uploader_name}</h4>
-          <span><i>{output.description}</i></span>
+          <h5 className='card__author'>{output.uploader_name}</h5>
+          <span className='description'><i>{output.description}</i></span>
 
         </div>
         <div className='purchaseInfo'>
-          <h1 className='card__price'>${output.price}</h1>
-          <button className='card__bttn'>PURCHASE</button>
+          <h1 className='card__price'>
+            {output.price === 0 ? 'FREE' : `$${output.price}`}
+          </h1>
+          <button
+            className={output.price === 0 ? 'card__bttn-free' : 'card__bttn'}
+            onClick={() => {
+              if (output.price === 0) window.open(`${output.file}`);
+            }}
+          >
+            {output.price === 0 ? 'DOWNLOAD' : 'PURCHASE'}
+          </button>
         </div>
+      </div>
+      
       </div>
     ))}
 
