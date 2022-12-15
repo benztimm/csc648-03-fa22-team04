@@ -14,7 +14,7 @@ from PIL import Image
 import apis.post_api as post_api
 import apis.user_api as user_api
 import apis.message_api as message_api
-import apis.category as category_api
+import apis.category_api as category_api
 
 
 
