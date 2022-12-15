@@ -14,6 +14,7 @@ from PIL import Image
 import apis.post_api as post_api
 import apis.user_api as user_api
 import apis.message_api as message_api
+import apis.category as category_api
 
 
 
@@ -346,3 +347,19 @@ def logout(user_id):
         return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500
     return json.dumps({'output': output}, sort_keys=True, default=str), 200
 
+@app.route('/get-category/', defaults={'category_id': None})
+@app.route('/get-category/<category_id>')
+def get_category(category_id=None):
+    '''
+    Get category base on category_id. If caller not specify category_id then return all category.
+    `inputs`  category_id - input Integer `Optional` 
+    `returns` query output
+    '''
+    try:
+        output = category_api.get_category(category_id)
+    except Exception as e:
+        print(f"== EXCEPTION == get_category: \n{e}")
+        return jsonify({"message: Something went wrong. Please check logs on the server :/ "}), 500     # Exception handling
+
+    # JSON.dumps because it can handle things better:
+    return json.dumps({'output': output, 'additional_info': 'something random info'}, sort_keys = True, default = str), 200
