@@ -13,7 +13,7 @@ import PurchaseMsg from './PurchaseMsg.js';
 import profilePic from '../images/testimage.jpg';
 
 
-function productPage() {
+function ProductPage() {
 
     const location = useLocation();
 
@@ -26,21 +26,65 @@ function productPage() {
 
     const fetchData = async () => {
 
-        // const data = await fetch(`http://54.200.101.218:5000/get-post-details/${location.state.id}`);
         const data = await fetch(`http://54.200.101.218:5000/get-post-details/${window.sessionStorage.getItem('post_id')}`);
         const json = await data.json();
 
         console.log(json);
-        setItems(json);
+        let product = json;
+        setItems(product);
+        
 
     }
 
     useEffect(() => {
         fetchData();
-        console.log(window.sessionStorage.getItem('post_id'));
       }, [])
 
     const media = items;
+
+    if(items && items.output[0].post_type === "Document") {
+
+        return(
+
+
+            <div>{items && items.output.map(output => (
+                <div className='page-container'>
+                        <div className='img-container'>
+                        <object data={output.file} type="application/pdf" width="100%" height="100%"></object>
+                    </div>
+            
+                    <div className='seller-card'>
+                        <div className='title-container'>
+                        <h1 className='title'>{output.title}</h1>
+                        </div>
+            
+                        <div className='seller-profile'>
+                            <img src={profilePic} width={100} height={100}></img>
+                            <h2 className='seller-name'>{output.uploader_name}</h2>
+                        </div>
+                        <div className='about-item'>
+                            <p>
+                                Date posted: {output.created_timestamp} <br/>
+                                Price: ${output.price}
+                            </p>
+                            <p className='description'>{output.description}</p>
+                        </div>
+                        <div className='footer-buttons'>
+                            
+                            <button className='purchase-bttn' onClick={() => setIsOpen(true)}>
+                                CONTACT SELLER
+                            </button>
+                           {isOpen && <PurchaseMsg setIsOpen={setIsOpen} output={output}/>}
+                        </div>
+                    </div>
+                    </div>
+    
+            ))}</div>
+    
+    
+    
+        )
+    }   else {
 
     return(
 
@@ -81,7 +125,8 @@ function productPage() {
 
 
 
-    );
+    )
+}
 }
 
-export default productPage;
+export default ProductPage;
