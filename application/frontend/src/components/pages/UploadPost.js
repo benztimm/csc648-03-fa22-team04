@@ -51,7 +51,7 @@ function UploadPost() {
         data.append('description', description);
         data.append('category', category);
         if (event.target.price.value === null) {
-            const price = 0;
+            const price = '0';
             data.append('price', price);
         } else {
             const price = event.target.price.value;
