@@ -17,8 +17,8 @@ function Dashboard(){
     const navigate = useNavigate();
     const [items, setItems] = useState(null);
 
-    // const user = JSON.parse(sessionStorage.getItem('user'));
-    // const user_id = user.output.user_id;
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    const user_id = user.user.user_id;
 
     const fetchData = async () => {
 

@@ -19,7 +19,7 @@ function Inbox(){
 
 
   const user = JSON.parse(sessionStorage.getItem('user'));
-  const user_id = user.output.user_id;
+  const user_id = user.user.user_id;
   
     const navigate = useNavigate();
     const goToPosts = () => {

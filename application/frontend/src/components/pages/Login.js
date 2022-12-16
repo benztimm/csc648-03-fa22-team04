@@ -34,16 +34,17 @@ const Login = ({setLoginOpen, setRegisterOpen, setUserLogin}) =>{
 
         //http://54.200.101.218:5000/login?email=testuser1@sfsu.edu&password=password
         
-        const data = await fetch(`http://54.200.101.218:5000/login?email=${email}&password=${password}`);
+        const data = await fetch(`http://54.200.101.218:5000/login?username=${email}&password=${password}`);
         const json = await data.json();
 
         console.log(json);
         let loginReturn = json;
         setItems(loginReturn);
+        console.log(json.message);
 
 
-        if(json.output){
-            console.log("worked");
+        if(json.message === "Login Successful!"){
+
             sessionStorage.setItem("user", JSON.stringify(json));
             //window.localStorage.setItem('user', `${email}`);
             setUserLogin(true);
