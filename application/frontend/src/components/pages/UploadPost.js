@@ -23,19 +23,8 @@ function UploadPost() {
     const [isRegisterOpen, setRegisterOpen] = useState(false);
     const [categories, setCategories] = useState([]);
 
-    const uploader_id = useRef(null);
-    const post_type = useRef(null);
-    const title = useRef(null);
-    const description = useRef();
-    const price = useRef(null);
-    const category = useRef(null);
     const fileInput = useRef(null);
-
     const navigate = useNavigate();
-
-
-
-
 
 
 
@@ -48,19 +37,25 @@ function UploadPost() {
     const handleSubmit = (event) => {
         event.preventDefault();
 
+        const title = event.target.title.value;
+        const mtype = event.target.mtype.value;
+        const category = event.target.category.value;
+        const description = event.target.description.value;
+        
+
         const data = new FormData();
         data.append('file', fileInput.current.files[0]);
-        data.append('post_type', post_type);
+        data.append('post_type', mtype);
         data.append('title', title);
         data.append('description', description);
-        data.append('price', price);
+        data.append('category', category);
         if (event.target.price.value === null) {
-            data.append('price', 0);
+            const price = 0;
+            data.append('price', price);
         } else {
+            const price = event.target.price.value;
             data.append('price', price);
         }
-        data.append('category', category);
-
 
         if (sessionStorage.getItem('user') === null) {
             setLoginOpen(true);
@@ -105,11 +100,11 @@ function UploadPost() {
                     <div className='form-container'>
                         <label className='input-text-field'>
                             TITLE<a style={{ color: 'red' }}><i>*</i></a><br></br>
-                            <input type="text" name="title" ref={title} required className="forms" />
+                            <input type="text" name="title" required className="forms" />
                         </label><br /><br />
                         <label className='input-text-field'>
                             MEDIA TYPE<text style={{ color: 'red' }}><i>*</i></text><br></br>
-                            <select name="type" ref={post_type} required className="forms">
+                            <select name="mtype" required className="forms">
                                 <option value="Image">Image</option>
                                 <option value="Video">Video</option>
                                 <option value="Document">Document</option>I
@@ -117,7 +112,7 @@ function UploadPost() {
                         </label><br /><br />
                         <label className='input-text-field'>
                             CATEGORY<text style={{ color: 'red' }}><i>*</i></text><br></br>
-                            <select name="category" ref={category} required className="forms">
+                            <select name="category" required className="forms">
                                 {categories.map((category) => (
                                     <option value={category.category_id}>{category.category_name}</option>
                                 ))}
@@ -126,12 +121,12 @@ function UploadPost() {
 
                         <label className='input-text-field'>
                             DESCRIPTION<br />
-                            <textarea name="description" ref={description} className="forms" rows="4" />
+                            <textarea name="description" className="forms" rows="4" />
                         </label><br /><br />
 
                         <label className='input-text-field'>
                             PRICE<br />
-                            <input type="number" name="price" ref={price} className="forms" />
+                            <input type="price" name="price" className="forms" />
                         </label><br /><br />
 
                         <label>
