@@ -17,12 +17,12 @@ function Dashboard(){
     const navigate = useNavigate();
     const [items, setItems] = useState(null);
 
-    const user = JSON.parse(sessionStorage.getItem('user'));
-    const user_id = user.output.user_id;
+    // const user = JSON.parse(sessionStorage.getItem('user'));
+    // const user_id = user.output.user_id;
 
     const fetchData = async () => {
 
-        const data = await fetch(`http://54.200.101.218:5000/get-user-post/${user_id}`);
+        const data = await fetch(`http://54.200.101.218:5000/get-user-post/1`);
         const json = await data.json();
 
         console.log(json);
@@ -68,16 +68,12 @@ function Dashboard(){
                             </div>
                             <div className='purchaseInfo'>
                                 <h1 className='card__price'>
-                                    {output.price === 0 ? 'FREE' : `$${output.price}`}
+                                    {output.price === 0 ? 'FREE' : `$${output.price}`}<br/>
+                                    
                                 </h1>
-                                <button
-                                    className={output.price === 0 ? 'card__bttn-free' : 'card__bttn'}
-                                    onClick={() => {
-                                        if (output.price === 0) window.open(`${output.file}`);
-                                    }}
-                                >
-                                    {output.price === 0 ? 'DOWNLOAD' : 'PURCHASE'}
-                                </button>
+                                Status: {output.approved}
+                                <button>DELETE</button>
+                                
                             </div>
                         </div>
 
