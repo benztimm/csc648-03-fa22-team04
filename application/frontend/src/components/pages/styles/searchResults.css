@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 .wrapper{
     display: inline-block;
     text-align: initial;
@@ -6,7 +7,8 @@
 }
 
 .card_body{
-    margin: 15px;
+    font-family: 'Noto Sans', sans-serif;
+    margin: 20px;
     width: 65vw;
     height: 180px;
     display: flex;
@@ -18,8 +20,8 @@
 
 .card_body:hover{
     background-color: #e8e8e8;
-    border-radius: 10px;
-    margin: 15px;
+    border-radius: 5px;
+    margin: 20px;
     width: 65vw;
     height: 180px;
     display: flex;
@@ -106,6 +108,26 @@
 .purchaseInfo .card__bttn:hover{
     background-color: #ebca0f;
     transform: translateY(-1px);
+}
+
+.purchaseInfo .card__bttn-free{
+    background-color: #3BB271;
+    color:black;
+}
+
+.purchaseInfo .card__bttn-free:hover{
+    background-color: #3BB271;
+    color:black;
+    transform: translateY(-1px);
+    z-index: 10;
+}
+
+.description {
+    font-size: 12px;
+}
+
+.date-filetype {
+    font-size: 12px;
 }
 
 
