@@ -30,7 +30,7 @@ def delete_message(message_id = None):
     return results
 
 
-def send_message(message, post_id, buyer, seller, status, timestamp, message_id):
+def send_message(message, post_id, buyer, seller, status, timestamp):
     """
     send message
 
@@ -41,18 +41,18 @@ def send_message(message, post_id, buyer, seller, status, timestamp, message_id)
         if fail return 'Fail'
     """
     query = "INSERT INTO message(message_id, post_id, buyer, seller, message, status, timestamp) VALUES(%s, %s, %s, %s, %s, %s, %s)"
-    data = (message_id, post_id, buyer, seller, message, status, timestamp)
+    data = (post_id, buyer, seller, message, status, timestamp)
     db.execute_query(query, data)
     return 'Message sent'
 
 
-def inbox(post_id, buyer, seller, message, status, timestamp):
+def inbox(user_id):
     """
         inbox details
 
         `input` message_id
 
-        `return` post_id, buyer, seller, message, status, timestamp
+        `return` all messages
         """
 
     query = """
@@ -66,8 +66,8 @@ def inbox(post_id, buyer, seller, message, status, timestamp):
                 FROM 
                     message m
                 WHERE
-                   message_id = %(message_id)s
+                   m.seller = %(user_id)s
             """
 
-    db.execute_query(query)
-    return post_id, buyer, seller, message, status, timestamp
+    return db.execute_query(query, {"user_id": user_id})
+    
