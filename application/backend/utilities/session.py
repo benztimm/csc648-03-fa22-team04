@@ -69,3 +69,20 @@ def has_valid_session(user_id):
         return True
     else:
         return False
+
+def update_session(user_id):
+    """
+    Sets the latest timestamp.
+
+    `input` user_id
+    `return` True / False
+    """
+    # Use pickled session data:
+    f = open("utilities/session.dat", "rb")
+    session_dict = pickle.load(f)
+
+    session_dict[user_id] = int(time.time())
+
+    f = open("utilities/session.dat", "wb")
+    pickle.dump(session_dict, f)
+    f.close()
