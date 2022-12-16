@@ -42,9 +42,10 @@ const Login = ({setLoginOpen, setRegisterOpen, setUserLogin}) =>{
         setItems(loginReturn);
 
 
-        if(json.output === "Login Successfully!"){
+        if(json.output){
             console.log("worked");
-            window.localStorage.setItem('user', `${email}`);
+            sessionStorage.setItem("user", JSON.stringify(json));
+            //window.localStorage.setItem('user', `${email}`);
             setUserLogin(true);
             setLoginOpen(false);
         }   
