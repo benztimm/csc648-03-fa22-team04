@@ -234,7 +234,7 @@ def register():
         first_name = param.get("first_name")
         last_name = param.get("last_name")
         email = param.get("email")
-        password = bcrypt.generate_password_hash(param.get("password"))
+        password = bcrypt.generate_password_hash(param.get("password")).decode('utf-8')
 
         # return success message if user is registered successfully
         output = user_api.register(first_name=first_name, last_name=last_name, email=email, password=password)
@@ -245,19 +245,25 @@ def register():
     return json.dumps({'output': output}, sort_keys=True, default=str), 200
 
 
-# @app.route('/login-request')
-# # takes user input from login form
-# # returns email and password in this specific order
-# def login_request():
-#     try:
-#         _json = request.json
-#         email = _json['email']
-#         password = _json['password']
-#         if email and password and request.method == 'POST':
-#             return email, password
-#     except Exception as e:
-#         print(f"Error when logging in :  \n{e}")
-#         raise Exception("Something went wrong with the login.")
+@app.route('/update-password')
+def update_password():
+    try:
+        param = request.args.to_dict()
+        email = param.get("username")
+        password = bcrypt.generate_password_hash(param.get("password")).decode('utf-8')
+
+        if not email or not password:
+            return jsonify({"message": "Missing Credentials!"}), 403
+        
+        if user_api.update_password(email=email, password=password):
+            return jsonify({"message": "Update Successfull"}), 200
+        else:
+            return jsonify({"message": "Could not update password!"}), 403
+
+    except Exception as e:
+        print(f"== EXCEPTION == login:\n{traceback.print_exc()}\n")
+        return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500
+
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -286,8 +292,6 @@ def login():
     except Exception as e:
         print(f"== EXCEPTION == login:\n{traceback.print_exc()}\n")
         return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500
-
-    return json.dumps({'output': output}, sort_keys=True, default=str), 200
 
 
 @app.route('/upload_file/',methods = ['POST'],defaults={'uploader_id' : None, 'post_type' : None, 'title' : None, 'file' : None, 'description' : None, 'price' : None, 'category' : None})

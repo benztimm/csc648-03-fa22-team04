@@ -90,26 +90,47 @@ def login(email):
     `return` success / fail message
     """
 
+    # find email from user input
+    query1 = """
+                SELECT
+                    first_name,
+                    email,
+                    user_id,
+                    password
+                FROM 
+                    user u
+                WHERE
+                    email = %(email)s
+            """
+
+    user = db.execute_query(query1, {"email": email})
+    return user
+
+
+def update_password(email, password):
+    """
+    Update password
+
+    `input` credentials
+
+    `return` success / fail message
+    """
+
     try:
-        # find email from user input
         query1 = """
-                    SELECT
-                        first_name,
-                        email,
-                        user_id,
-                        password
-                    FROM 
-                        user u
+                    UPDATE
+                        user
+                    SET
+                        password = %(password)s
                     WHERE
                         email = %(email)s
                 """
 
-        user = db.execute_query(query1, {"email": email})
-        return user
-
-    except BaseException as e:
+        db.execute_query(query1, {"email": email, 'password': password})
+        return True
+    except Exception as e:
         traceback.print_exc()
-        raise Exception(f"{repr(e)}\nError: user_api.login")
+        return False
 
 
 def get_user_post(uploader_id = None):
