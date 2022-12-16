@@ -250,7 +250,7 @@ def update_password():
     try:
         param = request.args.to_dict()
         email = param.get("username")
-        password = param.get("password")
+        password = bcrypt.generate_password_hash(param.get("password")).decode('utf-8')
 
         if not email or not password:
             return jsonify({"message": "Missing Credentials!"}), 403
