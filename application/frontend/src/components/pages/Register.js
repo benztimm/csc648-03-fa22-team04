@@ -50,7 +50,11 @@ const Register = ({setRegisterOpen, setLoginOpen}) =>{
         const json = await data.json();
 
         console.log(json);
-        setItems(json);
+        if(json.output === "Registration successful"){
+            setRegisterOpen(false);
+        }
+
+
 
     }
 
@@ -61,7 +65,7 @@ const Register = ({setRegisterOpen, setLoginOpen}) =>{
         var result = sfsuRegex.test(email);
         var result2 = mailRegex.test(email);
         if(result == true || result2 == true ){
-            console.log("Register success");
+
             fetchData();
         }
         else{
