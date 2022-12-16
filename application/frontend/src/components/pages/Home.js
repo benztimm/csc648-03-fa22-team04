@@ -53,9 +53,9 @@ const Home = () =>{
     //navigate(`/productpage/${post_id}`, {state:{id:post_id, title:title}});
 
     //USE THIS url WHEN TESTING ON LOCALHOST
-    var url = `http://localhost:3000/productpage/${post_id}`;
+    //var url = `http://localhost:3000/productpage/${post_id}`;
 
-    //var url = `http://54.200.101.218/productpage/${post_id}`;
+    var url = `http://54.200.101.218/productpage/${post_id}`;
     window.open(url);
   }
 

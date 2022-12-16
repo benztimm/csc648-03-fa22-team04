@@ -29,3 +29,52 @@ def delete_message(message_id = None):
     results = {'status':status}
     return results
 
+
+def send_message(message, post_id, buyer, seller):
+    """
+    send message
+
+    `input` post_id, buyer, seller, message, status
+
+    `return` status in JSON format
+        if success return 'Success'
+        if fail return 'Fail'
+    """
+    query = "INSERT INTO message(post_id, buyer, seller, message, status) VALUES(%s, %s, %s, %s, 'null')"
+    data = (post_id, buyer, seller, message)
+    db.execute_query(query, data)
+    return 'Message sent !'
+
+
+def inbox(user_id):
+    """
+        inbox details
+
+        `input` message_id
+
+        `return` all messages
+        """
+
+    query = """
+                SELECT
+                    m.*,
+                    buyer.email as 'buyer_email',
+                    seller.email as 'seller_email',
+                    buyer.user_id as 'buyer_id',
+                    seller.user_id as 'seller_id'
+                FROM
+                    message m
+                JOIN
+                    user buyer
+                ON
+                    m.buyer = buyer.user_id
+                join
+                    user seller
+                ON 
+                    m.seller = seller.user_id
+                WHERE
+                   m.seller = %(user_id)s
+            """
+
+    return db.execute_query(query, {"user_id": user_id})
+    
