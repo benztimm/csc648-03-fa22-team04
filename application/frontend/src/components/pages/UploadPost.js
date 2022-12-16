@@ -20,6 +20,7 @@ function UploadPost() {
 
     const [isRedirectOpen, setRedirectOpen] = useState(false);
     const [isLoginOpen, setLoginOpen] = useState(false);
+    const [isUserLoggedIn, setUserLogin] = useState(false);
     const [isRegisterOpen, setRegisterOpen] = useState(false);
     const [categories, setCategories] = useState([]);
 
@@ -68,10 +69,19 @@ function UploadPost() {
                 body: data,
               }).then((response) => {
                 response.json();
-                console.log(response);
+                console.log(response.status);
+
+                if(response.status === 200) {
+                    setRedirectOpen(true);
+
+                }   else if (response.status === 500){
+                    alert("There was a server error, please try again");
+                }
+
+                
               });
             }
-            setRedirectOpen(true);
+
         }
     
 
@@ -125,8 +135,8 @@ function UploadPost() {
                         </label><br /><br />
 
                         <label className='input-text-field'>
-                            PRICE<br />
-                            <input type="price" name="price" className="forms" />
+                            PRICE<text style={{ color: 'red' }}><i>* (Input 0 to make your item FREE)</i></text><br />
+                            <input type="price" name="price" className="forms" required/>
                         </label><br /><br />
 
                         <label>

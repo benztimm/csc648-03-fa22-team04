@@ -181,7 +181,7 @@ const Navbar = () =>{
                         <a href='/#'><Link to="/Upload">Upload</Link></a>
                         {isRegisterOpen && <Register setRegisterOpen={setRegisterOpen} setLoginOpen={setLoginOpen}/>}
                         <a onClick={logoutFunction} type='submit'>Logout</a>
-                        {isLoginOpen && <Login setLoginOpen={setLoginOpen} setRegisterOpen={setRegisterOpen} setUserLogin={setUserLogin}/>}
+                        {isLoginOpen && <Login setLoginOpen={setLoginOpen} setRegisterOpen={setRegisterOpen} c/>}
                     </div>
                     <button className='navButton' onClick={() => setShowLinks(!showLinks)}><FaBars/></button>
                 </div>
