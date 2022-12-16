@@ -1,5 +1,5 @@
 .dashboard button.dashboard{
-    border-radius: 10px;
+    border-radius: 5px;
     border: solid;
     border-width: 2px;
     border-color: black;
@@ -27,7 +27,7 @@
     border-width: 2px;
     border-color: black;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 5px;
 
     align-items: center;
     width: 120px;

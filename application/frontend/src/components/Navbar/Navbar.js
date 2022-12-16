@@ -117,7 +117,7 @@ const Navbar = () =>{
 
     if(sessionStorage.getItem('user') !== null) {
         const user = JSON.parse(sessionStorage.getItem("user"));
-        const email = user.output.email;
+        const email = user.user.email;
         console.log(email);
 
         const logoutFunction = async () => {

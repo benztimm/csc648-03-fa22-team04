@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 .darkBG {
     background-color: rgba(0, 0, 0, 0.2);
     width: 100vw;
@@ -18,7 +19,7 @@
   
   .modal {
 
-    background: white;
+    /* background: white; */
     z-index: 10;
     border-radius: 16px;
     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
@@ -27,9 +28,12 @@
   .modal-purchaseMsg{
     width: 45vw;
     height: 35vh;
-    background: white;
+    background: #afe0c5;
     z-index: 10;
-    border-radius: 16px;
+    border-radius: 10px;
+    border: solid;
+    border-width: 10px;
+
     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
   }
   
@@ -48,6 +52,7 @@
     font-weight: 500;
     font-size: 18px;
     text-align: center;
+    font-family: 'Noto Sans', sans-serif;
   }
   
   .modalContent {
@@ -64,6 +69,7 @@
     text-align: left;
     height: 15vh;
     display: block;
+    font-family: 'Noto Sans', sans-serif;
   }
 
   .modalContent-purchaseMsg-input {
@@ -161,15 +167,16 @@
   }
   
   .sendBtn:hover {
-    box-shadow: #006400;
+    box-shadow: #3BB271;
     transform: translateY(-1px);
-    background: #006400;
+    background: #3BB271;
     color: white;
   }
 
 
 
   .msgContainer{
-    border: 6px double #000000;
+
+    background-color: #afe0c5;
     
   }
