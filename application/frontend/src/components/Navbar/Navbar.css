@@ -163,3 +163,33 @@
   }
   
 }
+
+@media only screen and (max-width: 900px){
+  .left_side .img-fluid{
+    padding-top: 23px;
+    width: 75px;
+  }
+
+
+
+  .Navbar .right_side #hidden{
+    top: 100px;
+    height: 210px;
+  }
+
+  .left_side .nav_search_bar .cat-Select {
+    width: 117px;
+  }
+
+  .Navbar .right_side button{
+    padding-top: 15px;
+  }
+
+
+}
+
+@media only screen and (max-width: 650px){
+  .left_side .nav_search_bar .cat-Select {
+    width: 20px;
+  }
+}
