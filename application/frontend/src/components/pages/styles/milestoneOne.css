@@ -1,6 +1,7 @@
 .team {
-    text-align: left;
+    text-align: initial;
     padding-left: 100px;
+    flex-direction: column;
 }
 
 .aboutus-image {
@@ -11,8 +12,9 @@
 .about {
     width: 65%;
     background-color: #c5c8c8;
-    padding-right: 100px;
-    padding-bottom: 15px;
+    margin-right: 50px;
+
+    justify-content: space-around;
 
     border: 2px solid;
     border-color: black;
@@ -51,3 +53,10 @@
 }
 
 
+@media only screen and (max-width: 1000px){
+    .aboutus-image {
+        max-width: 100px;
+        height: auto;
+    }
+    
+}
