@@ -5,7 +5,6 @@ Description: All APIs related to Users.
 '''
 
 import utilities.db_helper as db
-from utilities import cryptography_helper as fernet
 import routes as routes
 import traceback
 import utilities.session as session
@@ -82,7 +81,7 @@ def register(first_name, last_name, email, password):
         raise Exception("Something went wrong while registering user.")
 
 
-def login(email, password):
+def login(email):
     """
     Login user.
 
@@ -90,55 +89,28 @@ def login(email, password):
 
     `return` success / fail message
     """
-    if not email or not password:
-        return 'Missing Credentials.'
 
     try:
         # find email from user input
         query1 = """
                     SELECT
-                        u.email as 'user_email'
+                        first_name,
+                        email,
+                        user_id,
+                        password
                     FROM 
                         user u
                     WHERE
-                        email = %(user_email)s
+                        email = %(email)s
                 """
-        # find encrypted password from user email
-        query2 = """
-                    SELECT 
-                        u.password as 'user_password'
-                    FROM
-                        user u 
-                    WHERE
-                        email = %(user_email)s
-                """
-        # find user_id for session
-        query3 = """
-                    SELECT
-                        u.user_id as 'user_id'
-                    FROM 
-                        user u
-                    WHERE
-                        email = %(user_email)s 
-            """
 
-        auth_email = db.execute_query(query1, {"user_email": email})[0]
-        auth_password = db.execute_query(query2, {"user_email": email})[0]
-        user_id = db.execute_query(query3, {"user_email": email})[0].get("user_id")
-
-        # check if user input matches stored email and decoded password
-        # decrypted_password = fernet.decrypting_function(auth_password.get("user_password"))
-
-        if email == auth_email.get("user_email") and password == auth_password.get("user_password"):
-            session.enter_session(user_id)
-            return {'email': email, "user_id": user_id}
-        else:
-            print(f"Incorrect Credentials: {email} == {auth_email} | {password} == {auth_password}")
-            return 'Login Unsuccessful!'
+        user = db.execute_query(query1, {"email": email})
+        return user
 
     except BaseException as e:
         traceback.print_exc()
         raise Exception(f"{repr(e)}\nError: user_api.login")
+
 
 def get_user_post(uploader_id = None):
     """
