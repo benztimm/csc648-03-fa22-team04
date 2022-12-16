@@ -20,6 +20,8 @@ function Inbox(){
 
   const user = JSON.parse(sessionStorage.getItem('user'));
   const user_id = user.user.user_id;
+
+  const [messages, setMessages] = useState([]);
   
     const navigate = useNavigate();
     const goToPosts = () => {
@@ -34,7 +36,7 @@ function Inbox(){
     const json = await data.json();
 
     console.log(json);
-    setItems(json);
+    setMessages(json.output);
 
   }
 

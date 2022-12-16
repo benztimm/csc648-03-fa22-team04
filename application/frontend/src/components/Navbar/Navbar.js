@@ -198,7 +198,6 @@ const Navbar = () =>{
         <div className='Navbar'>
             
             <div className='left_side'>
-                {/* <button>sidebarhere</button> */}
                 <Link to="/">
                     <img src={logo} className="img-fluid" onClick={() => setShowLinks(false)}
                     width={125} height={120}></img>

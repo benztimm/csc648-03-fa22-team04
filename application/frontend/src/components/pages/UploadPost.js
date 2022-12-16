@@ -59,7 +59,7 @@ function UploadPost() {
         }
 
         if (sessionStorage.getItem('user') === null) {
-            setLoginOpen(true);
+            alert("Please login to submit your item.");
         } else {
             const user = JSON.parse(sessionStorage.getItem("user"));
             const user_id = user.user.user_id;
@@ -78,7 +78,6 @@ function UploadPost() {
                     alert("There was a server error, please try again");
                 }
 
-                
               });
             }
 
@@ -91,8 +90,7 @@ function UploadPost() {
         navigate('/dashboard');
 
     }
-    //sessionStorage.getItem('user') !== null
-    //{isLoginOpen && <Login setLoginOpen={setLoginOpen} setRegisterOpen={setRegisterOpen} setUserLogin={setUserLogin}/>}
+
 
     return (
         <div className='upload-form-container'>

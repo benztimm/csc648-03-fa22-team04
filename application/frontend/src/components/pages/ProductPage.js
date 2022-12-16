@@ -22,6 +22,8 @@ function ProductPage() {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState(null);
+
+    const [showButton, setShowButton] = useState(false);
     const navigate = useNavigate();
 
     const fetchData = async () => {
@@ -33,14 +35,19 @@ function ProductPage() {
         let product = json;
         setItems(product);
         
-
     }
 
     useEffect(() => {
         fetchData();
+
+        if(sessionStorage.getItem('user') !== null){
+            setShowButton(true)
+        }
       }, [])
 
     const media = items;
+
+
 
     if(items && items.output[0].post_type === "Document") {
 
@@ -113,9 +120,11 @@ function ProductPage() {
                     </div>
                     <div className='footer-buttons'>
                         
-                        <button className='purchase-bttn' onClick={() => setIsOpen(true)}>
-                            CONTACT SELLER
-                        </button>
+                        {sessionStorage.getItem("user") ? (
+                            <button className='purchase-bttn' onClick={() => setIsOpen(true)}>
+                                CONTACT SELLER
+                            </button>
+                        ) : null}
                        {isOpen && <PurchaseMsg setIsOpen={setIsOpen} output={output}/>}
                     </div>
                 </div>
