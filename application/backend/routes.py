@@ -381,3 +381,43 @@ def get_category(category_id=None):
 
     # JSON.dumps because it can handle things better:
     return json.dumps({'output': output}, sort_keys = True, default = str), 200
+
+
+@app.route('/send-message', methods=['GET', 'POST'])
+def send_message():
+    try:
+        param = request.args.to_dict()
+        buyer = param.get("buyer")
+        seller = param.get("seller")
+        post_id = param.get("post_id")
+        message = param.get("message")
+
+        # return success message if user is registered successfully
+        output = message_api.send_message(message=message, post_id=post_id, buyer=buyer, seller=seller)
+
+    except Exception as e:
+        print(f"== EXCEPTION == send-message: \n{traceback.print_exc()}\n")
+        return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500
+    return json.dumps({'output': output}, sort_keys=True, default=str), 200
+
+
+@app.route('/get-user-inbox/', defaults={'user_id': None})
+@app.route('/get-user-inbox/<user_id>')
+def get_user_inbox(user_id=None):
+    '''
+    Search posts based on uploader_id.
+
+    `inputs` uploader_id - input string
+
+    `returns` query output
+    '''
+    output = []
+    try:
+        if user_id:
+            output = message_api.inbox(user_id)
+    except Exception as e:
+        print(f"== EXCEPTION == get-user-inbox: \n{traceback.print_exc()}\n")
+        return jsonify({"message: Something went wrong. Please check logs on the server :/ "}), 500     # Exception handling
+
+    # JSON.dumps because it can handle things better:
+    return json.dumps({'output': output}, sort_keys = True, default = str), 200

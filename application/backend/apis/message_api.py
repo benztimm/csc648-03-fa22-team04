@@ -30,20 +30,20 @@ def delete_message(message_id = None):
     return results
 
 
-def send_message(message, post_id, buyer, seller, status, timestamp):
+def send_message(message, post_id, buyer, seller):
     """
     send message
 
-    `input` message_id, post_id, buyer, seller, message, status, timestamp
+    `input` post_id, buyer, seller, message, status
 
     `return` status in JSON format
         if success return 'Success'
         if fail return 'Fail'
     """
-    query = "INSERT INTO message(message_id, post_id, buyer, seller, message, status, timestamp) VALUES(%s, %s, %s, %s, %s, %s, %s)"
-    data = (post_id, buyer, seller, message, status, timestamp)
+    query = "INSERT INTO message(post_id, buyer, seller, message, status) VALUES(%s, %s, %s, %s, 'null')"
+    data = (post_id, buyer, seller, message)
     db.execute_query(query, data)
-    return 'Message sent'
+    return 'Message sent !'
 
 
 def inbox(user_id):
@@ -57,14 +57,21 @@ def inbox(user_id):
 
     query = """
                 SELECT
-                    m.post_id as 'post_id', 
-                    m.buyer as 'buyer', 
-                    m.seller as 'seller', 
-                    m.message as 'message',
-                    m.status as 'status', 
-                    m.timestamp as 'timestamp'
-                FROM 
+                    m.*,
+                    buyer.email as 'buyer_email',
+                    seller.email as 'seller_email',
+                    buyer.user_id as 'buyer_id',
+                    seller.user_id as 'seller_id'
+                FROM
                     message m
+                JOIN
+                    user buyer
+                ON
+                    m.buyer = buyer.user_id
+                join
+                    user seller
+                ON 
+                    m.seller = seller.user_id
                 WHERE
                    m.seller = %(user_id)s
             """
