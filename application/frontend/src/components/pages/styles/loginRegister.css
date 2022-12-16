@@ -17,7 +17,6 @@
     align-items: center;
     flex-direction: column;
     border-radius: 10px;
-    width: 35%;
     z-index: 10;
     border:solid;
     border-width: 10px;
@@ -95,3 +94,28 @@
     transform: translateY(-1px);
   }
 
+
+  .modal {
+    width: 40vw;
+  }
+
+  .upload-modal-text{
+
+    width: 35vw;
+    height: 30vh;
+    text-align: center;
+    font-size: 22px;
+    text-align: center;
+  }
+
+
+  .modal-content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 40vh;
+    line-height: 10vh; /* Set the line-height to the same value as the height */
+    text-align: center; /* Center the text horizontally */
+    margin: auto;
+
+  }
