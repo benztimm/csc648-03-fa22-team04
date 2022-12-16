@@ -40,9 +40,6 @@ function SearchResults() {
 
   }
 
-  function handleDownload(event) {
-
-  }
   
   
 

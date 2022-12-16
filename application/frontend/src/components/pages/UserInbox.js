@@ -48,7 +48,7 @@ function Inbox(){
 
 
   const columns = useMemo(() => COLUMNS, []);
-  const data = useMemo(() => MOCK_DATA, []);
+  const data = useMemo(() => messages, []);
 
     const { getTableProps, 
             getTableBodyProps,
