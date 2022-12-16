@@ -7,7 +7,7 @@ Description: Displays user's messages from potential buyer's of user's listed it
 
 */
 
-import React, { useMemo } from 'react';
+import { useContext, useRef, useState, useHistory, useEffect, useMemo } from 'react'; 
 import { Link, useNavigate, generatePath, useLocation } from 'react-router-dom';
 import { useTable, useSortBy } from 'react-table';
 import MOCK_DATA from './MOCK_DATA.json'
@@ -16,16 +16,37 @@ import './styles/inbox.css';
 
 
 function Inbox(){
+
+
+  const user = JSON.parse(sessionStorage.getItem('user'));
+  const user_id = user.output.user_id;
   
     const navigate = useNavigate();
-
     const goToPosts = () => {
         navigate('/dashboard');
     }
 
-    const columns = useMemo(() => COLUMNS, []);
-    const data = useMemo(() => MOCK_DATA, []);
 
+
+  const fetchData = async () => {
+
+    const data = await fetch(`http://54.200.101.218:5000/get-user-inbox/${user_id}`);
+    const json = await data.json();
+
+    console.log(json);
+    setItems(json);
+
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, [])
+
+  
+
+
+  const columns = useMemo(() => COLUMNS, []);
+  const data = useMemo(() => MOCK_DATA, []);
 
     const { getTableProps, 
             getTableBodyProps,
