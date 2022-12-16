@@ -121,7 +121,7 @@ const Navbar = () =>{
         console.log(email);
 
         const logoutFunction = async () => {
-            const data = await fetch(`http://54.200.101.218:5000/logout/${user.output.user_id}`);
+            const data = await fetch(`http://54.200.101.218:5000/logout/${user.user.user_id}`);
             const json = await data.json();
             console.log(json);
             
