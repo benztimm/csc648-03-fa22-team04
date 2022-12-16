@@ -70,7 +70,8 @@ const Home = () =>{
         </div>
         <br/>
     
-      <div><b>Some Recent Uploads</b></div>
+      <div><b className='home-recent'>Recent Uploads</b></div>
+      <hr width='40%' ></hr>
       <br/>
     
         <div className='card-container'>
