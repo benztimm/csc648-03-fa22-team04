@@ -37,13 +37,14 @@ const purchaseMsg = ({setIsOpen, output}) =>{
             const json = await data.json();
 
             console.log(json);
+            if(json.output === "Message sent !"){
+                alert("Message sent!");
+            }   else {
+                alert("Error sending message.");
+            }
         }
 
-        if(json.output === "Message sent !"){
-            alert("Message sent!");
-        }   else {
-            alert("Error sending message.");
-        }
+
 
     }
     
