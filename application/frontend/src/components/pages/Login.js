@@ -47,8 +47,9 @@ const Login = ({setLoginOpen, setRegisterOpen, setUserLogin}) =>{
 
             sessionStorage.setItem("user", JSON.stringify(json));
             //window.localStorage.setItem('user', `${email}`);
-            setUserLogin(true);
             setLoginOpen(false);
+            //setUserLogin(true);
+
         }   
 
     }

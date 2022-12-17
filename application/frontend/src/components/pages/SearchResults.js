@@ -33,24 +33,24 @@ function SearchResults() {
     // navigate(`/productpage/${post_id}`, {state:{id:post_id, title:title}});
 
     //USE THIS url WHEN TESTING ON LOCALHOST
-    //var url = `http://localhost:3000/productpage/${post_id}`;
+    var url = `http://localhost:3000/productpage/${post_id}`;
 
-    var url = `http://54.200.101.218/productpage/${post_id}`;
+    //var url = `http://54.200.101.218/productpage/${post_id}`;
     window.open(url);
 
   }
 
-  function handleDownload(event) {
-
-  }
-  
+  const status = window.localStorage.getItem('status');
   
 
   return (
     
     <div className='wrapper'>
     <br/>
-    <div><b>Showing {media && Object.keys(media.output).length} results</b></div>
+    <div><b>Showing 1-{media && Object.keys(media.output).length} out of {media && Object.keys(media.output).length} results</b></div>
+    <br/>
+    <br/>
+    <div><b>{status}</b></div>
     <br/>
     {media && media.output.map(output => (
 

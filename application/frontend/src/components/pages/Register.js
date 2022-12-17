@@ -43,14 +43,21 @@ const Register = ({setRegisterOpen, setLoginOpen}) =>{
     }
 
     const fetchData = async () => {
-
-        //http://54.200.101.218:5000/register?email=testuser2@sfsu.edu&password=password2&first_name=test_user_2&last_name=last_name_2
         
         const data = await fetch(`http://54.200.101.218:5000/register?email=${email}&password=${password}&first_name=${firstName}&last_name=${lastName}`);
         const json = await data.json();
 
         console.log(json);
+
         setItems(json);
+        
+        if(json.output === "Registration successful"){
+            setRegisterOpen(false);
+            alert("Registration successful!");
+        }   else {
+            alert("Registration failed. Please try again.");
+        }
+
 
     }
 
@@ -61,7 +68,7 @@ const Register = ({setRegisterOpen, setLoginOpen}) =>{
         var result = sfsuRegex.test(email);
         var result2 = mailRegex.test(email);
         if(result == true || result2 == true ){
-            console.log("Register success");
+
             fetchData();
         }
         else{
