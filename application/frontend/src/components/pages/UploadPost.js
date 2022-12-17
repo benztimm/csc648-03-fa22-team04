@@ -66,6 +66,9 @@ function UploadPost() {
             data.append('uploader_id', user_id);
             fetch('http://54.200.101.218:5000/upload_file/', {
                 method: 'POST',
+                headers: {
+                    'user': `${user_id}`,
+                },
                 body: data,
               }).then((response) => {
                 response.json();

@@ -10,8 +10,6 @@ Description: Displays user's messages from potential buyer's of user's listed it
 import { useContext, useRef, useState, useHistory, useEffect, useMemo } from 'react'; 
 import { Link, useNavigate, generatePath, useLocation } from 'react-router-dom';
 import { useTable, useSortBy } from 'react-table';
-import MOCK_DATA from './MOCK_DATA.json'
-import { COLUMNS } from './columns'
 import './styles/inbox.css';
 
 
@@ -57,7 +55,43 @@ function Inbox(){
 
   }, [])
 
-  
+
+  async function deleteButton(event) {
+    const value = event.target.getAttribute('data-value');
+    console.log(value);
+    const data = await fetch(`http://54.200.101.218:5000/delete-message/${value}`, {
+      method: 'GET',
+      headers: {
+        'user': `${user_id}`,
+      }
+    });
+    const json = await data.json();
+    console.log(json);
+    // You might want to update the messages state here to reflect the deleted message
+  }
+
+  const COLUMNS = [
+    {
+        Header: 'Item Title',
+        accessor: 'post_title',
+    },
+    {
+        Header: 'Message',
+        accessor: 'message',
+    },
+    {
+        Header: 'Email',
+        accessor: 'buyer_email',
+    },
+    {
+        Header: 'Date',
+        accessor: 'timestamp',
+    },
+    {
+        Header: 'Delete',
+        Cell: ({row}) => <button data-value={row.original.message_id} onClick={deleteButton}>DELETE</button>
+    },
+    ]
 
 
   const columns = useMemo(() => COLUMNS, []);

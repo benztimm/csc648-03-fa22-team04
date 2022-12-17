@@ -44,9 +44,18 @@ function Dashboard(){
 
     }
 
-    function deleteButton(event) {
+    async function deleteButton(event) {
         const value = event.target.getAttribute('data-value');
         console.log(value);
+        const data = await fetch(`http://54.200.101.218:5000/delete-post/${value}`, {
+          method: 'GET',
+          headers: {
+            'user': `${user_id}`,
+          }
+        });
+        const json = await data.json();
+      
+        console.log(json);
       }
 
     return (
@@ -58,12 +67,12 @@ function Dashboard(){
                 <button class="dashboard-myPost" >MY POSTS</button>&nbsp;&nbsp;&nbsp;
                 <button class="dashboard" onClick={goToInbox}>INBOX</button>
             </div>
-
+                                                {/* onClick={() => navigateToProduct(`${output.title}`, `${output.post_id}`) */}
             <div className='wrapper'>
                 {items && items.output.map(output => (
 
                     <div>
-                        <div className='card_body' key={output.post_id} onClick={() => navigateToProduct(`${output.title}`, `${output.post_id}`)}>
+                        <div className='card_body' key={output.post_id}>
                             <div className='image_container'>
                                 <img src={output.thumbnail} className='thumbnail' />
                                 <div className='hovercap'>Click for Details</div>
