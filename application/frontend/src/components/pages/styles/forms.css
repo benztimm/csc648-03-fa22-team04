@@ -34,6 +34,7 @@
     border: solid;
     border-width: 3px 0px 3px 0px;
     border-color: black;
+    margin-top: 10px;
 }
 
 .form-container .upload-note{
@@ -46,20 +47,26 @@
 
 } */
 .form-container button{
-    width: 30%;
-    height: 30px;
-
-    border-radius: 5px;
-    border: solid;
-    border-width: 2px;
-    border-color: black;
+    position: relative;
+    
+    font-size: 15px;
+    color: black;
+    padding: 5px;
+    width: 175px;
+    height: 45px;
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
     cursor: pointer;
+    margin-left: 10px;
+
+    box-shadow: 0 2.5px #999;
 }
 
 .upload-submit-button {
     background-color: #2eb06b;
-    float: right;
-    cursor: pointer;
+    
 }
 
 .upload-submit-button:hover {
@@ -71,7 +78,7 @@
 .upload-cancel-button{
     background-color: white;
     float: left;
-    cursor: pointer;
+
 }
 
 .upload-cancel-button:hover{

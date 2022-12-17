@@ -6,6 +6,7 @@
     flex-wrap: wrap;
     margin-top: 5vh;
     justify-content: center;
+    height: fit-content;
     
 }
 
@@ -78,24 +79,33 @@
 }
 
 .purchase-bttn{
-    border-radius: 10px;
-    border: solid;
-    border-width: 2px;
-    border-color: black;
-    cursor: pointer;
+    position: relative;
     background-color: gold;
-    margin-top: 10px;
+    border: none;
+    font-size: 15px;
+    color: black;
+    padding: 5px;
+    width: 175px;
+    height: 45px;
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
     cursor: pointer;
-    font-weight: 500;
-    padding: 11px 28px;
-    font-size: 0.8rem;
-    transition: all 0.25s ease;
+    margin-left: 10px;
+
+    box-shadow: 0 2.5px #999;
 }
 
 .purchase-bttn:hover {
     color: white;
     transform: translateY(-1px);
     background: #3BB261;
+}
+
+.purchaseInfo .card__bttn:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
 }
 
 .cancel-bttn{
