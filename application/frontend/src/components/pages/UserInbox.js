@@ -20,6 +20,9 @@ function Inbox(){
 
   const user = JSON.parse(sessionStorage.getItem('user'));
   const user_id = user.user.user_id;
+
+  const [messages, setMessages] = useState([]);
+
   
     const navigate = useNavigate();
     const goToPosts = () => {
@@ -34,19 +37,26 @@ function Inbox(){
     const json = await data.json();
 
     console.log(json);
-    setItems(json);
+    setMessages(json.output);
 
   }
 
   useEffect(() => {
     fetchData();
+    console.log(messages);
+
+    if(messages.length === 0){
+      console.log("test");
+    }
+
   }, [])
 
   
 
 
   const columns = useMemo(() => COLUMNS, []);
-  const data = useMemo(() => MOCK_DATA, []);
+  const data = useMemo(() => messages, [messages]);
+
 
     const { getTableProps, 
             getTableBodyProps,
@@ -59,54 +69,62 @@ function Inbox(){
             },
             useSortBy)
 
+
+
     return (
 
-        <div>
-                <div className="dashboard">
-                  <div className="header">
-                    <h1>INBOX</h1>
-                  </div>
-                    <button className="dashboard" onClick={goToPosts}>MY POSTS</button>&nbsp;&nbsp;&nbsp;
-                    <button className="dashboard-inbox">INBOX</button>
-                </div>
+      <div>
+        <div className="dashboard">
+          <div className="header">
+            <h1>INBOX</h1>
+          </div>
+          <button className="dashboard" onClick={goToPosts}>MY POSTS</button>&nbsp;&nbsp;&nbsp;
+          <button className="dashboard-inbox">INBOX</button>
+        </div>
 
-                <table {...getTableProps()}>
-                  <thead>
-                    {headerGroups.map((headerGroup) => (
-                    <tr {...headerGroup.getHeaderGroupProps()}>
-                        {headerGroup.headers.map((column) => (
-                              <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                                {column.render('Header')}
-                                <span>
-                                  {column.isSorted ? (column.isSortedDesc ? '🔽' : '🔼' ): ''}
-                                </span>
-                              </th>
-                            ))}
-                    </tr>
-                    ))}
-                  </thead>
-                  <tbody {...getTableBodyProps()}>
+        <table {...getTableProps()}>
+          <thead>
+            {headerGroups.map((headerGroup) => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                    {column.render('Header')}
+                    <span>
+                      {column.isSorted ? (column.isSortedDesc ? '🔽' : '🔼') : ''}
+                    </span>
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {
+              rows.map(row => {
+                prepareRow(row)
+                return (
+                  <tr {...row.getRowProps()}>
                     {
-                        rows.map(row => {
-                          prepareRow(row)
-                          return (
-                            <tr {...row.getRowProps()}>
-                              {
-                                row.cells.map((cell) => {
-                                  return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                                })
-                              }
-                            </tr>
-                          )
-                        })
+                      row.cells.map((cell) => {
+                        return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                      })
                     }
+                  </tr>
+                )
+              })
+            }
 
-                  </tbody>
+          </tbody>
 
-                </table>
-                
-            </div>
+        </table>
+
+      </div>
+
+
     );
+          
+  
+
+
 }
 
 export default Inbox;

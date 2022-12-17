@@ -9,21 +9,21 @@ Description: File for columns for table in UserInbox.js
 import './styles/inbox.css';
 
 export const COLUMNS = [
-    {
-        Header: 'Item Title',
-        accessor: 'title',
-    },
+    // {
+    //     Header: 'Item Title',
+    //     accessor: 'title',
+    // },
     {
         Header: 'Message',
         accessor: 'message',
     },
     {
         Header: 'Email',
-        accessor: 'email',
+        accessor: 'buyer_email',
     },
     {
         Header: 'Date',
-        accessor: 'date',
+        accessor: 'timestamp',
     },
     {
         Header: 'Delete',

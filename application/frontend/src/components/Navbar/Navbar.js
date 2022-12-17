@@ -24,11 +24,18 @@ const Navbar = () =>{
 
     // CATEGORY SELECTOR
     const [selectedOption, setSelectedOption] = useState('');
+    const [categories, setCategories] = useState([]);
 
     const changeHandlerCategory = (e) => {
         let newCat = e.target.value;
         setSelectedOption(newCat);
     };
+
+    useEffect(() => {
+        fetch(`http://54.200.101.218:5000/get-category/`)
+            .then(response => response.json())
+            .then(data => setCategories(data.output));
+    }, []);
     //END CATEGORY SELECTOR
 
     // SEARCH BAR
@@ -82,12 +89,18 @@ const Navbar = () =>{
     //GET request from search bar input
     const fetchData = async () => {
 
-        const data = await fetch(`http://54.200.101.218:5000/search-posts/?keyword=${value}&type=&category=${selectedOption}`);
-        const json = await data.json();
-
-        console.log(json);
-        setItems(json);
-        window.localStorage.setItem('result', JSON.stringify(json));
+        const data = {'data': await fetch(`http://54.200.101.218:5000/search-posts/?keyword=${value}&type=&category=${selectedOption}`)};
+        const json = {'json': await data.data.json()};
+        json['status'] = "Here are your search results.";
+        if (json.json['output'].length === 0){
+            data.data = await fetch(`http://54.200.101.218:5000/home-page/`);
+            json.json = await data.data.json();
+            json['status'] = "Your search yielded no results. Here are some recent ones."
+        }
+        console.log(json.json);
+        setItems(json.json);
+        window.localStorage.setItem('result', JSON.stringify(json.json));
+        window.localStorage.setItem('status', JSON.stringify(json.status));
         navigate('/searchresults');
     }
 
@@ -154,13 +167,12 @@ const Navbar = () =>{
                         width={125} height={120}></img>
                     </Link>
                     <div className='nav_search_bar'>
-                        <select  className='cat-Select' onChange={changeHandlerCategory}>
-                            <option value="">All Categories</option>
-                            <option value="Photography" >Photography</option>
-                            <option value="Computer Science" >Computer Science</option>
-                            <option value="Art" >Art</option>
-                            <option value="Travel" >Travel</option>
-                        </select>
+                    <select className='cat-Select' onChange={changeHandlerCategory}>
+                    <option value="">Select a category</option>
+                                {categories.map((category) => (
+                                    <option value={category.category_id}>{category.category_name}</option>
+                                ))}
+                            </select>
     
                         <input maxLength={40} value={value} onChange={handleChange} onKeyDown={changeHandler} type="text" placeholder="Search..."/>
                         {isActive && <div className="searchBarAlert">Please enter up to 40 characters.</div>}
@@ -176,7 +188,7 @@ const Navbar = () =>{
                         <a href='/#'><Link to="/Upload">Upload</Link></a>
                         {isRegisterOpen && <Register setRegisterOpen={setRegisterOpen} setLoginOpen={setLoginOpen}/>}
                         <a onClick={logoutFunction} type='submit'>Logout</a>
-                        {isLoginOpen && <Login setLoginOpen={setLoginOpen} setRegisterOpen={setRegisterOpen} setUserLogin={setUserLogin}/>}
+                        {isLoginOpen && <Login setLoginOpen={setLoginOpen} setRegisterOpen={setRegisterOpen} c/>}
                     </div>
                     <button className='navButton' onClick={() => setShowLinks(!showLinks)}><FaBars/></button>
                 </div>
@@ -193,19 +205,17 @@ const Navbar = () =>{
         <div className='Navbar'>
             
             <div className='left_side'>
-                {/* <button>sidebarhere</button> */}
                 <Link to="/">
                     <img src={logo} className="img-fluid" onClick={() => setShowLinks(false)}
                     width={125} height={120}></img>
                 </Link>
                 <div className='nav_search_bar'>
-                    <select  className='cat-Select' onChange={changeHandlerCategory}>
-                        <option value="">All Categories</option>
-                        <option value="Photography" >Photography</option>
-                        <option value="Computer Science" >Computer Science</option>
-                        <option value="Art" >Art</option>
-                        <option value="Travel" >Travel</option>
-                    </select>
+                <select className='cat-Select' onChange={changeHandlerCategory}>
+                <option value="">Select a category</option>
+                                {categories.map((category) => (
+                                    <option value={category.category_id}>{category.category_name}</option>
+                                ))}
+                            </select>
 
                     <input maxLength={40} value={value} onChange={handleChange} onKeyDown={changeHandler} type="text" placeholder="Search..."/>
                     {isActive && <div className="searchBarAlert">Please enter up to 40 characters.</div>}
