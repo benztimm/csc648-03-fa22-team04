@@ -102,7 +102,6 @@ def execute_query(query, params:dict = None, debug = False):
         
         # Debug:
         if debug: print(cursor._executed)
-        return rows
 
     except Exception as e :
         print(e)
@@ -110,6 +109,9 @@ def execute_query(query, params:dict = None, debug = False):
     finally:
         conn.close()
         cursor.close()
+    
+    return rows
+    
 
 def execute_query_rowcount(query, params:dict = None, debug = False):
     """

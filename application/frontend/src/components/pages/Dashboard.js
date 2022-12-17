@@ -11,8 +11,20 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate, useHistory, generatePath, useLocation } from 'react-router-dom';
 import './styles/dashboard.css';
 import myImage from '../images/gatorExchange.png';
+import ReactGA from 'react-ga';
 
 function Dashboard(){
+
+    useEffect(() => {
+        console.log(window.location.pathname + window.location.search);
+        try{
+          ReactGA.pageview(window.location.pathname + window.location.search);
+        }
+        catch(e){
+          console.error(e);
+        }
+        
+      }, []);
 
     const navigate = useNavigate();
     const [items, setItems] = useState(null);

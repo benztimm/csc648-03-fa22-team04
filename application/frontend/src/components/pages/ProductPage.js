@@ -13,9 +13,22 @@ import PurchaseMsg from './PurchaseMsg.js';
 import profilePic from '../images/testimage.jpg';
 import AudioPlayer from './AudioPlayer';
 import VideoPlayer from './VideoPlayer';
+import ReactGA from 'react-ga';
+
 
 
 function ProductPage() {
+
+    useEffect(() => {
+        console.log(window.location.pathname + window.location.search);
+        try{
+          ReactGA.pageview(window.location.pathname + window.location.search);
+        }
+        catch(e){
+          console.error(e);
+        }
+        
+      }, []);
 
     const location = useLocation();
 

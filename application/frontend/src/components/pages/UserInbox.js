@@ -11,10 +11,21 @@ import { useContext, useRef, useState, useHistory, useEffect, useMemo } from 're
 import { Link, useNavigate, generatePath, useLocation } from 'react-router-dom';
 import { useTable, useSortBy } from 'react-table';
 import './styles/inbox.css';
+import ReactGA from 'react-ga';
 
 
 function Inbox(){
 
+  useEffect(() => {
+    console.log(window.location.pathname + window.location.search);
+    try{
+      ReactGA.pageview(window.location.pathname + window.location.search);
+    }
+    catch(e){
+      console.error(e);
+    }
+    
+  }, []);
 
   const user = JSON.parse(sessionStorage.getItem('user'));
   const user_id = user.user.user_id;

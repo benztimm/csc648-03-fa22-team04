@@ -17,6 +17,27 @@ import apis.user_api as user_api
 import apis.message_api as message_api
 import apis.category_api as category_api
 
+import utilities.session as session
+
+
+def check_session():
+    user = request.headers.get("user", False)
+    if user and int(user) != 0 and repr(user) != "0":
+        session.update_session(int(user))
+
+
+def authenticate_session():
+    '''
+    Check if API is authenticated.
+
+    `return` True / False
+    '''
+    user = request.headers.get("user", False)
+
+    if not user or not session.has_valid_session(int(user)): return False
+    
+    return True
+
 @app.route("/")
 def hello():
     return "<h1 style='color:black'>CSC 648 - Team 4!</h1>"
@@ -57,6 +78,7 @@ def get_post_details(post_id=1):
     `returns` query output
     '''
     try:
+        check_session()
         output = post_api.get_post_details(post_id=post_id)
     except Exception as e:
         print(f"== EXCEPTION == get_post_details: \n{traceback.print_exc()}\n")
@@ -75,6 +97,7 @@ def get_latest_post(limit=None):
     `returns` query output
     '''
     try:
+        check_session()
         limit = (int(limit))
         output = post_api.get_latest_posts(limit = limit)
     except Exception as e:
@@ -94,6 +117,8 @@ def static_post(post_name=None):
     `returns` static image
     '''
     try:
+        check_session()
+
         file_name = path.abspath(f"../../posts/{post_name}")
         return send_file(file_name)
     except Exception as e:
@@ -110,6 +135,8 @@ def static_thumbnail(post_name=None):
     `returns` static image
     '''
     try:
+        check_session()
+
         file_name = path.abspath(f"../../thumbnails/{post_name}")
         return send_file(file_name)
     except Exception as e:
@@ -126,6 +153,10 @@ def post_delete(post_id=None):
     `returns` query status
     '''
     try:
+        if not authenticate_session():
+            return jsonify({"message": "Not Authorized! Please Log-in to continue"}), 403
+        check_session()
+        
         post_id = (int(post_id))
         output = post_api.delete_post(post_id)
     except Exception as e:
@@ -143,6 +174,10 @@ def user_delete(user_id=None):
     `returns` query status
     '''
     try:
+        if not authenticate_session():
+            return jsonify({"message": "Not Authorized! Please Log-in to continue"}), 403
+        check_session()
+
         user_id = (int(user_id))
         output = user_api.delete_user(user_id)
     except Exception as e:
@@ -160,6 +195,10 @@ def message_delete(message_id=None):
     `returns` query status
     '''
     try:
+        if not authenticate_session():
+            return jsonify({"message": "Not Authorized! Please Log-in to continue"}), 403
+        check_session()
+
         message_id = (int(message_id))
         output = message_api.delete_message(message_id)
     except Exception as e:
@@ -181,6 +220,8 @@ def search_posts(keyword = None,category = None,type = None):
     `returns` query output
     '''
     try:
+        check_session()
+
         param = request.args.to_dict()
         if 'keyword' in param:
             keyword = param['keyword']
@@ -201,6 +242,10 @@ def search_posts(keyword = None,category = None,type = None):
 @app.route('/get-user-email/<user_id>')
 def email_get(user_id=None):
     try:
+        if not authenticate_session():
+            return jsonify({"message": "Not Authorized! Please Log-in to continue"}), 403
+        check_session()
+
         user_id = (int(user_id))
         output = user_api.get_email(user_id=user_id)
     except Exception as e:
@@ -237,12 +282,14 @@ def register():
         password = bcrypt.generate_password_hash(param.get("password")).decode('utf-8')
 
         # return success message if user is registered successfully
-        output = user_api.register(first_name=first_name, last_name=last_name, email=email, password=password)
+        user_api.register(first_name=first_name, last_name=last_name, email=email, password=password)
+        output = login(email=email, password=param.get("password"))
 
     except Exception as e:
         print(f"== EXCEPTION == register: \n{traceback.print_exc()}\n")
         return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500
-    return json.dumps({'output': output}, sort_keys=True, default=str), 200
+    
+    return json.dumps(json.loads(output[0].get_data(as_text=True)), sort_keys=True, default=str), 200
 
 
 @app.route('/update-password')
@@ -267,11 +314,12 @@ def update_password():
 
 
 @app.route('/login', methods=['GET', 'POST'])
-def login():
+def login(email = None, password = None):
     try:
-        param = request.args.to_dict()
-        email = param.get("username")
-        password = param.get("password")
+        if not email or not password:
+            param = request.args.to_dict()
+            email = param.get("username")
+            password = param.get("password")
 
         if not email or not password:
             return jsonify({"message": "Missing Credentials!"}), 403
@@ -283,6 +331,8 @@ def login():
             output = output[0]
             if bcrypt.check_password_hash(output.get("password"), password):
                 del output['password']
+                session.update_session(output.get('user_id'))
+
                 return jsonify({"message": "Login Successful!", 'user': output}), 500
             else:
                 return jsonify({"message": "Incorrect Credentials!"}), 403
@@ -297,6 +347,10 @@ def login():
 @app.route('/upload_file/',methods = ['POST'],defaults={'uploader_id' : None, 'post_type' : None, 'title' : None, 'file' : None, 'description' : None, 'price' : None, 'category' : None})
 def upload_file(uploader_id = None, post_type = None, title = None, file = None, description = None, price = None, category = None):
     try:
+        if not authenticate_session():
+            return jsonify({"message": "Not Authorized! Please Log-in to continue"}), 403
+        check_session()
+
         #check if directory exist or not. if not then create 
         #NOT NECESSARY FOR THE PROJECT
         if not os.path.exists("../../posts"):
@@ -310,7 +364,7 @@ def upload_file(uploader_id = None, post_type = None, title = None, file = None,
 
         #get all parameter
         uploader_id = request.form['uploader_id']
-        post_type = request.form['post_type'].lower()
+        post_type = request.form['post_type']
         title = request.form['title']
         file = f.filename
         description = request.form['description']
@@ -318,7 +372,7 @@ def upload_file(uploader_id = None, post_type = None, title = None, file = None,
         category = request.form['category']
         
         #create thumbnail from file if file_type is image
-        if post_type=='image':
+        if post_type=='Image':
             img = Image.open(os.path.join("../../posts", f.filename))
             SIZE = (img.width/(img.height/300), 300)
             img.thumbnail(SIZE)
@@ -347,6 +401,10 @@ def get_user_post(uploader_id=None):
     '''
     output = []
     try:
+        if not authenticate_session():
+            return jsonify({"message": "Not Authorized! Please Log-in to continue"}), 403
+        check_session()
+        
         if uploader_id:
             output = user_api.get_user_post(uploader_id)
     except Exception as e:
@@ -378,6 +436,8 @@ def get_category(category_id=None):
     `returns` query output
     '''
     try:
+        check_session()
+
         output = category_api.get_category(category_id)
     except Exception as e:
         print(f"== EXCEPTION == get_category: \n{traceback.print_exc()}\n")
@@ -390,6 +450,10 @@ def get_category(category_id=None):
 @app.route('/send-message', methods=['GET', 'POST'])
 def send_message():
     try:
+        if not authenticate_session():
+            return jsonify({"message": "Not Authorized! Please Log-in to continue"}), 403
+        check_session()
+        
         param = request.args.to_dict()
         buyer = param.get("buyer")
         seller = param.get("seller")
@@ -417,6 +481,10 @@ def get_user_inbox(user_id=None):
     '''
     output = []
     try:
+        if not authenticate_session():
+            return jsonify({"message": "Not Authorized! Please Log-in to continue"}), 403
+        check_session()
+
         if user_id:
             output = message_api.inbox(user_id)
     except Exception as e:

@@ -11,9 +11,21 @@ import React, {Component} from 'react';
 import { useContext, useRef, useState, useHistory, useEffect,  } from 'react'; 
 import { Link, renderMatches, useNavigate, useRouteLoaderData } from 'react-router-dom';
 import './styles/home.css';
+import ReactGA from 'react-ga';
 
 
 const Home = () =>{
+
+  useEffect(() => {
+    console.log(window.location.pathname + window.location.search);
+    try{
+      ReactGA.pageview(window.location.pathname + window.location.search);
+    }
+    catch(e){
+      console.error(e);
+    }
+    
+  }, []);
 
   const navigate = useNavigate();
 

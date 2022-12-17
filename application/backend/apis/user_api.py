@@ -172,6 +172,8 @@ def get_user_post(uploader_id = None):
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/document.png'
             elif post['post_type'] == "Audio":
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/audio.png'
+            elif post['post_type'] == "Video":
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/video.png'
             else:    
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/{post["file"]}'
             

@@ -6,7 +6,7 @@ Authors: Sophia Chu, Ruben Ponce
 Description: Contains router for all components of app.
 
 */
-import React, { Component, useContext, useMemo, useState } from 'react';
+import React, { Component, useContext, useEffect, useMemo, useState } from 'react';
 import { Routes, Route, Switch, Router, createBrowserRouter, RouterProvider,
   Outlet, useRouteLoaderData, createRoutesFromElements, BrowserRouter  } from 'react-router-dom';
 import styles from './App.css';
@@ -21,6 +21,7 @@ import Inbox from './components/pages/UserInbox';
 import ProductPage from './components/pages/ProductPage';
 import SearchResults from './components/pages/SearchResults';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import ReactGA from 'react-ga';
 
 
 //TEST
@@ -28,10 +29,22 @@ import TESTIMAGE from './components/pages/imagetest.js';
 
 const queryClient = new QueryClient();
 
+//Integrating Google Analytics with Tracking ID
+ReactGA.initialize('UA-165702779-1');
 
 const App= () =>{
 
-
+  useEffect(() => {
+    console.log(window.location.pathname + window.location.search);
+    try{
+      ReactGA.pageview(window.location.pathname + window.location.search);
+    }
+    catch(e){
+      console.error(e);
+    }
+    
+  }, []);
+  
   return (
 
 
@@ -72,4 +85,3 @@ const App= () =>{
 };
 
 export default App;
-

@@ -63,6 +63,8 @@ def search_posts(keyword = None,category = None,type = None):
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/document.png'
             elif post['post_type'] == "Audio":
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/audio.png'
+            elif post['post_type'] == "Video":
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/video.png'
             else:    
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/{post["file"]}'
             
@@ -115,6 +117,8 @@ def get_latest_posts(limit = 1):
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/document.png'
             elif post['post_type'] == "Audio":
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/audio.png'
+            elif post['post_type'] == "Video":
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/video.png'
             else:    
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/{post["file"]}'
             
@@ -165,6 +169,8 @@ def get_post_details(post_id = None):
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/document.png'
             elif post['post_type'] == "Audio":
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/audio.png'
+            elif post['post_type'] == "Video":
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/video.png'
             else:    
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/{post["file"]}'
             
@@ -218,9 +224,9 @@ def upload_post(uploader_id = None, post_type = None, title = None, file = None,
         query_select = """ SELECT * FROM post """
         query = """
                 insert into post
-                (uploader_id,post_type,title,file,thumbnail,description,price,approved,category)
+                (uploader_id,post_type,title,file,thumbnail,description,price,category)
                 values 
-                (%(uploader_id)s,%(post_type)s,%(title)s,%(file)s,%(file)s,%(description)s,%(price)s,'Approved',%(category)s);
+                (%(uploader_id)s,%(post_type)s,%(title)s,%(file)s,%(file)s,%(description)s,%(price)s,%(category)s);
                 """
 
         row_count_before = db.execute_query_rowcount(query_select)
