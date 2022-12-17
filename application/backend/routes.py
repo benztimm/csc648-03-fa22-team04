@@ -23,7 +23,7 @@ import utilities.session as session
 def check_session():
     user = request.headers.get("user", False)
     if user and int(user) != 0 and repr(user) != "0":
-        session.update_session(user)
+        session.update_session(int(user))
 
 
 def authenticate_session():
@@ -34,7 +34,7 @@ def authenticate_session():
     '''
     user = request.headers.get("user", False)
 
-    if not user or not session.has_valid_session(user): return False
+    if not user or not session.has_valid_session(int(user)): return False
     
     return True
 
@@ -286,14 +286,14 @@ def register():
         password = bcrypt.generate_password_hash(param.get("password")).decode('utf-8')
 
         # return success message if user is registered successfully
-        output = user_api.register(first_name=first_name, last_name=last_name, email=email, password=password)
+        user_api.register(first_name=first_name, last_name=last_name, email=email, password=password)
+        output = login(email=email, password=param.get("password"))
 
     except Exception as e:
         print(f"== EXCEPTION == register: \n{traceback.print_exc()}\n")
         return jsonify({"message": "Something went wrong. Please check logs on the server :/"}), 500
     
-    check_session()
-    return json.dumps({'output': output}, sort_keys=True, default=str), 200
+    return json.dumps(json.loads(output[0].get_data(as_text=True)), sort_keys=True, default=str), 200
 
 
 @app.route('/update-password')
@@ -318,11 +318,12 @@ def update_password():
 
 
 @app.route('/login', methods=['GET', 'POST'])
-def login():
+def login(email = None, password = None):
     try:
-        param = request.args.to_dict()
-        email = param.get("username")
-        password = param.get("password")
+        if not email or not password:
+            param = request.args.to_dict()
+            email = param.get("username")
+            password = param.get("password")
 
         if not email or not password:
             return jsonify({"message": "Missing Credentials!"}), 403
@@ -334,7 +335,7 @@ def login():
             output = output[0]
             if bcrypt.check_password_hash(output.get("password"), password):
                 del output['password']
-                check_session()
+                session.update_session(output.get('user_id'))
 
                 return jsonify({"message": "Login Successful!", 'user': output}), 500
             else:

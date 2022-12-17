@@ -21,6 +21,7 @@ def enter_session(user_id):
     Creates a new session for the user. (Log in)
     `input` user_id
     """
+    user_id = int(user_id)
     # Use pickled session data:
     f = open("utilities/session.dat", "rb")
     session_dict = pickle.load(f)
@@ -37,6 +38,7 @@ def exit_session(user_id):
     Removes an active session of the user. (Log out)
     `input` user_id
     """
+    user_id = int(user_id)
 
     # Use pickled session data:
     f = open("utilities/session.dat", "rb")
@@ -55,6 +57,8 @@ def has_valid_session(user_id):
     `input` user_id
     `return` True / False
     """
+    user_id = int(user_id)
+
     # Use pickled session data:
     f = open("utilities/session.dat", "rb")
     session_dict = pickle.load(f)
@@ -77,11 +81,13 @@ def update_session(user_id):
     `input` user_id
     `return` True / False
     """
+    user_id = int(user_id)
+
     # Use pickled session data:
     f = open("utilities/session.dat", "rb")
     session_dict = pickle.load(f)
 
-    session_dict[user_id] = int(time.time())
+    session_dict[user_id] = int(time.time())  
 
     f = open("utilities/session.dat", "wb")
     pickle.dump(session_dict, f)

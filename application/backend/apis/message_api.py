@@ -61,17 +61,22 @@ def inbox(user_id):
                     buyer.email as 'buyer_email',
                     seller.email as 'seller_email',
                     buyer.user_id as 'buyer_id',
-                    seller.user_id as 'seller_id'
+                    seller.user_id as 'seller_id',
+                    p.title as 'post_title'
                 FROM
                     message m
                 JOIN
                     user buyer
                 ON
                     m.buyer = buyer.user_id
-                join
+                JOIN
                     user seller
                 ON 
                     m.seller = seller.user_id
+                JOIN
+                    post p
+                ON
+                    p.post_id = m.post_id
                 WHERE
                    m.seller = %(user_id)s
             """
