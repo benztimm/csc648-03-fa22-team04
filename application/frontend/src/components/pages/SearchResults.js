@@ -47,7 +47,7 @@ function SearchResults() {
     
     <div className='wrapper'>
     <br/>
-    <div><b>Showing {media && Object.keys(media.output).length} results</b></div>
+    <div><b>Showing 1-{media && Object.keys(media.output).length} out of {media && Object.keys(media.output).length} results</b></div>
     <br/>
     <br/>
     <div><b>{status}</b></div>
