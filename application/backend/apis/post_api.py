@@ -63,6 +63,8 @@ def search_posts(keyword = None,category = None,type = None):
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/document.png'
             elif post['post_type'] == "Audio":
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/audio.png'
+            elif post['post_type'] == "Video":
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/video.png'
             else:    
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/{post["file"]}'
             
@@ -115,6 +117,8 @@ def get_latest_posts(limit = 1):
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/document.png'
             elif post['post_type'] == "Audio":
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/audio.png'
+            elif post['post_type'] == "Video":
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/video.png'
             else:    
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/{post["file"]}'
             
@@ -165,6 +169,8 @@ def get_post_details(post_id = None):
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/document.png'
             elif post['post_type'] == "Audio":
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/audio.png'
+            elif post['post_type'] == "Video":
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/video.png'
             else:    
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/{post["file"]}'
             
