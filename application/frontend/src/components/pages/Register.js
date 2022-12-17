@@ -129,7 +129,8 @@ const Register = ({setRegisterOpen, setLoginOpen, setUserLogin}) =>{
                             <input type='password' id='confirmPassword' required className='forms' value={confirmPassword} onChange = {(e) => handleInputChange(e)}/>
                         </label><br /><br />
                         <div>
-                            <input type='checkbox' required /><u>I agree to terms and conditions.</u>
+                            <input type='checkbox' required />
+                            <a id='terms' href="/terms-and-conditions">I agree to terms and conditions.</a>
                         </div>
                         <br /><br />
                         <button onClick={()=>handleSubmit()} type='button' className='confirm-bttn' >Register</button>

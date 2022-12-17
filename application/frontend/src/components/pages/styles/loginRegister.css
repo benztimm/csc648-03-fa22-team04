@@ -119,3 +119,10 @@
     margin: auto;
 
   }
+
+
+  #terms {
+    color: blue;
+    text-decoration: unset;
+    font-size: 15px;
+  }

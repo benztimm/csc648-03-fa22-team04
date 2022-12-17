@@ -20,6 +20,7 @@ import Dashboard from './components/pages/Dashboard';
 import Inbox from './components/pages/UserInbox';
 import ProductPage from './components/pages/ProductPage';
 import SearchResults from './components/pages/SearchResults';
+import TandC from './components/pages/TandC';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import ReactGA from 'react-ga';
 
@@ -64,7 +65,7 @@ const App= () =>{
             <Route path="/upload" element={<UploadPost />} />
             <Route path="/inbox" element={<Inbox />} />
             <Route path="/productpage/:post_id" element={<ProductPage />}/>
-
+            <Route path="/terms-and-conditions" element={<TandC />} />
 
             <Route path="/searchresults" element={<SearchResults />}>
               <Route index element={<SearchResults />} />
