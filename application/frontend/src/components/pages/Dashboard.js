@@ -93,7 +93,7 @@ function Dashboard(){
                                     
                                 </h1>
                                 Status: {output.approved}
-                                <button data-value={output.post_id} onClick={deleteButton}>DELETE</button>
+                                <button class="delete-bttn" data-value={output.post_id} onClick={deleteButton}>DELETE</button>
                                 
                             </div>
                         </div>
