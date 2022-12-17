@@ -364,7 +364,7 @@ def upload_file(uploader_id = None, post_type = None, title = None, file = None,
 
         #get all parameter
         uploader_id = request.form['uploader_id']
-        post_type = request.form['post_type'].lower()
+        post_type = request.form['post_type']
         title = request.form['title']
         file = f.filename
         description = request.form['description']
@@ -372,7 +372,7 @@ def upload_file(uploader_id = None, post_type = None, title = None, file = None,
         category = request.form['category']
         
         #create thumbnail from file if file_type is image
-        if post_type=='image':
+        if post_type=='Image':
             img = Image.open(os.path.join("../../posts", f.filename))
             SIZE = (img.width/(img.height/300), 300)
             img.thumbnail(SIZE)
