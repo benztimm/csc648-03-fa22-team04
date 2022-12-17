@@ -173,7 +173,7 @@ const Navbar = () =>{
                     </Link>
                     <div className='nav_search_bar'>
                     <select className='cat-Select' onChange={changeHandlerCategory}>
-                    <option value="">Select a category</option>
+                    <option value="">All Categories</option>
                                 {categories.map((category) => (
                                     <option value={category.category_name}>{category.category_name}</option>
                                 ))}
@@ -216,7 +216,7 @@ const Navbar = () =>{
                 </Link>
                 <div className='nav_search_bar'>
                 <select className='cat-Select' onChange={changeHandlerCategory}>
-                <option value="">Select a category</option>
+                <option value="">All Categories</option>
                                 {categories.map((category) => (
                                     <option value={category.category_name}>{category.category_name}</option>
                                 ))}

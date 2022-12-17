@@ -50,17 +50,17 @@
     text-decoration: underline;
 }
 .seller-profile{
-    padding-top: 25px;
+    padding-top: 18px;
     text-align: left;
     justify-content: space-around;
 }
 .seller-name{   
-    font-size: 15px;
+    font-size: 25px;
     padding-bottom: 20px;
 }
 
 .about-item{
-    font-size: 15px;
+    font-size:18px;
     text-align: left;
 }
 

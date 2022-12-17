@@ -50,7 +50,9 @@ const Login = ({setLoginOpen, setRegisterOpen, setUserLogin}) =>{
             setLoginOpen(false);
             setUserLogin(true);
 
-        }   
+        }   else if(json.message === "Incorrect Credentials!"){
+            alert("Incorrect password!");
+        }
 
     }
 

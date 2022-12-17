@@ -43,6 +43,8 @@ const Register = ({setRegisterOpen, setLoginOpen, setUserLogin}) =>{
     }
 
     const fetchData = async () => {
+
+    
         
         const data = await fetch(`http://54.200.101.218:5000/register?email=${email}&password=${password}&first_name=${firstName}&last_name=${lastName}`);
         const json = await data.json();
@@ -61,15 +63,27 @@ const Register = ({setRegisterOpen, setLoginOpen, setUserLogin}) =>{
             alert("Registration failed. Please try again.");
         }
 
-
+        
     }
 
     const handleSubmit  = () => {
         console.log(firstName,lastName,email,password,confirmPassword);
+        
         var sfsuRegex = /[A-Za-z0-9]+@sfsu\.edu/;
         var mailRegex = /[A-Za-z0-9]+@mail\.sfsu\.edu/;
         var result = sfsuRegex.test(email);
         var result2 = mailRegex.test(email);
+
+        if(firstName === null || lastName === null || email === null || password === null || confirmPassword === null){
+            alert("Please fill out all fields.");
+            return;
+        }   
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match.");
+            return;
+        }
+
         if(result == true || result2 == true ){
 
             fetchData();
