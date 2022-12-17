@@ -39,7 +39,6 @@ def search_posts(keyword = None,category = None,type = None):
         query += """
                     AND (p.title LIKE %(keyword)s
                     OR p.description LIKE %(keyword)s
-                    OR c.category_name LIKE %(category)s
                     )
                 """
     if  category:
@@ -50,6 +49,11 @@ def search_posts(keyword = None,category = None,type = None):
         query+= """
                     AND (p.post_type LIKE %(type)s)
                 """
+    if not category and keyword:
+        query += """
+                    OR c.category_name LIKE %(keyword)s
+                """
+
     results = db.execute_query(query=query, params={
         "keyword": "%" + keyword + "%" if keyword else keyword,
         "category": "%" + category + "%" if category else category,
