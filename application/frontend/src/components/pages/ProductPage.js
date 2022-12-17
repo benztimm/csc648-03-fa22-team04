@@ -12,6 +12,7 @@ import '../pages/styles/productPage.css';
 import PurchaseMsg from './PurchaseMsg.js';
 import profilePic from '../images/testimage.jpg';
 import AudioPlayer from './AudioPlayer';
+import VideoPlayer from './VideoPlayer';
 
 
 function ProductPage() {
@@ -57,6 +58,49 @@ function ProductPage() {
         }
     };
 
+    if(items && items.output[0].post_type === "Video") {
+
+        return(
+
+
+            <div>{items && items.output.map(output => (
+                <div className='page-container'>
+                        <div className='img-container'>
+                        <VideoPlayer videoUrl={output.file} />
+                    </div>
+            
+                    <div className='seller-card'>
+                        <div className='title-container'>
+                        <h1 className='title'>{output.title}</h1>
+                        </div>
+            
+                        <div className='seller-profile'>
+                            <img src={profilePic} width={100} height={100}></img>
+                            <h2 className='seller-name'>{output.uploader_name}</h2>
+                        </div>
+                        <div className='about-item'>
+                            <p>
+                                Date posted: {output.created_timestamp} <br/>
+                                Price: ${output.price}
+                            </p>
+                            <p className='description'>{output.description}</p>
+                        </div>
+                        <div className='footer-buttons'>
+                            
+                            <button className='purchase-bttn' onClick={checkLogin}>
+                                CONTACT SELLER
+                            </button>
+                           {isOpen && <PurchaseMsg setIsOpen={setIsOpen} output={output}/>}
+                        </div>
+                    </div>
+                    </div>
+    
+            ))}</div>
+    
+    
+    
+        )
+    }else
 
     if(items && items.output[0].post_type === "Audio") {
 
