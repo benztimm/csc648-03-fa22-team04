@@ -135,8 +135,8 @@ const Navbar = () =>{
 
     if(sessionStorage.getItem('user') !== null) {
         const user = JSON.parse(sessionStorage.getItem("user"));
-        const email = user.user.email;
-        console.log(email);
+        const first_name = user.user.first_name;
+
 
         const logoutFunction = async () => {
             const data = await fetch(`http://54.200.101.218:5000/logout/${user.user.user_id}`);
@@ -173,7 +173,7 @@ const Navbar = () =>{
                     </Link>
                     <div className='nav_search_bar'>
                     <select className='cat-Select' onChange={changeHandlerCategory}>
-                    <option value="">Select a category</option>
+                    <option value="">All Categories</option>
                                 {categories.map((category) => (
                                     <option value={category.category_name}>{category.category_name}</option>
                                 ))}
@@ -189,7 +189,7 @@ const Navbar = () =>{
                 <div className='right_side'>
                     
                     <div className='nav_links' id={showLinks ? "hidden" : ""} onClick={() => setShowLinks(false)}>
-                        <HoverLink initialText={"Welcome "+ email} hoverText="To Dashboard" />
+                        <HoverLink initialText={"Welcome "+ first_name} hoverText="To Dashboard" />
                         <a href='/#'><Link to="/Upload">Upload</Link></a>
                         {isRegisterOpen && <Register setRegisterOpen={setRegisterOpen} setLoginOpen={setLoginOpen}/>}
                         <a onClick={logoutFunction} type='submit'>Logout</a>
@@ -216,7 +216,7 @@ const Navbar = () =>{
                 </Link>
                 <div className='nav_search_bar'>
                 <select className='cat-Select' onChange={changeHandlerCategory}>
-                <option value="">Select a category</option>
+                <option value="">All Categories</option>
                                 {categories.map((category) => (
                                     <option value={category.category_name}>{category.category_name}</option>
                                 ))}
