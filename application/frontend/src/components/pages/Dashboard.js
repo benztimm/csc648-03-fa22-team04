@@ -37,6 +37,12 @@ function Dashboard(){
         navigate('/inbox');
 
     }
+
+    function deleteButton(event) {
+        const value = event.target.getAttribute('data-value');
+        console.log(value);
+      }
+
     return (
         <div className="dash-container">
             <div className="header">
@@ -72,7 +78,7 @@ function Dashboard(){
                                     
                                 </h1>
                                 Status: {output.approved}
-                                <button>DELETE</button>
+                                <button data-value={output.post_id} onClick={deleteButton}>DELETE</button>
                                 
                             </div>
                         </div>
