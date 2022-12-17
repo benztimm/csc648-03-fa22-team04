@@ -18,12 +18,11 @@
 }
 
 .card_body:hover{
-
     background-color: #e8e8e8;
     border-radius: 5px;
     margin: 20px;
-    width: 80%;
-    height: auto;
+    width: 75.5%;
+    height: fit-content;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -93,10 +92,9 @@
 
 .purchaseInfo button{
     position: relative;
-    background-color: gold;
     border: none;
     font-size: 15px;
-    color: black;
+    
     padding: 5px;
     width: 120px;
     text-align: center;
@@ -108,6 +106,11 @@
 
     box-shadow: 0 2.5px #999;
     
+}
+
+.purchaseInfo .card__bttn{
+    background-color: gold;
+    color: black;
 }
 
 .purchaseInfo .card__bttn:hover{
