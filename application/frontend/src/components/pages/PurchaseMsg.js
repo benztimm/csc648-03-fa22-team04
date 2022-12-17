@@ -33,7 +33,13 @@ const purchaseMsg = ({setIsOpen, output}) =>{
         } else {
             const user = JSON.parse(sessionStorage.getItem("user"));
             const user_id = user.user.user_id;
-            const data = await fetch(`http://54.200.101.218:5000/send-message?buyer=${user_id}&seller=${uploader_id}&post_id=${post_id}&message=${message}`);
+            const data = await fetch(`http://54.200.101.218:5000/send-message?buyer=${user_id}&seller=${uploader_id}&post_id=${post_id}&message=${message}`, {
+                method: 'GET',
+                headers: {
+                    'user': `${user_id}`,
+                    
+                }
+            });
             const json = await data.json();
 
             console.log(json);
