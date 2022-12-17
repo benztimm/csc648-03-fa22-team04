@@ -32,7 +32,12 @@ const Navbar = () =>{
     };
 
     useEffect(() => {
-        fetch(`http://54.200.101.218:5000/get-category/`)
+        fetch(`http://54.200.101.218:5000/get-category/`, {
+            method: 'GET',
+            headers: {
+              'user': '0',
+            }
+          })
             .then(response => response.json())
             .then(data => setCategories(data.output));
     }, []);
@@ -170,7 +175,7 @@ const Navbar = () =>{
                     <select className='cat-Select' onChange={changeHandlerCategory}>
                     <option value="">Select a category</option>
                                 {categories.map((category) => (
-                                    <option value={category.category_id}>{category.category_name}</option>
+                                    <option value={category.category_name}>{category.category_name}</option>
                                 ))}
                             </select>
     
@@ -213,7 +218,7 @@ const Navbar = () =>{
                 <select className='cat-Select' onChange={changeHandlerCategory}>
                 <option value="">Select a category</option>
                                 {categories.map((category) => (
-                                    <option value={category.category_id}>{category.category_name}</option>
+                                    <option value={category.category_name}>{category.category_name}</option>
                                 ))}
                             </select>
 
@@ -230,7 +235,7 @@ const Navbar = () =>{
                     <a href='/#'><Link to="/About">About</Link></a>
                     <a href='/#'><Link to="/Upload">Upload</Link></a>
                     <a onClick={() => setRegisterOpen(true)}>Register</a>
-                    {isRegisterOpen && <Register setRegisterOpen={setRegisterOpen} setLoginOpen={setLoginOpen}/>}
+                    {isRegisterOpen && <Register setRegisterOpen={setRegisterOpen} setLoginOpen={setLoginOpen} setUserLogin={setUserLogin}/>}
                     <a onClick={() => setLoginOpen(true)}>Login</a>
                     {isLoginOpen && <Login setLoginOpen={setLoginOpen} setRegisterOpen={setRegisterOpen} setUserLogin={setUserLogin}/>}
                 </div>

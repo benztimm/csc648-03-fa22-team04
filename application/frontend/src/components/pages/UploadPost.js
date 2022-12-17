@@ -77,6 +77,9 @@ function UploadPost() {
             data.append('uploader_id', user_id);
             fetch('http://54.200.101.218:5000/upload_file/', {
                 method: 'POST',
+                headers: {
+                    'user': `${user_id}`,
+                },
                 body: data,
               }).then((response) => {
                 response.json();
@@ -125,8 +128,9 @@ function UploadPost() {
                             MEDIA TYPE<text style={{ color: 'red' }}><i>*</i></text><br></br>
                             <select name="mtype" required className="forms">
                                 <option value="Image">Image</option>
+                                <option value="Audio">Audio</option>
                                 <option value="Video">Video</option>
-                                <option value="Document">Document</option>I
+                                <option value="Document">Document</option>
                             </select>
                         </label><br /><br />
                         <label className='input-text-field'>

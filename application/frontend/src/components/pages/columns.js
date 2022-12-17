@@ -9,10 +9,10 @@ Description: File for columns for table in UserInbox.js
 import './styles/inbox.css';
 
 export const COLUMNS = [
-    // {
-    //     Header: 'Item Title',
-    //     accessor: 'title',
-    // },
+    {
+        Header: 'Item Title',
+        accessor: 'post_title',
+    },
     {
         Header: 'Message',
         accessor: 'message',
@@ -27,6 +27,6 @@ export const COLUMNS = [
     },
     {
         Header: 'Delete',
-        Cell: <button className='delete'>delete</button>
+        Cell: <button data-value={output.message_id} onClick={deleteButton}>DELETE</button>
     },
 ]
