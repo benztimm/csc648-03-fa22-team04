@@ -224,9 +224,9 @@ def upload_post(uploader_id = None, post_type = None, title = None, file = None,
         query_select = """ SELECT * FROM post """
         query = """
                 insert into post
-                (uploader_id,post_type,title,file,thumbnail,description,price,approved,category)
+                (uploader_id,post_type,title,file,thumbnail,description,price,category)
                 values 
-                (%(uploader_id)s,%(post_type)s,%(title)s,%(file)s,%(file)s,%(description)s,%(price)s,'Approved',%(category)s);
+                (%(uploader_id)s,%(post_type)s,%(title)s,%(file)s,%(file)s,%(description)s,%(price)s,%(category)s);
                 """
 
         row_count_before = db.execute_query_rowcount(query_select)
