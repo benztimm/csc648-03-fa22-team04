@@ -7,7 +7,7 @@
 
 .card_body{
     font-family: 'Noto Sans', sans-serif;
-    margin: 20px;
+    margin: auto;
     width: 75%;
     height: auto;
     display: flex;
@@ -20,12 +20,22 @@
 .card_body:hover{
     background-color: #e8e8e8;
     border-radius: 5px;
-    margin: 20px;
+    margin: auto;
     width: 75.5%;
     height: fit-content;
     display: flex;
     align-items: center;
     justify-content: space-around;
+}
+
+.status {
+    width: 100%;
+    text-align: center;
+}
+
+.showing {
+    width: 100%;
+    margin-left: 50px;
 }
 
 
