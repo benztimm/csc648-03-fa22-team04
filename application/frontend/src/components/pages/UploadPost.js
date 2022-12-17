@@ -114,6 +114,7 @@ function UploadPost() {
                             MEDIA TYPE<text style={{ color: 'red' }}><i>*</i></text><br></br>
                             <select name="mtype" required className="forms">
                                 <option value="Image">Image</option>
+                                <option value="Audio">Audio</option>
                                 <option value="Video">Video</option>
                                 <option value="Document">Document</option>I
                             </select>
