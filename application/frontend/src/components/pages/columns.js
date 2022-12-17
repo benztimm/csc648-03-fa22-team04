@@ -11,7 +11,7 @@ import './styles/inbox.css';
 export const COLUMNS = [
     {
         Header: 'Item Title',
-        accessor: 'title',
+        accessor: 'post_title',
     },
     {
         Header: 'Message',
@@ -19,14 +19,14 @@ export const COLUMNS = [
     },
     {
         Header: 'Email',
-        accessor: 'email',
+        accessor: 'buyer_email',
     },
     {
         Header: 'Date',
-        accessor: 'date',
+        accessor: 'timestamp',
     },
     {
         Header: 'Delete',
-        Cell: <button className='delete'>delete</button>
+        Cell: <button data-value={output.message_id} onClick={deleteButton}>DELETE</button>
     },
 ]

@@ -7,94 +7,115 @@ Description: File for user dashboard. Displays user's uploaded media items.
 
 */
 
-import React from "react";
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate, useHistory, generatePath, useLocation } from 'react-router-dom';
 import './styles/dashboard.css';
 import myImage from '../images/gatorExchange.png';
+import ReactGA from 'react-ga';
 
 function Dashboard(){
 
+    useEffect(() => {
+        console.log(window.location.pathname + window.location.search);
+        try{
+          ReactGA.pageview(window.location.pathname + window.location.search);
+        }
+        catch(e){
+          console.error(e);
+        }
+        
+      }, []);
+
     const navigate = useNavigate();
+    const [items, setItems] = useState(null);
+
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    const user_id = user.user.user_id;
+
+    const fetchData = async () => {
+
+        const data = await fetch(`http://54.200.101.218:5000/get-user-post/${user_id}`, {
+            method: 'GET',
+            headers: {
+                'user': `${user_id}`,
+                
+            }
+        });
+        const json = await data.json();
+
+        console.log(json);
+        setItems(json);
+    }
+
+    useEffect(() => {
+        fetchData();
+      }, [])
 
     const goToInbox = () => {
         navigate('/inbox');
 
     }
-        return (
-            <div className="dash-container">
-                <div className="header">
-                    <h1>MY POSTS</h1>
-                </div>
-                <div class="dashboard">
-                    <button class="dashboard" >MY POSTS</button>&nbsp;&nbsp;&nbsp;
-                    <button class="dashboard" onClick={goToInbox}>INBOX</button>
-                </div>
 
-                <div className='wrapper'>
-                <div className='card_body' >
-                        <div className='image_container'>
-                            <img src={myImage} className='thumbnail' />
-                        </div>
+    async function deleteButton(event) {
+        const value = event.target.getAttribute('data-value');
+        console.log(value);
+        const data = await fetch(`http://54.200.101.218:5000/delete-post/${value}`, {
+          method: 'GET',
+          headers: {
+            'user': `${user_id}`,
+          }
+        });
+        const json = await data.json();
+      
+        console.log(json);
+      }
 
-                        <div className='maintext'>
-                            <h1 className='card__title'>My Gator</h1>
-                            <span>Date created: </span><br />
-                            <span>File type: </span>
-                            <br /><br />
-                            <h4 className='card__author'>Sophia Chu</h4>
-                            <span><i>This is a stock photo of a cartoon alligator.</i></span>
-
-                        </div>
-                        <div className='purchaseInfo'>
-                            <h1 className='card__price'>$20</h1>
-                            <span>STATUS: APPROVED</span>
-                            <button className='card__bttn'>DELETE</button>
-                        </div>
-                    </div>
-                    <div className='card_body' >
-                        <div className='image_container'>
-                            <img src={myImage} className='thumbnail' />
-                        </div>
-
-                        <div className='maintext'>
-                            <h1 className='card__title'>My Gator</h1>
-                            <span>Date created: </span><br />
-                            <span>File type: </span>
-                            <br /><br />
-                            <h4 className='card__author'>Sophia Chu</h4>
-                            <span><i>This is a stock photo of a cartoon alligator.</i></span>
-
-                        </div>
-                        <div className='purchaseInfo'>
-                            <h1 className='card__price'>$20</h1>
-                            <span>STATUS: APPROVED</span>
-                            <button className='card__bttn'>DELETE</button>
-                        </div>
-                    </div>
-                    <div className='card_body' >
-                        <div className='image_container'>
-                            <img src={myImage} className='thumbnail' />
-                        </div>
-
-                        <div className='maintext'>
-                            <h1 className='card__title'>My Gator</h1>
-                            <span>Date created: </span><br />
-                            <span>File type: </span>
-                            <br /><br />
-                            <h4 className='card__author'>Sophia Chu</h4>
-                            <span><i>This is a stock photo of a cartoon alligator.</i></span>
-
-                        </div>
-                        <div className='purchaseInfo'>
-                            <h1 className='card__price'>$20</h1>
-                            <span>STATUS: In-review</span>
-                            <button className='card__bttn'>DELETE</button>
-                        </div>
-                    </div>
-                </div>
-
+    return (
+        <div className="dash-container">
+            <div className="header">
+                <h1>MY POSTS</h1>
             </div>
-        );
+            <div class="dashboard">
+                <button class="dashboard-myPost" >MY POSTS</button>&nbsp;&nbsp;&nbsp;
+                <button class="dashboard" onClick={goToInbox}>INBOX</button>
+            </div>
+                                                {/* onClick={() => navigateToProduct(`${output.title}`, `${output.post_id}`) */}
+            <div className='wrapper'>
+                {items && items.output.map(output => (
+
+                    <div>
+                        <div className='card_body' key={output.post_id}>
+                            <div className='image_container'>
+                                <img src={output.thumbnail} className='thumbnail' />
+                                <div className='hovercap'>Click for Details</div>
+                            </div>
+
+                            <div className='maintext'>
+                                <h3 className='card__title'>{output.title}</h3>
+                                <span className='date-filetype'>Date created: {output.created_timestamp}</span><br />
+                                <span className='date-filetype'>File type: {output.post_type}</span>
+                                <br /><br />
+                                <h5 className='card__author'>{output.uploader_name}</h5>
+                                <span className='description'><i>{output.description}</i></span>
+
+                            </div>
+                            <div className='purchaseInfo'>
+                                <h1 className='card__price'>
+                                    {output.price === 0 ? 'FREE' : `$${output.price}`}<br/>
+                                    
+                                </h1>
+                                Status: {output.approved}
+                                <button class="delete-bttn" data-value={output.post_id} onClick={deleteButton}>DELETE</button>
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                ))}
+            </div>
+
+        </div>
+    );
 }
 
 export default Dashboard;

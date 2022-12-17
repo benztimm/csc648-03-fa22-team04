@@ -41,12 +41,19 @@
 
 .left_side .nav_search_bar .cat-Select {
   height: 34px;
-  width: 90px;
+  width: fit-content;
   border-radius: 4px;
   color: black;
   border: solid 1px;
   border-color: black;
   cursor: pointer;
+}
+
+.searchBarAlert {
+  position: absolute;
+  left:240px;
+  top: 73px;
+  color: white;
 }
 
 .left_side button{
@@ -155,4 +162,34 @@
     
   }
   
+}
+
+@media only screen and (max-width: 900px){
+  .left_side .img-fluid{
+    padding-top: 23px;
+    width: 75px;
+  }
+
+
+
+  .Navbar .right_side #hidden{
+    top: 100px;
+    height: 210px;
+  }
+
+  .left_side .nav_search_bar .cat-Select {
+    width: 117px;
+  }
+
+  .Navbar .right_side button{
+    padding-top: 15px;
+  }
+
+
+}
+
+@media only screen and (max-width: 650px){
+  .left_side .nav_search_bar .cat-Select {
+    width: 20px;
+  }
 }
