@@ -5,12 +5,13 @@ Description: All APIs related to Users.
 '''
 
 import utilities.db_helper as db
-from utilities import cryptography_helper as fernet
 import routes as routes
 import traceback
+import utilities.session as session
+
 
 def delete_user(user_id = None):
-    """    
+    """
     Delete specific post
     `input` user_id : unique post ID
     `return` status in JSON format
@@ -80,50 +81,112 @@ def register(first_name, last_name, email, password):
         raise Exception("Something went wrong while registering user.")
 
 
-def login(email, password):
+def login(email):
     """
     Login user.
 
     `input` credentials
-    
+
     `return` success / fail message
     """
-    if not email or not password:
-        return 'Missing Credentials.'
+
+    # find email from user input
+    query1 = """
+                SELECT
+                    first_name,
+                    email,
+                    user_id,
+                    password
+                FROM 
+                    user u
+                WHERE
+                    email = %(email)s
+            """
+
+    user = db.execute_query(query1, {"email": email})
+    return user
+
+
+def update_password(email, password):
+    """
+    Update password
+
+    `input` credentials
+
+    `return` success / fail message
+    """
 
     try:
-        # find email from user input
         query1 = """
-                    SELECT
-                        u.email as 'user_email'
-                    FROM 
-                        user u
+                    UPDATE
+                        user
+                    SET
+                        password = %(password)s
                     WHERE
-                        email = %(user_email)s
-                """
-        # find encrypted password from user email
-        query2 = """
-                    SELECT 
-                        u.password as 'user_password'
-                    FROM
-                        user u 
-                    WHERE
-                        email = %(user_email)s
+                        email = %(email)s
                 """
 
-        auth_email = db.execute_query(query1, {"user_email": email})[0]
-        auth_password = db.execute_query(query2, {"user_email": email})[0]
+        db.execute_query(query1, {"email": email, 'password': password})
+        return True
+    except Exception as e:
+        traceback.print_exc()
+        return False
 
-        # check if user input matches stored email and decoded password
-        # decrypted_password = fernet.decrypting_function(auth_password.get("user_password"))
 
-        
-        if email == auth_email.get("user_email") and password == auth_password.get("user_password"):
-            return 'Login Successfully!'
-        else:
-            print(f"Incorrect Credentials: {email} == {auth_email} | {password} == {auth_password}")
-            return 'Login Unsuccessful!'
+def get_user_post(uploader_id = None):
+    """
+    Get details of a user specific post
 
+    `input` uploader_id : unique uploader_id
+
+    `return` JSON of all details of that
+    """
+    query = """
+                SELECT
+                    p.*,
+                    u.first_name as 'uploader_name',
+                    c.category_name as 'category_name',
+                    u.user_id as 'uploader_id',
+                    c.category_id as 'category_id'
+                FROM
+                    post p
+                JOIN
+                    user u
+                ON
+                    p.uploader_id = u.user_id
+                join
+                    category c
+                on
+                    p.category = c.category_id
+                WHERE
+                    p.uploader_id = %(uploader_id)s
+            """
+
+    # Update query with where clause with post_id provided:
+    results = db.execute_query(query=query, params={"uploader_id": uploader_id})
+
+    for post in results:
+        try:
+            # read the file and send static URL:
+            if post['post_type'] == "Document":
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/document.png'
+            elif post['post_type'] == "Audio":
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/audio.png'
+            elif post['post_type'] == "Video":
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/video.png'
+            else:    
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/{post["file"]}'
+            
+            post['file'] = f'http://54.200.101.218:5000/post/{post["file"]}'
+        except Exception as e:
+            print(f"Error loading file for post <{post.get('post_id')}> : \n{e}")
+            raise Exception("Something went wrong while loading file.")
+
+    return results
+
+def logout(user_id):
+    try:
+        session.exit_session(user_id)
     except BaseException as e:
         traceback.print_exc()
-        raise Exception(f"{repr(e)}\nError: user_api.login")
+        raise Exception(f"{repr(e)}\nError: user_api.logout")

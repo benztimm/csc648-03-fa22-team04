@@ -1,43 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 .wrapper{
-    display: inline-block;
+    display: inline-flexbox;
     text-align: initial;
-    
     
 }
 
 .card_body{
-    margin: 15px;
-    width: 65vw;
-    height: 180px;
+    font-family: 'Noto Sans', sans-serif;
+    margin: auto;
+    width: 75%;
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: space-around;
+    cursor: pointer;
 
 }
 
 .card_body:hover{
     background-color: #e8e8e8;
-    border-radius: 10px;
-    margin: 15px;
-    width: 65vw;
-    height: 180px;
+    border-radius: 5px;
+    margin: auto;
+    width: 75.5%;
+    height: fit-content;
     display: flex;
     align-items: center;
     justify-content: space-around;
+}
 
+.status {
+    width: 100%;
+    text-align: center;
+}
+
+.showing {
+    width: 100%;
+    margin-left: 50px;
 }
 
 
 .image_container{
     order: 1;
-
+    position: relative;
     width: 270px;
-    height: 100%;
+    height: 200px;
 
 }
 
+.hovercap {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    border-radius: 0 0 10px 10px;
+   
+    position: absolute;
+    bottom: 0; left: 0;
+   
+    /* (C3) COLORS */
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+  }
+  
+  /* (D) SHOW/HIDE */
+  .hovercap {
+    visibility: none; opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .image_container:hover .hovercap {
+    visibility: visible; opacity: 1;
+  }
+
 .thumbnail{
     border-radius: 10px;
+    object-fit: contain;
     width: 100%;
     height: 100%;
 }
@@ -62,28 +97,68 @@
     margin-top: -40px;
     margin-left: -5px;
     text-align: center;
+    padding: 1px;
 }
 
-.purchaseInfo .card__bttn{
-    border-color: black;
-    cursor: pointer;
-
-    align-items:flex-end;
-    width:100px;
-    font-size: medium;
-    padding: 0.5%;
-    margin: 10px;
+.purchaseInfo button{
+    position: relative;
+    border: none;
+    font-size: 15px;
+    
+    padding: 5px;
+    width: 120px;
     text-align: center;
-    background: white;;
-    color:black;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+    margin-left: 10px;
+
+    box-shadow: 0 2.5px #999;
     
 }
 
-.purchaseInfo .card__bttn:hover{
+.purchaseInfo .card__bttn{
     background-color: gold;
+    color: black;
+}
+
+.purchaseInfo .card__bttn:hover{
+    background-color: #ebca0f;
     transform: translateY(-1px);
 }
 
+.purchaseInfo .card__bttn:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
 
+
+.purchaseInfo .card__bttn-free{
+    background-color: #3BB271;
+    color:black;
+    width:115px;
+}
+
+.purchaseInfo .card__bttn-free:hover{
+    background-color: #2d9c5f;
+    transform: translateY(-1px);
+}
+
+.purchaseInfo .card__bttn-free:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+.description {
+    font-size: 20px;
+}
+
+.date-filetype {
+    font-size: 12px;
+}
+
+.card__price{
+    margin-left: 15px;
+}
 
 

@@ -24,21 +24,64 @@ const Navbar = () =>{
 
     // CATEGORY SELECTOR
     const [selectedOption, setSelectedOption] = useState('');
+    const [categories, setCategories] = useState([]);
 
     const changeHandlerCategory = (e) => {
         let newCat = e.target.value;
         setSelectedOption(newCat);
     };
+
+    useEffect(() => {
+        fetch(`http://54.200.101.218:5000/get-category/`, {
+            method: 'GET',
+            headers: {
+              'user': '0',
+            }
+          })
+            .then(response => response.json())
+            .then(data => setCategories(data.output));
+    }, []);
     //END CATEGORY SELECTOR
 
     // SEARCH BAR
 
     //Set input value as value
+    const searchButtonRef = useRef();
     const [value, setValue] = useState('');
-    const changeHandler = (event) => {
-        //let newValue = event.target.value;
+
+    function handleChange(event) {
         setValue(event.target.value);
+      }
+
+    function changeHandler(event)  {
+        const alphanumericRegex = /^[a-zA-Z0-9]+$/;
+        const newValue = event.target.value;
+
+        if (event.keyCode === 13) {
+            searchButtonRef.current.click();
+          }
+
+        if (event.keyCode === 8 && event.target.selectionStart !== event.target.selectionEnd) {
+            setValue(newValue);
+            return;
+        }
+
+        if (alphanumericRegex.test(newValue)) {
+        setValue(newValue);
+        }
     };
+
+    const [isActive, setIsActive] = useState(false);
+    const [alert, setAlert] = useState('');
+
+    useEffect(() => {
+        if (value !== '') {
+          setIsActive(true);
+        } else {
+          setIsActive(false);
+        }
+      }, [value]);
+
     // END SEARCH BAR
 
 
@@ -51,20 +94,25 @@ const Navbar = () =>{
     //GET request from search bar input
     const fetchData = async () => {
 
-        const data = await fetch(`http://54.200.101.218:5000/search-posts/${selectedOption} ${value}`);
-
-        const json = await data.json();
-
-        console.log(json);
-        setItems(json);
-        window.localStorage.setItem('result', JSON.stringify(json));
-        console.log(window.localStorage.getItem('result'));
+        const data = {'data': await fetch(`http://54.200.101.218:5000/search-posts/?keyword=${value}&type=&category=${selectedOption}`)};
+        const json = {'json': await data.data.json()};
+        json['status'] = "Here are your search results.";
+        if (json.json['output'].length === 0){
+            data.data = await fetch(`http://54.200.101.218:5000/home-page/`);
+            json.json = await data.data.json();
+            json['status'] = "Your search yielded no results. Here are some recent ones."
+        }
+        console.log(json.json);
+        setItems(json.json);
+        window.localStorage.setItem('result', JSON.stringify(json.json));
+        window.localStorage.setItem('status', JSON.stringify(json.status));
         navigate('/searchresults');
     }
 
 
     //when search button is clicked
     const searchClick = () => {
+        console.log(value)
         fetchData();
     }
     //END SEARCH BAR
@@ -72,33 +120,111 @@ const Navbar = () =>{
 
     //LOGIN
     const [isLoginOpen, setLoginOpen] = useState(false);
+    const [isUserLoggedIn, setUserLogin] = useState(false);
     
     //REGISTER
     const [isRegisterOpen, setRegisterOpen] = useState(false);
 
-
     const [showLinks, setShowLinks] = useState(false);
+
+    const [logout, setLogout] = useState(false);
+
+    
+
+
+
+    if(sessionStorage.getItem('user') !== null) {
+        const user = JSON.parse(sessionStorage.getItem("user"));
+        const first_name = user.user.first_name;
+
+
+        const logoutFunction = async () => {
+            const data = await fetch(`http://54.200.101.218:5000/logout/${user.user.user_id}`);
+            const json = await data.json();
+            console.log(json);
+            
+            setLogout(true);
+            setUserLogin(false);
+            window.sessionStorage.removeItem('user');
+            navigate('/');
+        };
+
+        
+
+        //function to change text when hovering over NavBar buttons
+        function HoverLink({ initialText, hoverText }) {
+            const [text, setText] = React.useState(initialText);
+          
+            return (
+              <a onMouseEnter={() => setText(hoverText)} onMouseLeave={() => setText(initialText)}><Link to="/dashboard">
+                {text}
+              </Link></a>
+            );
+          }
+
+        return(
+            <div className='Navbar'>
+                
+                <div className='left_side'>
+                    {/* <button>sidebarhere</button> */}
+                    <Link to="/">
+                        <img src={logo} className="img-fluid" onClick={() => setShowLinks(false)}
+                        width={125} height={120}></img>
+                    </Link>
+                    <div className='nav_search_bar'>
+                    <select className='cat-Select' onChange={changeHandlerCategory}>
+                    <option value="">All Categories</option>
+                                {categories.map((category) => (
+                                    <option value={category.category_name}>{category.category_name}</option>
+                                ))}
+                            </select>
+    
+                        <input maxLength={40} value={value} onChange={handleChange} onKeyDown={changeHandler} type="text" placeholder="Search..."/>
+                        {isActive && <div className="searchBarAlert">Please enter up to 40 characters.</div>}
+                        <button onClick={searchClick} ref={searchButtonRef}>Search</button>
+                    </div>
+                    
+                </div>
+    
+                <div className='right_side'>
+                    
+                    <div className='nav_links' id={showLinks ? "hidden" : ""} onClick={() => setShowLinks(false)}>
+                        <HoverLink initialText={"Welcome "+ first_name} hoverText="To Dashboard" />
+                        <a href='/#'><Link to="/Upload">Upload</Link></a>
+                        {isRegisterOpen && <Register setRegisterOpen={setRegisterOpen} setLoginOpen={setLoginOpen}/>}
+                        <a onClick={logoutFunction} type='submit'>Logout</a>
+                        {isLoginOpen && <Login setLoginOpen={setLoginOpen} setRegisterOpen={setRegisterOpen} c/>}
+                    </div>
+                    <button className='navButton' onClick={() => setShowLinks(!showLinks)}><FaBars/></button>
+                </div>
+                <p className='cc'> 
+                        SFSU Software Engineering Project CSC648-848,
+                        Fall 2022 for Demonstration Only
+                </p>
+    
+            </div>
+        );
+    }
 
     return(
         <div className='Navbar'>
             
             <div className='left_side'>
-                {/* <button>sidebarhere</button> */}
                 <Link to="/">
                     <img src={logo} className="img-fluid" onClick={() => setShowLinks(false)}
                     width={125} height={120}></img>
                 </Link>
                 <div className='nav_search_bar'>
-                    <select  className='cat-Select' onChange={changeHandlerCategory}>
-                        <option value="">Category</option>
-                        <option value="Photography" >Photography</option>
-                        <option value="Computer Science" >Computer Science</option>
-                        <option value="Art" >Art</option>
-                        <option value="Travel" >Travel</option>
-                    </select>
+                <select className='cat-Select' onChange={changeHandlerCategory}>
+                <option value="">All Categories</option>
+                                {categories.map((category) => (
+                                    <option value={category.category_name}>{category.category_name}</option>
+                                ))}
+                            </select>
 
-                    <input onChange={changeHandler} type="text" placeholder="Search..."/>
-                    <button onClick={searchClick}>Search</button>
+                    <input maxLength={40} value={value} onChange={handleChange} onKeyDown={changeHandler} type="text" placeholder="Search..."/>
+                    {isActive && <div className="searchBarAlert">Please enter up to 40 characters.</div>}
+                    <button onClick={searchClick} ref={searchButtonRef}>Search</button>
                 </div>
                 
             </div>
@@ -109,11 +235,9 @@ const Navbar = () =>{
                     <a href='/#'><Link to="/About">About</Link></a>
                     <a href='/#'><Link to="/Upload">Upload</Link></a>
                     <a onClick={() => setRegisterOpen(true)}>Register</a>
-                    {isRegisterOpen && <Register setRegisterOpen={setRegisterOpen} setLoginOpen={setLoginOpen}/>}
-                    <a onClick={() => setLoginOpen(true)}>Log In</a>
-                    {isLoginOpen && <Login setLoginOpen={setLoginOpen} setRegisterOpen={setRegisterOpen}/>}
-                    {/* <a href='/#'><Link to="/Register">Register</Link></a>
-                    <a href='/#'><Link to="/Login">Log In</Link></a> */}
+                    {isRegisterOpen && <Register setRegisterOpen={setRegisterOpen} setLoginOpen={setLoginOpen} setUserLogin={setUserLogin}/>}
+                    <a onClick={() => setLoginOpen(true)}>Login</a>
+                    {isLoginOpen && <Login setLoginOpen={setLoginOpen} setRegisterOpen={setRegisterOpen} setUserLogin={setUserLogin}/>}
                 </div>
                 <button className='navButton' onClick={() => setShowLinks(!showLinks)}><FaBars/></button>
             </div>

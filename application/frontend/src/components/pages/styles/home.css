@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+.home-recent {
+    font-family: 'Noto Sans', sans-serif;
+}
+
 .card-container {
 
     display: flex;
@@ -8,19 +14,20 @@
 
 .card{
     width: 300px;
-    height: 250px;
-    border-radius: 17px;
+    height: 220px;
+    border-radius: 12px;
     margin: 20px;
     display:flex;
     flex-direction: column;
+    font-family: 'Noto Sans', sans-serif;
 
 }
 
 .card:hover{
-    background-color: #b4b4b4;
+    background-color: #bfbfbf;
     width: 300px;
-    height: 250px;
-    border-radius: 17px;
+    height: 220px;
+    border-radius: 12px;
     margin: 20px;
     display:flex;
     flex-direction: column;
@@ -29,12 +36,31 @@
 
 .thumbnail-home{
     height: 180px;
-    border: solid;
-    border-width: 2px;
-    border-color: black;
     border-radius: 15px 15px 15px 15px;
-    background-color: lightblue;
+    background-color: #b8b8b8;
+    position: relative;
 }
+
+.hovercap {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    position: absolute;
+    bottom: 0; left: 0;
+   
+    /* (C3) COLORS */
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+  }
+  
+  /* (D) SHOW/HIDE */
+  .hovercap {
+    visibility: none; opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .thumbnail-home:hover .hovercap {
+    visibility: visible; opacity: 1;
+  }
 
 .thumbnail-home img{
     flex-shrink: 0;
@@ -44,10 +70,14 @@
 }
 
 
+
+
 .title-home{
     display: flex;
     justify-content: flex-start;
     height: 70px;
+
+    
 
 }
 

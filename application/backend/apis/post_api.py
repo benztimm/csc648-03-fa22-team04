@@ -39,7 +39,6 @@ def search_posts(keyword = None,category = None,type = None):
         query += """
                     AND (p.title LIKE %(keyword)s
                     OR p.description LIKE %(keyword)s
-                    OR c.category_name LIKE %(category)s
                     )
                 """
     if  category:
@@ -50,6 +49,11 @@ def search_posts(keyword = None,category = None,type = None):
         query+= """
                     AND (p.post_type LIKE %(type)s)
                 """
+    if not category and keyword:
+        query += """
+                    OR c.category_name LIKE %(keyword)s
+                """
+
     results = db.execute_query(query=query, params={
         "keyword": "%" + keyword + "%" if keyword else keyword,
         "category": "%" + category + "%" if category else category,
@@ -63,6 +67,8 @@ def search_posts(keyword = None,category = None,type = None):
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/document.png'
             elif post['post_type'] == "Audio":
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/audio.png'
+            elif post['post_type'] == "Video":
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/video.png'
             else:    
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/{post["file"]}'
             
@@ -115,6 +121,8 @@ def get_latest_posts(limit = 1):
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/document.png'
             elif post['post_type'] == "Audio":
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/audio.png'
+            elif post['post_type'] == "Video":
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/video.png'
             else:    
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/{post["file"]}'
             
@@ -165,6 +173,8 @@ def get_post_details(post_id = None):
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/document.png'
             elif post['post_type'] == "Audio":
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/audio.png'
+            elif post['post_type'] == "Video":
+                post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/video.png'
             else:    
                 post['thumbnail'] = f'http://54.200.101.218:5000/thumbnails/{post["file"]}'
             
@@ -198,3 +208,46 @@ def delete_post(post_id = None):
     status = 'Success' if row_count_after == row_count_before-1 else 'Fail'
     results = {'status':status}
     return results
+
+def upload_post(uploader_id = None, post_type = None, title = None, file = None, description = None, price = None, category = None):
+    """
+    Insert new upload to post table
+
+    `input` 
+        uploader_id : unique uploader ID
+        post_type : file type eg. Image, Document
+        title : post title
+        file : file name — use in both file and thumbnail
+        description : post description
+        price : media price
+        category : media category. *integer*
+
+    `return` Success or Failed
+    """
+    try:
+        query_select = """ SELECT * FROM post """
+        query = """
+                insert into post
+                (uploader_id,post_type,title,file,thumbnail,description,price,category)
+                values 
+                (%(uploader_id)s,%(post_type)s,%(title)s,%(file)s,%(file)s,%(description)s,%(price)s,%(category)s);
+                """
+
+        row_count_before = db.execute_query_rowcount(query_select)
+        db.execute_query(query=query, params={
+            "uploader_id": uploader_id if uploader_id else uploader_id,
+            "post_type": post_type if post_type else post_type,
+            "title": title if title else title,
+            "file": file if file else file,
+            "description": description if description else description,
+            "price": price if price else price,
+            "category": category if category else category  
+            })
+        row_count_after = db.execute_query_rowcount(query_select)
+        status = 'Success' if row_count_after == row_count_before+1 else 'Fail'
+        results = {'status':status}
+        return results
+
+    except Exception as e:
+        print(f"Error in post_api : upload_post user : \n{e}")
+        raise Exception("Something went wrong while uploading a new post.")
