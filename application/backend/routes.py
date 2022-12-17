@@ -117,8 +117,6 @@ def static_post(post_name=None):
     `returns` static image
     '''
     try:
-        if not authenticate_session():
-            return jsonify({"message": "Not Authorized! Please Log-in to continue"}), 403
         check_session()
 
         file_name = path.abspath(f"../../posts/{post_name}")
@@ -137,8 +135,6 @@ def static_thumbnail(post_name=None):
     `returns` static image
     '''
     try:
-        if not authenticate_session():
-            return jsonify({"message": "Not Authorized! Please Log-in to continue"}), 403
         check_session()
 
         file_name = path.abspath(f"../../thumbnails/{post_name}")
