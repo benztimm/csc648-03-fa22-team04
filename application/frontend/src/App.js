@@ -36,7 +36,14 @@ ReactGA.initialize('UA-165702779-1');
 const App= () =>{
 
   useEffect(() => {
-    ReactGA.pageview(window.location.pathname + window.location.search);
+    console.log(window.location.pathname + window.location.search);
+    try{
+      ReactGA.pageview(window.location.pathname + window.location.search);
+    }
+    catch(e){
+      console.error(e);
+    }
+    
   }, []);
   
   return (
