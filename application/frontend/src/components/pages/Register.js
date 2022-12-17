@@ -12,7 +12,7 @@ import { useContext, useRef, useState, useHistory, useEffect } from 'react';
 import './styles/loginRegister.css';
 
 
-const Register = ({setRegisterOpen, setLoginOpen}) =>{
+const Register = ({setRegisterOpen, setLoginOpen, setUserLogin}) =>{
 
     const [firstName, setFirstName] = useState(null);
     const [lastName, setLastName] = useState(null);
@@ -51,9 +51,12 @@ const Register = ({setRegisterOpen, setLoginOpen}) =>{
 
         setItems(json);
         
-        if(json.output === "Registration successful"){
+        if(json.message === "Login Successful!"){
+            sessionStorage.setItem("user", JSON.stringify(json));
             setRegisterOpen(false);
+            setUserLogin(true);
             alert("Registration successful!");
+            
         }   else {
             alert("Registration failed. Please try again.");
         }
