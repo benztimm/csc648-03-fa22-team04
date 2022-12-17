@@ -14,9 +14,20 @@ import { Link, useNavigate, useHistory, generatePath, useLocation } from 'react-
 import Login from '../pages/Login.js';
 import Register from '../pages/Register.js';
 import { AiOutlineArrowRight } from 'react-icons/ai';
-
+import ReactGA from 'react-ga';
 
 function UploadPost() {
+
+    useEffect(() => {
+        console.log(window.location.pathname + window.location.search);
+        try{
+          ReactGA.pageview(window.location.pathname + window.location.search);
+        }
+        catch(e){
+          console.error(e);
+        }
+        
+      }, []);
 
     const [isRedirectOpen, setRedirectOpen] = useState(false);
     const [isLoginOpen, setLoginOpen] = useState(false);
