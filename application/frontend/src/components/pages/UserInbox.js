@@ -33,7 +33,13 @@ function Inbox(){
 
   const fetchData = async () => {
 
-    const data = await fetch(`http://54.200.101.218:5000/get-user-inbox/${user_id}`);
+    const data = await fetch(`http://54.200.101.218:5000/get-user-inbox/${user_id}`, {
+      method: 'GET',
+      headers: {
+          'user': `${user_id}`,
+          
+      }
+  });
     const json = await data.json();
 
     console.log(json);
