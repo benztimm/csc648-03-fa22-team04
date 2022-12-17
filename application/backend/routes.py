@@ -333,7 +333,7 @@ def login(email = None, password = None):
                 del output['password']
                 session.update_session(output.get('user_id'))
 
-                return jsonify({"message": "Login Successful!", 'user': output}), 500
+                return jsonify({"message": "Login Successful!", 'user': output}), 200
             else:
                 return jsonify({"message": "Incorrect Credentials!"}), 403
         else:
