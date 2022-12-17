@@ -26,7 +26,6 @@ import ReactGA from 'react-ga';
 
 //TEST
 import TESTIMAGE from './components/pages/imagetest.js';
-import { useEffect } from 'react';
 
 const queryClient = new QueryClient();
 
