@@ -48,6 +48,16 @@ function ProductPage() {
     const media = items;
 
 
+    const checkLogin = () => {
+        if(sessionStorage.getItem('user') !== null){
+            setIsOpen(true)
+        }   else  {
+            alert("Please login.")
+        }
+    };
+
+
+
 
     if(items && items.output[0].post_type === "Document") {
 
@@ -78,7 +88,7 @@ function ProductPage() {
                         </div>
                         <div className='footer-buttons'>
                             
-                            <button className='purchase-bttn' onClick={() => setIsOpen(true)}>
+                            <button className='purchase-bttn' onClick={checkLogin}>
                                 CONTACT SELLER
                             </button>
                            {isOpen && <PurchaseMsg setIsOpen={setIsOpen} output={output}/>}
@@ -120,11 +130,11 @@ function ProductPage() {
                     </div>
                     <div className='footer-buttons'>
                         
-                        {sessionStorage.getItem("user") ? (
-                            <button className='purchase-bttn' onClick={() => setIsOpen(true)}>
-                                CONTACT SELLER
-                            </button>
-                        ) : null}
+                        
+                        <button className='purchase-bttn' onClick={checkLogin}>
+                            CONTACT SELLER
+                        </button>
+                        
                        {isOpen && <PurchaseMsg setIsOpen={setIsOpen} output={output}/>}
                     </div>
                 </div>

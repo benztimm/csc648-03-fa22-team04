@@ -95,7 +95,7 @@ const Navbar = () =>{
         if (json.json['output'].length === 0){
             data.data = await fetch(`http://54.200.101.218:5000/home-page/`);
             json.json = await data.data.json();
-            json['status'] = "no search results found here is 10 recent posts"
+            json['status'] = "Your search yielded no results. Here are some recent ones."
         }
         console.log(json.json);
         setItems(json.json);
