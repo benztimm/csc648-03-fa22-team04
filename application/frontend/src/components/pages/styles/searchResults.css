@@ -1,16 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 .wrapper{
-    display: inline-block;
+    display: inline-flexbox;
     text-align: initial;
-    
     
 }
 
 .card_body{
     font-family: 'Noto Sans', sans-serif;
     margin: 20px;
-    width: 65vw;
-    height: 180px;
+    width: 75%;
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -19,15 +18,15 @@
 }
 
 .card_body:hover{
+
     background-color: #e8e8e8;
     border-radius: 5px;
     margin: 20px;
-    width: 65vw;
-    height: 180px;
+    width: 80%;
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: space-around;
-
 }
 
 
@@ -88,20 +87,25 @@
     margin-top: -40px;
     margin-left: -5px;
     text-align: center;
+    padding: 1px;
 }
 
-.purchaseInfo .card__bttn{
-    border-color: black;
-    cursor: pointer;
-
-    align-items:flex-end;
-    width:100px;
-    font-size: medium;
-    padding: 0.5%;
-    margin: 10px;
-    text-align: center;
+.purchaseInfo button{
+    position: relative;
     background-color: gold;
-    color:black;
+    border: none;
+    font-size: 15px;
+    color: black;
+    padding: 5px;
+    width: 120px;
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+    margin-left: 10px;
+
+    box-shadow: 0 2.5px #999;
     
 }
 
@@ -110,18 +114,27 @@
     transform: translateY(-1px);
 }
 
+.purchaseInfo .card__bttn:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+
+
 .purchaseInfo .card__bttn-free{
     background-color: #3BB271;
     color:black;
+    width:115px;
 }
 
 .purchaseInfo .card__bttn-free:hover{
-    background-color: #3BB271;
-    color:black;
+    background-color: #2d9c5f;
     transform: translateY(-1px);
-    z-index: 10;
 }
 
+.purchaseInfo .card__bttn-free:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
 .description {
     font-size: 12px;
 }
@@ -130,6 +143,8 @@
     font-size: 12px;
 }
 
-
+.card__price{
+    margin-left: 15px;
+}
 
 
