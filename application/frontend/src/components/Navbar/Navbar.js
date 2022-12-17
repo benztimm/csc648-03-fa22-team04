@@ -89,12 +89,18 @@ const Navbar = () =>{
     //GET request from search bar input
     const fetchData = async () => {
 
-        const data = await fetch(`http://54.200.101.218:5000/search-posts/?keyword=${value}&type=&category=${selectedOption}`);
-        const json = await data.json();
-
-        console.log(json);
-        setItems(json);
-        window.localStorage.setItem('result', JSON.stringify(json));
+        const data = {'data': await fetch(`http://54.200.101.218:5000/search-posts/?keyword=${value}&type=&category=${selectedOption}`)};
+        const json = {'json': await data.data.json()};
+        json['status'] = "here is your search result..."
+        if (json.json['output'].length === 0){
+            data.data = await fetch(`http://54.200.101.218:5000/home-page/`);
+            json.json = await data.data.json();
+            json['status'] = "no search results found here is 10 recent posts"
+        }
+        console.log(json.json);
+        setItems(json.json);
+        window.localStorage.setItem('result', JSON.stringify(json.json));
+        window.localStorage.setItem('status', JSON.stringify(json.status));
         navigate('/searchresults');
     }
 

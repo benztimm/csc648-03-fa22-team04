@@ -40,7 +40,7 @@ function SearchResults() {
 
   }
 
-  
+  const status = window.localStorage.getItem('status');
   
 
   return (
@@ -48,6 +48,9 @@ function SearchResults() {
     <div className='wrapper'>
     <br/>
     <div><b>Showing {media && Object.keys(media.output).length} results</b></div>
+    <br/>
+    <br/>
+    <div><b>{status}</b></div>
     <br/>
     {media && media.output.map(output => (
 
