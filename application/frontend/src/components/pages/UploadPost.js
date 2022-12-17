@@ -119,7 +119,7 @@ function UploadPost() {
                                 <option value="Image">Image</option>
                                 <option value="Audio">Audio</option>
                                 <option value="Video">Video</option>
-                                <option value="Document">Document</option>I
+                                <option value="Document">Document</option>
                             </select>
                         </label><br /><br />
                         <label className='input-text-field'>
