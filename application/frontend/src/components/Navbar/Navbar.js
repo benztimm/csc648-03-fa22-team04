@@ -91,7 +91,7 @@ const Navbar = () =>{
 
         const data = {'data': await fetch(`http://54.200.101.218:5000/search-posts/?keyword=${value}&type=&category=${selectedOption}`)};
         const json = {'json': await data.data.json()};
-        json['status'] = "here is your search result..."
+        json['status'] = "Here are your search results.";
         if (json.json['output'].length === 0){
             data.data = await fetch(`http://54.200.101.218:5000/home-page/`);
             json.json = await data.data.json();
@@ -168,6 +168,7 @@ const Navbar = () =>{
                     </Link>
                     <div className='nav_search_bar'>
                     <select className='cat-Select' onChange={changeHandlerCategory}>
+                    <option value="">Select a category</option>
                                 {categories.map((category) => (
                                     <option value={category.category_id}>{category.category_name}</option>
                                 ))}
@@ -209,13 +210,12 @@ const Navbar = () =>{
                     width={125} height={120}></img>
                 </Link>
                 <div className='nav_search_bar'>
-                    <select  className='cat-Select' onChange={changeHandlerCategory}>
-                        <option value="">All Categories</option>
-                        <option value="Photography" >Photography</option>
-                        <option value="Computer Science" >Computer Science</option>
-                        <option value="Art" >Art</option>
-                        <option value="Travel" >Travel</option>
-                    </select>
+                <select className='cat-Select' onChange={changeHandlerCategory}>
+                <option value="">Select a category</option>
+                                {categories.map((category) => (
+                                    <option value={category.category_id}>{category.category_name}</option>
+                                ))}
+                            </select>
 
                     <input maxLength={40} value={value} onChange={handleChange} onKeyDown={changeHandler} type="text" placeholder="Search..."/>
                     {isActive && <div className="searchBarAlert">Please enter up to 40 characters.</div>}
