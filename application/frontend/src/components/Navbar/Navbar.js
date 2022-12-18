@@ -177,7 +177,7 @@ const Navbar = () =>{
                             }}
                         />
                         {focused && searchTerm === "" && (
-                            <div className="searchBarAlert" >Please enter a search term</div>
+                            <div className="searchBarAlert" >Please enter up to 40 characters.</div>
                         )}
                         <button onClick={handleSearch}>Search</button>
                     </div>
@@ -222,14 +222,13 @@ const Navbar = () =>{
                     <input type="text" placeholder="Search..." onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
 
                         value={searchTerm} onChange={handleInputChange} onKeyPress={(event) => {
-                            // if the user presses the Enter key, perform the search
                             if (event.key === 'Enter') {
                                 handleSearch();
                             }
                         }}
                     />
                     {focused && searchTerm === "" && (
-                        <div className="searchBarAlert" >Please enter a search term</div>
+                        <div className="searchBarAlert" >Please enter up to 40 characters.</div>
                     )}
                     <button onClick={handleSearch}>Search</button>
                 </div>
