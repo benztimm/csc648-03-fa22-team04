@@ -45,42 +45,29 @@ const Navbar = () =>{
 
     // SEARCH BAR
 
-    //Set input value as value
-    const searchButtonRef = useRef();
-    const [value, setValue] = useState('');
+    const [focused, setFocused] = useState(false);
 
-    function handleChange(event) {
-        setValue(event.target.value);
-      }
 
-    function changeHandler(event)  {
-        const alphanumericRegex = /^[a-zA-Z0-9]+$/;
-        const newValue = event.target.value;
+    const [searchTerm, setSearchTerm] = React.useState('');
 
-        if (event.keyCode === 13) {
-            searchButtonRef.current.click();
-          }
-
-        if (event.keyCode === 8 && event.target.selectionStart !== event.target.selectionEnd) {
-            setValue(newValue);
-            return;
+    const handleInputChange = (event) => {
+        const inputValue = event.target.value;
+        // limit the input to 40 alphanumeric characters
+        if (/^[a-zA-Z0-9]{0,40}$/.test(inputValue)) {
+            setSearchTerm(inputValue);
         }
+    };
 
-        if (alphanumericRegex.test(newValue)) {
-        setValue(newValue);
-        }
+    const handleSearch = () => {
+        // perform the search with the current search term
+        console.log(`Searching for: ${searchTerm}`);
+        fetchData();
     };
 
     const [isActive, setIsActive] = useState(false);
     const [alert, setAlert] = useState('');
 
-    useEffect(() => {
-        if (value !== '') {
-          setIsActive(true);
-        } else {
-          setIsActive(false);
-        }
-      }, [value]);
+
 
     // END SEARCH BAR
 
@@ -94,7 +81,7 @@ const Navbar = () =>{
     //GET request from search bar input
     const fetchData = async () => {
 
-        const data = {'data': await fetch(`http://54.200.101.218:5000/search-posts/?keyword=${value}&type=&category=${selectedOption}`)};
+        const data = {'data': await fetch(`http://54.200.101.218:5000/search-posts/?keyword=${searchTerm}&type=&category=${selectedOption}`)};
         const json = {'json': await data.data.json()};
         json['status'] = "Here are your search results.";
         if (json.json['output'].length === 0){
@@ -166,7 +153,7 @@ const Navbar = () =>{
             <div className='Navbar'>
                 
                 <div className='left_side'>
-                    {/* <button>sidebarhere</button> */}
+                    
                     <Link to="/">
                         <img src={logo} className="img-fluid" onClick={() => setShowLinks(false)}
                         width={125} height={120}></img>
@@ -179,9 +166,20 @@ const Navbar = () =>{
                                 ))}
                             </select>
     
-                        <input maxLength={40} value={value} onChange={handleChange} onKeyDown={changeHandler} type="text" placeholder="Search..."/>
-                        {isActive && <div className="searchBarAlert">Please enter up to 40 characters.</div>}
-                        <button onClick={searchClick} ref={searchButtonRef}>Search</button>
+                        
+                        <input type="text" placeholder="Search..." onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
+
+                            value={searchTerm} onChange={handleInputChange} onKeyPress={(event) => {
+                                
+                                if (event.key === 'Enter') {
+                                    handleSearch();
+                                }
+                            }}
+                        />
+                        {focused && searchTerm === "" && (
+                            <div className="searchBarAlert" >Please enter up to 40 characters.</div>
+                        )}
+                        <button onClick={handleSearch}>Search</button>
                     </div>
                     
                 </div>
@@ -221,10 +219,18 @@ const Navbar = () =>{
                                     <option value={category.category_name}>{category.category_name}</option>
                                 ))}
                             </select>
+                    <input type="text" placeholder="Search..." onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
 
-                    <input maxLength={40} value={value} onChange={handleChange} onKeyDown={changeHandler} type="text" placeholder="Search..."/>
-                    {isActive && <div className="searchBarAlert">Please enter up to 40 characters.</div>}
-                    <button onClick={searchClick} ref={searchButtonRef}>Search</button>
+                        value={searchTerm} onChange={handleInputChange} onKeyPress={(event) => {
+                            if (event.key === 'Enter') {
+                                handleSearch();
+                            }
+                        }}
+                    />
+                    {focused && searchTerm === "" && (
+                        <div className="searchBarAlert" >Please enter up to 40 characters.</div>
+                    )}
+                    <button onClick={handleSearch}>Search</button>
                 </div>
                 
             </div>
